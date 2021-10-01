@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2e9b05ae6a5f3499ad6f1dfabe6558, type: 3}
+  m_Name: PortraitModeCamera
+  m_EditorClassIdentifier: 
+  Pitch: 50
+  Yaw: 45
+  Roll: 0
+  FieldOfView: 10
+  KeyboardPanSpeed: 8
+  KeyboardYawSpeed: 90
+  StartZoom: 15
+  MinZoom: 60
+  MaxZoom: 60
+  ScrollWheelZoomSpeed: 1600

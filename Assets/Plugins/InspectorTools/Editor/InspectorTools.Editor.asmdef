@@ -1,0 +1,18 @@
+{
+    "name": "InspectorTools.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d4f4299d44c2da445996e9b804bf4348"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

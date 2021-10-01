@@ -1,0 +1,21 @@
+{
+    "name": "BattleSimulator",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:8a97c14b90edefa469f4be7ec985e4aa",
+        "GUID:efd5094a776e9274594352a60180a796",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:d4f4299d44c2da445996e9b804bf4348",
+        "GUID:e0cd26848372d4e5c891c569017e11f1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

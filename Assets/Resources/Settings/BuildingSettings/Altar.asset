@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154a2aff3c2ed4a4fa7388df21426eeb, type: 3}
+  m_Name: Altar
+  m_EditorClassIdentifier: 
+  Speed: 0
+  Size: 1.7
+  Health: 20
+  PrimaryAttack:
+    AttackType: 0
+    Damage: 0
+    AttackRange: 0
+    AttackSpeed: 0
+    AttackUpswing: 0
+    ProjectileOffset: {x: 0, y: 0, z: 0}
+    MinPitch: -15
+    MaxPitch: -7.5
+    MaxYError: 7.5

@@ -1,0 +1,33 @@
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace Game.Simulation
+{
+    /// <summary>
+    /// Implementation of either<Unit|Position>.
+    /// </summary>
+    public struct UnitTargetInfo
+    {
+        BattleObject targetObject;
+        float2 targetPosition;
+
+        public float2 Position => targetObject != null ? targetObject.GetPosition2D() : targetPosition;
+        public BattleObject TargetObject => targetObject;
+        public Unit TargetUnit => targetObject as Unit;
+
+        public UnitTargetInfo(BattleObject targetObject)
+        {
+            this.targetObject = targetObject;
+            this.targetPosition = targetObject?.GetPosition2D() ?? default;
+        }
+
+        public UnitTargetInfo(float2 targetPosition)
+        {
+            this.targetObject = null;
+            this.targetPosition = targetPosition;
+        }
+
+        public static implicit operator UnitTargetInfo(BattleObject targetObject) => new UnitTargetInfo(targetObject);
+        public static implicit operator UnitTargetInfo(float2 targetPosition) => new UnitTargetInfo(targetPosition);
+    }
+}
