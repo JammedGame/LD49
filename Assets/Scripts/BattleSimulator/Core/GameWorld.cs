@@ -97,19 +97,19 @@ namespace Game.Simulation
 			}
 			Profiler.EndSample();
 
-			// update units.
-			Profiler.BeginSample("Tick Units");
-			foreach(var unit in AllUnits)
-			{
-				unit.Tick();
-			}
-			Profiler.EndSample();
-			
 			// update spells
 			Profiler.BeginSample("Tick Spells");
 			foreach (Spell spell in AllSpells)
 			{
 				spell.Tick();
+			}
+			Profiler.EndSample();
+			
+			// update units.
+			Profiler.BeginSample("Tick Units");
+			foreach(var unit in AllUnits)
+			{
+				unit.Tick();
 			}
 			Profiler.EndSample();
 
@@ -158,6 +158,7 @@ namespace Game.Simulation
 					if (obj is Projectile p) AllProjectiles.Remove(p);
 					if (obj is Unit u) AllUnits.Remove(u);
 					if (obj is Building b) AllBuildings.Remove(b);
+					if (obj is Spell s) AllSpells.Remove(s);
 				}
 			}
 		}

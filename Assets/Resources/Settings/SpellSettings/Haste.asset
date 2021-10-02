@@ -16,5 +16,5 @@ MonoBehaviour:
   manaCost: 10
   castRange: 0
   castDurationSeconds: 1
-  EffectDurationSeconds: 10
-  SpeedModifier: 2
+  EffectDurationSeconds: 3
+  SpeedModifier: 3

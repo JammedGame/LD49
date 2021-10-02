@@ -7,7 +7,7 @@ namespace Game.View.SpellView
     {
         public override void OnInitialized(BattleObject data)
         {
-            Debug.Log("Haste Spell View On Initialize");
+            
         }
     }
 }
