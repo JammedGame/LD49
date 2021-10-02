@@ -17,7 +17,7 @@ MonoBehaviour:
   Health: 10
   PrimaryAttack:
     AttackType: 0
-    Damage: 10
+    Damage: 2
     AttackRange: 0.85
     AttackSpeed: 1
     AttackUpswing: 0.4

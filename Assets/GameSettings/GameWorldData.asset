@@ -25,6 +25,9 @@ MonoBehaviour:
   - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
     Position: {x: 15, y: 50}
     Owner: 0
+  - Type: {fileID: 11400000, guid: fce89bd34c07a0843b317528de5db439, type: 2}
+    Position: {x: 25, y: 50}
+    Owner: 1
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
     Position: {x: 20, y: 25}
     Owner: 1

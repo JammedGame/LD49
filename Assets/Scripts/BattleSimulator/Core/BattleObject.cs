@@ -63,10 +63,9 @@ namespace Game.Simulation
 		/// <summary>
 		/// What happens when this object receives damage?
 		/// </summary>
-		public void DealDamage(float damage, BattleObject damageSource)
+		public virtual void DealDamage(float damage, BattleObject damageSource)
 		{
 		}
-
 
 		/// <summary>
 		/// Gets 2d position of the object.

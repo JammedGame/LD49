@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3.2
   Size: 0.25
-  Health: 10
+  Health: 20
   PrimaryAttack:
     AttackType: 1
-    Damage: 10
+    Damage: 2
     AttackRange: 7
     AttackSpeed: 1
     AttackUpswing: 1

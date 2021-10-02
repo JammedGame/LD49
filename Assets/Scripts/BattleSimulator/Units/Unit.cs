@@ -35,7 +35,7 @@ namespace Game.Simulation
 		public bool IsMoving => currentActionType == UnitActionType.Movement;
 		public float Radius => Settings.Size;
 		public float Health => health;
-		public float HealthPercent => health / Settings.Health;
+		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
@@ -103,6 +103,16 @@ namespace Game.Simulation
 			{
 				Target = target
 			};
+		}
+
+		#endregion
+
+		#region Health
+
+		public override void DealDamage(float damage, BattleObject damageSource)
+		{
+			base.DealDamage(damage, damageSource);
+			health -= damage;
 		}
 
 		#endregion
