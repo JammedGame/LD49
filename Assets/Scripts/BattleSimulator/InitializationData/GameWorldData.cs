@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Game.Simulation.Board;
 using Physics2D;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game.Simulation
@@ -28,7 +29,7 @@ namespace Game.Simulation
 
         public void Execute(GameWorld world)
         {
-            Type?.Spawn(world, Position, Owner);
+			Type?.Spawn(world, (float2) Position, Owner);
         }
     }
 

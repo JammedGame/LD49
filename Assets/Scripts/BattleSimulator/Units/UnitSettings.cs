@@ -28,9 +28,9 @@ namespace Game.Simulation
 		[Header("Spells")]
 		public List<SpellSettings> Spells;
 
-		public override BattleObject Spawn(GameWorld world, float2 position, OwnerId owner, BattleObject parent)
+		public override BattleObject Spawn(GameWorld world, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
-			return world.SpawnUnit(this, position, owner);
+			return world.SpawnUnit(this, targetInfo.Position, owner);
 		}
 	}
 }
