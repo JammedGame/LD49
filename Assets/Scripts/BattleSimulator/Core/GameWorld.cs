@@ -64,9 +64,9 @@ namespace Game.Simulation
 			return newObject;
 		}
 
-		public Projectile SpawnProjectile(BattleObject source, Vector3 position, Vector3 velocity)
+		public Projectile SpawnProjectile(BattleObject source, Vector3 position, Vector3 velocity, BattleObject target)
 		{
-			var newObject = new Projectile(source, position, velocity);
+			var newObject = new Projectile(source, position, velocity, target);
 			AllProjectiles.Add(newObject);
 			AllBattleObjects.Add(newObject);
 			DispatchViewEvent(newObject, ViewEventType.Created);

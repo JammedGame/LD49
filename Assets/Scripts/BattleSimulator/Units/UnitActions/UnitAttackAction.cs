@@ -24,6 +24,7 @@ namespace Game.Simulation
 
 		[Tooltip("Offset from view pivot to the spawn position of the projectile.")]
 		public Vector3 ProjectileOffset;
+		public float ProjectileVelocity = 15f;
 		public float MinPitch = -15f, MaxPitch = -7.5f, MaxYError = 7.5f;
 
 		/// <summary>
@@ -104,8 +105,8 @@ namespace Game.Simulation
 			var projectileOrientation = MathUtil.ConvertDirectionToOrientation(fromPosition2D, targetInfo.Position);
 			var verticalAngle = UnityEngine.Random.Range(MinPitch, MaxPitch);
 			projectileOrientation += UnityEngine.Random.Range(-MaxYError, MaxYError);
-			var projectileDirection = Quaternion.Euler(verticalAngle, projectileOrientation, 0) * Vector3.forward * 15;
-			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection);
+			var projectileDirection = Quaternion.Euler(verticalAngle, projectileOrientation, 0) * Vector3.forward;
+			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity, targetInfo.TargetObject);
 		}
 	}
 
