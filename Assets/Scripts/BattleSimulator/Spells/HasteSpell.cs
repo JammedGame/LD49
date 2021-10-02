@@ -5,14 +5,21 @@ namespace BattleSimulator.Spells
 {
     public class HasteSpell : Spell
     {
-        public HasteSpell(HasteSpellSettings settings, GameWorld gameWorld, OwnerId owner, BattleObject parent = null) : base(settings, gameWorld, owner, parent)
+        private float secondsLeft;
+        public HasteSpell(BattleObject caster, HasteSpellSettings settings, GameWorld gameWorld, OwnerId owner) : base(caster, settings, gameWorld)
         {
+            Debug.Log($"{caster} casts Haste Spell!");
+            secondsLeft = settings.EffectDurationSeconds;
             
         }
 
-        public override void Execute(Unit caster, UnitTargetInfo targetInfo)
+        public override void Tick()
         {
-            Debug.Log($"{caster.Settings.name} casts Haste Spell!");
+            secondsLeft -= GameTick.TickDuration;
+            if (secondsLeft <= 0)
+            {
+                Deactivate();
+            }
         }
     }
 }

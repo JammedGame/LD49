@@ -24,7 +24,7 @@ namespace Game.Simulation
 	{
 		public static bool IsAnimationControlledBySimulation(this UnitActionType actionType)
 		{
-			return actionType == UnitActionType.Attack;
+			return actionType == UnitActionType.Attack || actionType == UnitActionType.CastSpell;
 		}
 	}
 }

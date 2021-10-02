@@ -9,9 +9,10 @@ namespace BattleSimulator.Spells
     {
         public float EffectDurationSeconds = 10f;
         public float SpeedModifier = 2f;
-        public override BattleObject Spawn(GameWorld world, float2 position, OwnerId owner)
+
+        public override BattleObject Spawn(GameWorld world, float2 position, OwnerId owner, BattleObject parent)
         {
-            return new HasteSpell(this, world, owner);
+            return new HasteSpell(parent, this, world, owner);
         }
     }
 }

@@ -15,6 +15,7 @@ MonoBehaviour:
   Speed: 2.8
   Size: 0.35
   Health: 10
+  CastUpswing: 0.1
   PrimaryAttack:
     AttackType: 0
     Damage: 2
@@ -25,3 +26,5 @@ MonoBehaviour:
     MinPitch: -5
     MaxPitch: -10
     MaxYError: 5
+  Spells:
+  - {fileID: 11400000, guid: 3cfb92bad176dc04abc1d17a98714c06, type: 2}

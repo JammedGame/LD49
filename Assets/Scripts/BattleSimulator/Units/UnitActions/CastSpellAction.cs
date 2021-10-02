@@ -6,13 +6,13 @@ namespace Game.Simulation
 {
     public class CastSpellAction : UnitAction
     {
-        private Spell Spell;
+        private SpellSettings SpellSettings;
         private float CastUpswing;
-        private float CastSpeed => 1f / Spell.Settings.castDurationSeconds;
+        private float CastSpeed => 1f / SpellSettings.castDurationSeconds;
 
-        public CastSpellAction(Spell spell, float upswing)
+        public CastSpellAction(SpellSettings spellSettings, float upswing)
         {
-            Spell = spell;
+            SpellSettings = spellSettings;
             CastUpswing = upswing;
         }
         
@@ -35,19 +35,16 @@ namespace Game.Simulation
             // land strike if reached the right frame
             if (!actionContext.Executed && newProgress >= CastUpswing && oldProgress < CastUpswing)
             {
-                Spell.Execute(unit, actionContext.Target);
-                return UnitActionType.EndCurrentAction;
+                unit.GameWorld.CastSpell(SpellSettings, actionContext.Target, unit);
             }
 
             // update progress
             actionContext.Progress = newProgress;
             actionContext.Started = true;
 
-            // make sure progress doesn't overflow
-            if (newProgress > 1f)
+            if (newProgress >= 1f)
             {
-                actionContext.ResetProgress();
-                actionContext.Progress = newProgress - 1f;
+                return UnitActionType.EndCurrentAction;
             }
 
             return UnitActionType.CastSpell;
@@ -55,13 +52,13 @@ namespace Game.Simulation
         
         private bool ShouldBreakAttack(Unit unit, UnitTargetInfo target)
         {
-            if (Spell.Settings.castRange == 0)
+            if (SpellSettings.castRange == 0)
             {
                 return false;
             }
             
             var distanceToTarget = math.distance(unit.Position, target.Position);
-            if (distanceToTarget > Spell.Settings.castRange)
+            if (distanceToTarget > SpellSettings.castRange)
             {
                 return true;
             }

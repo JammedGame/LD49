@@ -8,7 +8,7 @@ namespace BattleSimulator.Spells
     {
         public readonly SpellSettings Settings;
         
-        protected Spell(SpellSettings settings, GameWorld gameWorld, OwnerId owner, BattleObject parent = null) : base(gameWorld, owner, parent)
+        protected Spell(BattleObject caster, SpellSettings settings, GameWorld gameWorld) : base(gameWorld, caster.Owner, caster)
         {
             Settings = settings;
         }
@@ -24,7 +24,7 @@ namespace BattleSimulator.Spells
             return Vector3.zero;
         }
 
-        public virtual void Execute(Unit caster, UnitTargetInfo targetInfo)
+        public virtual void Tick()
         {
             
         }

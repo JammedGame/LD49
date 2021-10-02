@@ -115,8 +115,7 @@ namespace Game.Simulation
 
 		public void OrderSpellCast(int spellSlot, UnitTargetInfo targetInfo)
 		{
-			Spell spell = (Spell) Settings.Spells[spellSlot].Spawn(GameWorld, float2.zero, Owner);
-			StartAction(new CastSpellAction(spell, Settings.CastUpswing), targetInfo);
+			StartAction(new CastSpellAction(Settings.Spells[spellSlot], Settings.CastUpswing), targetInfo);
 		}
 
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)

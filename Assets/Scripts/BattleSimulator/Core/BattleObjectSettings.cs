@@ -5,6 +5,6 @@ namespace Game.Simulation
 {
 	public abstract class BattleObjectSettings : ScriptableObject
 	{
-		public abstract BattleObject Spawn(GameWorld world, float2 position, OwnerId owner);
+		public abstract BattleObject Spawn(GameWorld world, float2 position, OwnerId ownerId, BattleObject parent = null);
 	}
 }

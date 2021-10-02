@@ -22,6 +22,7 @@ namespace Game.Simulation
 		public readonly List<BattleObject> AllBattleObjects = new List<BattleObject>();
 		public readonly List<Unit> AllUnits = new List<Unit>();
 		public readonly List<Building> AllBuildings = new List<Building>();
+		public readonly List<Spell> AllSpells = new List<Spell>();
 
 		/// <summary>
 		/// Current simulation time.
@@ -73,7 +74,15 @@ namespace Game.Simulation
 			DispatchViewEvent(source, ViewEventType.ProjectileFired, newObject);
 			return newObject;
 		}
-		
+
+		public Spell CastSpell(SpellSettings spellSettings, UnitTargetInfo targetInfo, BattleObject caster)
+		{
+			Spell newSpell = (Spell) spellSettings.Spawn(this, targetInfo.Position, caster.Owner, caster);
+			AllSpells.Add(newSpell);
+			AllBattleObjects.Add(newSpell);
+			DispatchViewEvent(newSpell, ViewEventType.Created);
+			return newSpell;
+		}
 
 		public void Tick(GameTick tick)
 		{
@@ -93,6 +102,14 @@ namespace Game.Simulation
 			foreach(var unit in AllUnits)
 			{
 				unit.Tick();
+			}
+			Profiler.EndSample();
+			
+			// update spells
+			Profiler.BeginSample("Tick Spells");
+			foreach (Spell spell in AllSpells)
+			{
+				spell.Tick();
 			}
 			Profiler.EndSample();
 
