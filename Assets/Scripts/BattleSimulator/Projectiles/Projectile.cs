@@ -7,22 +7,24 @@ namespace Game.Simulation
 {
 	public class Projectile : BattleObject
 	{
-		private const float HomingAmount = 10f;
+		private const float HomingAmount = 20f;
 
 		Vector3 position;
 		Vector3 velocity;
-		private readonly BattleObject target;
+		private readonly Unit target;
+		private readonly float damage;
 
 		public Vector3 Position => position;
 		public Vector3 Velocity => velocity;
 
 		public override string ViewPath => $"View/ProjectileViews/Projectile";
 
-		public Projectile(BattleObject parent, Vector3 position, Vector3 velocity, BattleObject target) : base(parent.GameWorld, parent.Owner, parent)
+		public Projectile(BattleObject parent, Vector3 position, Vector3 velocity, Unit target, float damage) : base(parent.GameWorld, parent.Owner, parent)
 		{
 			this.position = position;
 			this.velocity = velocity;
 			this.target = target;
+			this.damage = damage;
 		}
 
 		public void Tick()
@@ -30,12 +32,9 @@ namespace Game.Simulation
 			var newPosition = position + velocity * GameTick.TickDuration;
 			if (target != null)
 			{
-				var currentDirection = velocity.normalized;
 				var targetPosition = target.GetPosition3D();
 				var targetDirection = (targetPosition - position).normalized;
-				var newDirection =
-					Vector3.Lerp(currentDirection, targetDirection, HomingAmount * GameTick.TickDuration).normalized;
-				velocity = velocity.magnitude * newDirection;
+				velocity += targetDirection * HomingAmount * GameTick.TickDuration;
 			}
 			else
 			{
@@ -43,9 +42,21 @@ namespace Game.Simulation
 			}
 
 			position = newPosition;
-			if (position.y < 0)
+			if (target != null)
 			{
-				Deactivate();
+				var vectorToTarget = target.GetPosition3D() - position;
+				if (vectorToTarget.magnitude < target.Radius || Vector3.Dot(vectorToTarget, velocity) < 0)
+				{
+					target.DealDamage(damage, this);
+					Deactivate();
+				}
+			}
+			else
+			{
+				if (position.y <= 0)
+				{
+					Deactivate();
+				}
 			}
 		}
 

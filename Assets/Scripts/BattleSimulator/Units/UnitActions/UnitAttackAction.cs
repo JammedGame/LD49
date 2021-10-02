@@ -101,7 +101,8 @@ namespace Game.Simulation
 		{
 			var fromPosition = unit.GetPosition3D() + Quaternion.Euler(0, unit.Orientation, 0) * ProjectileOffset;
 			var projectileDirection = (targetInfo.TargetObject.GetPosition3D() - unit.GetPosition3D()).normalized;
-			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity, targetInfo.TargetObject);
+			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity,
+				targetInfo.TargetUnit, unit.Settings.PrimaryAttack.Damage);
 		}
 	}
 

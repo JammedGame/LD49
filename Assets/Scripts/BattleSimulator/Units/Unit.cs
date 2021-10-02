@@ -43,7 +43,7 @@ namespace Game.Simulation
 		public float Health => health;
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
-		public virtual bool IsValidAttackTarget => true;
+		public bool IsValidAttackTarget => IsActive;
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
 
