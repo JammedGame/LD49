@@ -118,6 +118,12 @@ namespace Game.Simulation
 			health -= damage;
 		}
 
+		public override void OnDeactivate()
+		{
+			base.OnDeactivate();
+			currentActionType = UnitActionType.Death;
+		}
+
 		#endregion
 
 		#region Unit Transform

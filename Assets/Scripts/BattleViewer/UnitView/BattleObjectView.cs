@@ -78,7 +78,7 @@ namespace Game.View
 		/// <summary>
 		/// Called on object deactivation.
 		/// </summary>
-		public virtual void OnDeactivated()
+		protected virtual void OnDeactivated()
 		{
 		}
 

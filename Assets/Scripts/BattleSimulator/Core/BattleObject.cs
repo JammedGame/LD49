@@ -51,6 +51,7 @@ namespace Game.Simulation
 			if (_isActive)
 			{
 				GameWorld.DispatchViewEvent(this, ViewEventType.End);
+				OnDeactivate();
 				_isActive = false;
 			}
 		}
@@ -76,5 +77,10 @@ namespace Game.Simulation
 		/// Gets 3d position of the object.
 		/// </summary>
 		public abstract Vector3 GetPosition3D();
+
+		/// <summary>
+		/// Called when unit gets deactivated.
+		/// </summary>
+		public virtual void OnDeactivate() {}
 	}
 }

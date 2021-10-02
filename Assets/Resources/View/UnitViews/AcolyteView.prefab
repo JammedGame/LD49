@@ -286,8 +286,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a5cdaa63b0040dbbf8cc463e3536ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathAnimationDuration: 1
+  DeathAnimationDuration: 2
   Height: 2
+  DeathAnimation:
+    ClipName: anim_Death
+    Speed: 2
+    Crossfade: 0.15
   MovementAnimation:
     ClipName: anim_Running
     Speed: 0.7
@@ -309,13 +313,13 @@ Animation:
   m_GameObject: {fileID: 1234759034580599769}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: -203655887218126122, guid: b824ed3040313ab489326bd5bb983ed6,
-    type: 3}
+  m_Animation: {fileID: 7400000, guid: ed1ae03baa208854aa03fab1df468545, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: c5e86d6a2021237408641d2b5f9f816d, type: 2}
   - {fileID: 7400000, guid: ed1ae03baa208854aa03fab1df468545, type: 2}
   - {fileID: 7400000, guid: 57b3f85ca3710e44899b50f843abb3b5, type: 2}
   - {fileID: 7400000, guid: 090c3f078ec5ae04db79626ad73f5e06, type: 2}
+  - {fileID: 7400000, guid: cd968456ad1b0cf48aeba9ddde55e1b0, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

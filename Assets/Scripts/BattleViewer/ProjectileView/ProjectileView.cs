@@ -25,7 +25,7 @@ namespace Game.View
 			SyncTransform(projectile);
 		}
 
-		public override void OnDeactivated()
+		protected override void OnDeactivated()
 		{
 			base.OnDeactivated();
 			SyncTransform((Projectile)Data);
