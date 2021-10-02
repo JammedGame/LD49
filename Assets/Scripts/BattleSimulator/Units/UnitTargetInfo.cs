@@ -14,8 +14,9 @@ namespace Game.Simulation
         public float2 Position => targetObject != null ? targetObject.GetPosition2D() : targetPosition;
         public BattleObject TargetObject => targetObject;
         public Unit TargetUnit => targetObject as Unit;
+		public bool IsValid => targetObject == null || targetObject.IsActive;
 
-        public UnitTargetInfo(BattleObject targetObject)
+		public UnitTargetInfo(BattleObject targetObject)
         {
             this.targetObject = targetObject;
             this.targetPosition = targetObject?.GetPosition2D() ?? default;

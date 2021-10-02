@@ -67,6 +67,9 @@ namespace Game.Simulation
 
 		private bool ShouldBreakAttack(Unit unit, UnitTargetInfo target)
 		{
+			if (!target.IsValid)
+				return true;
+
 			var distanceToTarget = math.distance(unit.Position, target.Position);
 			if (distanceToTarget > AttackRange)
 				return true;
