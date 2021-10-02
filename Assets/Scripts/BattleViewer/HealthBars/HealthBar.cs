@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+	public Color player1Color;
+	public Color player2Color;
 	public Image BackgroundImage;
 	public Image ProgressImage;
 	public AnimationCurve HealthBarScale;
@@ -18,6 +20,8 @@ public class HealthBar : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		this.unitView = unitView;
+		this.ProgressImage.color = unitView.Unit.Owner == OwnerId.Player1
+			? player1Color : player2Color;
 	}
 
 	public void Sync()

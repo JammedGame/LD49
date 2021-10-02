@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7d6380eb913cc49ad51777a72ec2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1Color: {r: 0.5058824, g: 0.8492242, b: 1, a: 1}
+  player2Color: {r: 1, g: 0.263, b: 0.263, a: 1}
   BackgroundImage: {fileID: 2163275635325252406}
   ProgressImage: {fileID: 8822359085642393437}
   HealthBarScale:
