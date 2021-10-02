@@ -19,7 +19,7 @@ MonoBehaviour:
   PrimaryAttack:
     AttackType: 0
     Damage: 2
-    AttackRange: 1
+    AttackRange: 0.7
     AttackSpeed: 1
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}

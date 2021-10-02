@@ -12,6 +12,7 @@ namespace Game.Simulation
         float2 targetPosition;
 
         public float2 Position => targetObject != null ? targetObject.GetPosition2D() : targetPosition;
+        public float Radius => targetObject is Unit unit ? unit.Radius : 0f;
         public BattleObject TargetObject => targetObject;
         public Unit TargetUnit => targetObject as Unit;
 		public bool IsValid => targetObject == null || targetObject.IsActive;

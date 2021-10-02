@@ -186,9 +186,14 @@ namespace Game.Simulation
 			Position = GameWorld.Board.ClampPosition(newPosition, Radius);
 		}
 
-		public bool IsWithinRange(Unit other)
+		public bool IsWithinAttackRange(UnitTargetInfo other)
 		{
-			return length(Position - other.Position) <= Settings.PrimaryAttack.AttackRange;
+			return IsWithinRange(other, other.Radius + Settings.PrimaryAttack.AttackRange);
+		}
+
+		public bool IsWithinRange(UnitTargetInfo other, float range)
+		{
+			return distancesq(Position, other.Position) <= range * range;
 		}
 
 		public void SetBrain(IBrain newBrain)

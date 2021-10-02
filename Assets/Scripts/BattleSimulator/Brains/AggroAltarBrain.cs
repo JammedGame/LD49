@@ -1,13 +1,18 @@
 using Game.Simulation;
+using Unity.Mathematics;
 
 namespace BattleSimulator.Brains
 {
 	public class AggroAltarBrain : IBrain
 	{
+		public const float DefaultAggroRange = 6;
+		public const float BreakAggroRange = 10;
+
 		public Decision Think(Unit myUnit)
 		{
 			if (myUnit.CurrentActionType == UnitActionType.Idle
-			|| myUnit.CurrentTarget.TargetObject == myUnit.GameWorld.Altar)
+			|| myUnit.CurrentTarget.TargetObject == myUnit.GameWorld.Altar
+			|| !myUnit.IsWithinRange(myUnit.CurrentTarget, BreakAggroRange))
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
 				if (target != null)
@@ -20,10 +25,12 @@ namespace BattleSimulator.Brains
 		private Unit PickHighestAggroTargetInRange(Unit myUnit)
 		{
 			Unit target = null;
+			float aggroRange = math.max(DefaultAggroRange, myUnit.Settings.PrimaryAttack.AttackRange);
 			var maxAggro = 0f;
 			foreach (var candidate in myUnit.GameWorld.AllUnits)
-				if (candidate.IsValidAttackTarget &&
-					myUnit.Owner != candidate.Owner && myUnit.IsWithinRange(candidate))
+				if (candidate.IsValidAttackTarget
+				&& myUnit.Owner != candidate.Owner
+				&& myUnit.IsWithinRange(candidate, aggroRange))
 				{
 					var aggro = CalculateAggro(myUnit, candidate);
 					if (aggro > maxAggro)
