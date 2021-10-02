@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BattleSimulator.Brains;
 using UnityEngine;
 
 namespace Game.Simulation
@@ -60,8 +61,9 @@ namespace Game.Simulation
             for (int i = 0; i < unitSpawns.Count; i++)
             {
                 // execute
-                unitSpawns[i].Execute(world);
-            }
+                Unit unit = unitSpawns[i].Execute(world);
+				unit?.SetBrain(new AggroAltarBrain());
+			}
 
         }
 

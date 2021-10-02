@@ -27,11 +27,15 @@ namespace Game.Simulation
         public Vector2 Position;
         public OwnerId Owner;
 
-        public void Execute(GameWorld world)
+        public Unit Execute(GameWorld world)
         {
 			if (Type != null)
 			{
-				world.SpawnUnit(Type, Position, Owner, null);
+				return world.SpawnUnit(Type, Position, Owner, null);
+			}
+			else
+			{
+				return null;
 			}
 		}
     }

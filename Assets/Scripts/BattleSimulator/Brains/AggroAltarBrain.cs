@@ -2,14 +2,16 @@ using Game.Simulation;
 
 namespace BattleSimulator.Brains
 {
-	public class AggroPortalBrain : IBrain
+	public class AggroAltarBrain : IBrain
 	{
 		public Decision Think(Unit myUnit)
 		{
-			if (myUnit.CurrentActionType == UnitActionType.Idle)
+			if (myUnit.CurrentActionType == UnitActionType.Idle
+			|| myUnit.CurrentTarget.TargetObject == myUnit.GameWorld.Altar)
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
-				if (target != null) return new Decision(myUnit.Settings.PrimaryAttack, target);
+				if (target != null)
+					return new Decision(myUnit.Settings.PrimaryAttack, target);
 			}
 
 			return null;
@@ -31,7 +33,7 @@ namespace BattleSimulator.Brains
 					}
 				}
 
-			return target;
+			return target ?? myUnit.GameWorld.Altar;
 		}
 
 		private float CalculateAggro(Unit myUnit, Unit other)

@@ -7,13 +7,13 @@ namespace Game.Simulation
 	{
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
-			return new Atlar(gameWorld, this, targetInfo.Position, owner, parent);
+			return new Altar(gameWorld, this, targetInfo.Position, owner, parent);
 		}
 	}
 
-	public class Atlar : Building
+	public class Altar : Building
 	{
-		public Atlar(GameWorld gameWorld, BuildingSettings settings, float2 position, OwnerId owner, BattleObject parent) :
+		public Altar(GameWorld gameWorld, BuildingSettings settings, float2 position, OwnerId owner, BattleObject parent) :
 			base(gameWorld, settings, position, owner, parent)
 		{
 		}

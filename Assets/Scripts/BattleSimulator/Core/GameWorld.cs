@@ -12,6 +12,7 @@ namespace Game.Simulation
 	{
 		public readonly List<BattleObject> AllBattleObjects = new List<BattleObject>();
 		public readonly List<Building> AllBuildings = new List<Building>();
+		public Altar Altar { get; private set; }
 
 		// collections of battle objects.
 		public readonly List<Projectile> AllProjectiles = new List<Projectile>();
@@ -37,12 +38,12 @@ namespace Game.Simulation
 
 
         /// <summary>
-        ///     Current simulation time.
+        /// Current simulation time.
         /// </summary>
         public float CurrentTime { get; private set; }
 
         /// <summary>
-        ///     API for the collision and physics.
+		/// API for the collision and physics.
         /// </summary>
         public GameWorldPhysics Physics { get; }
 
@@ -52,6 +53,7 @@ namespace Game.Simulation
 			AllUnits.Add(newUnit);
 			AllBattleObjects.Add(newUnit);
 			if (newUnit is Building building) AllBuildings.Add(building);
+			if (newUnit is Altar altar) Altar = altar;
 			DispatchViewEvent(newUnit, ViewEventType.Created);
 			return newUnit;
 		}
