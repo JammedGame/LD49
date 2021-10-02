@@ -9,7 +9,7 @@ namespace Game.Simulation
 		private const float ChangeDirectionPenalty = 0.2f;
 		private const float AwayFromTargetPenalty = 0.5f;
 		private const float GoodEnoughScore = 0.1f;
-		private const float MaxObstacleDist = 10f;
+		private const float MaxObstacleDist = 1f;
 
 		/* gameplay data */
 		private static readonly Rotator Rotator = new Rotator();
