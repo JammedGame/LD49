@@ -11,8 +11,8 @@ Shader "Game/Diffuse"
 		_NormalTex ("Normal Map", 2D) = "white" {}
 
 		[Space]
-		_MainColor ( "Main Color", Color) = (1, 1, 1, 1)
-		_MainColorMult ( "Main Color Mult", float) = 1
+		_Color ( "Main Color", Color) = (1, 1, 1, 1)
+		_ColorMult ( "Main Color Mult", float) = 1
 
 		[Space]
 		[MaterialToggle] USE_FRESNEL("Use Fresnel", Float) = 0
@@ -50,9 +50,9 @@ Shader "Game/Diffuse"
 
 			float4 _FresnelColor;
 			float _FresnelPower;
-			float _MainColorMult;
+			float _ColorMult;
 
-			float4 _MainColor;
+			float4 _Color;
 
 			float4 _LightColor0;
 
@@ -123,7 +123,7 @@ Shader "Game/Diffuse"
 				float diffuseTerm = _LightColor0 * NdotL * attenuation;
 				diffuseTerm += UNITY_LIGHTMODEL_AMBIENT;
 
-				float4 color = tex2D(_MainTex, i.uv) * _MainColor * _MainColorMult;
+				float4 color = tex2D(_MainTex, i.uv) * _Color * _ColorMult;
 #if defined(USE_VERTEX_COLOR_ON)
 				color.rgb *= i.color;
 #endif
