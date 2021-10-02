@@ -37,7 +37,7 @@ namespace Game
 			Application.targetFrameRate = 60;
 
 			// create new game world
-			viewController = new GameViewController(HealthBarController);
+			viewController = new GameViewController(HealthBarController, CameraController);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);
@@ -67,12 +67,15 @@ namespace Game
 				gameWorld.Tick(nextTick);
 			}
 
-			// update view
-			viewController.Update(Time.deltaTime);
-
 			// update camera
 			if (FollowSelectedUnit && SelectedUnit is Unit selectedUnit)
-				CameraController.Follow(viewController.GetView(selectedUnit).transform);
+			{
+				CameraController.Follow(selectedUnit.GetPosition3D());
+			}
+			CameraController.UpdateCamera();
+
+			// update view
+			viewController.Update(Time.deltaTime);
 		}
 
 		public bool TryMouseRaycast(out float2 hitResult)

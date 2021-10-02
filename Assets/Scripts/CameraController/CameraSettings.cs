@@ -22,7 +22,6 @@ public class CameraSettings : ScriptableObject
 
 	[Header("Follow target")]
 	public Vector3 FollowOffset;
-	public bool MatchYaw;
 
 	void OnValidate()
 	{

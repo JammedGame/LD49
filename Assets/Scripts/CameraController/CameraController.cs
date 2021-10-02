@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 		Yaw = Settings.Yaw;
 	}
 
-	void LateUpdate()
+	public void UpdateCamera()
 	{
 		// update position.
 		var offset = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * Settings.KeyboardPanSpeed * Time.deltaTime;
@@ -58,16 +58,8 @@ public class CameraController : MonoBehaviour
 		Position = new Vector3(MinX + MaxX, 0, MinZ + MaxZ) / 2f;
 	}
 
-	public void Follow(Transform transform)
+	public void Follow(Vector3 position)
 	{
-		if (!transform)
-			return;
-
-		Position = transform.position + Settings.FollowOffset;
-
-		if (Settings.MatchYaw)
-		{
-			Yaw = transform.eulerAngles.y;
-		}
+		Position = position + Settings.FollowOffset;
 	}
 }

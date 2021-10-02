@@ -9,10 +9,12 @@ namespace Game.View
 	public abstract class BattleObjectView : MonoBehaviour
     {
         protected BattleObject data;
+        protected GameViewController viewController;
 
         public BattleObject Data => data;
+        public GameViewController ViewController => viewController;
 
-        public static BattleObjectView Create(BattleObject data)
+        public static BattleObjectView Create(BattleObject data, GameViewController viewController)
         {
             var viewPath = data.ViewPath;
             if (string.IsNullOrEmpty(viewPath))
@@ -26,7 +28,8 @@ namespace Game.View
 
             var newView = Instantiate(prefab);
             newView.data = data;
-            newView.OnInitialized(data);
+			newView.viewController = viewController;
+			newView.OnInitialized(data);
             newView.SyncView(0f);
             return newView;
         }
@@ -59,6 +62,15 @@ namespace Game.View
 		/// </summary>
 		public virtual void OnDeactivated()
 		{
+		}
+
+        public virtual void OnDispose()
+        {
+        }
+
+        void OnDestroy()
+        {
+			OnDispose();
 		}
     }
 }

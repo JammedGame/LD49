@@ -8,6 +8,9 @@ namespace Game.View
 {
 	public class UnitView : BattleObjectView
 	{
+		[Header("Health Bar")]
+		public float Height = 1.5f;
+
 		[Header("Animation")]
 		public AnimationInfo MovementAnimation;
 		public AnimationInfo IdleAnimation;
@@ -36,6 +39,7 @@ namespace Game.View
 			// update transform
 			SyncUnitTransform(unit);
 			SyncUnitAnimation(unit);
+			SyncHealthBar(unit);
 		}
 
 		private void SyncUnitTransform(Unit unit)
@@ -51,6 +55,14 @@ namespace Game.View
 				unit.GetPosition3D(),
 				unit.GetRotation3D()
 			);
+		}
+
+		private void SyncHealthBar(Unit unit)
+		{
+			if (healthBar == null)
+				healthBar = ViewController.HealthBarController.Fetch(this);
+
+			healthBar.Sync();
 		}
 
 		private void SyncUnitAnimation(Unit unit)

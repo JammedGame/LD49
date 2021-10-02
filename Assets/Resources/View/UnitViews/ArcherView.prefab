@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a5cdaa63b0040dbbf8cc463e3536ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Height: 1.3
   MovementAnimation:
     ClipName: anim_standing-run-forward
     Speed: 1
@@ -882,7 +883,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6400592dd9fa55e419fea73e03e3ad31, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1603,7 +1604,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 20dfd4ce356ce9740b9d5f8481c49484, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

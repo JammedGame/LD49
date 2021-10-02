@@ -9,13 +9,16 @@ namespace Game.View
 	public class GameViewController : IViewEventHandler
 	{
 		public readonly HealthBarController HealthBarController;
+		public readonly CameraController CameraController;
+
 		readonly Dictionary<BattleObject, BattleObjectView> battleObject2ViewDict = new Dictionary<BattleObject, BattleObjectView>();
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController)
 		{
 			HealthBarController = healthBarController;
+			CameraController = cameraController;
 		}
 
 		public void OnViewEvent(ViewEvent evt)
@@ -95,7 +98,7 @@ namespace Game.View
 
 		private void CreateViewObject(BattleObject parent)
 		{
-			var newView = BattleObjectView.Create(parent);
+			var newView = BattleObjectView.Create(parent, this);
 			battleObject2ViewDict[parent] = newView;
 			allBattleViews.Add(newView);
 		}

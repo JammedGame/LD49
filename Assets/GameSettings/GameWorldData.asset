@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e907d183c30d4e68a6152a9e31ca4dd, type: 3}
   m_Name: GameWorldData
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Board:
     width: 100
     height: 100
@@ -25,12 +25,6 @@ MonoBehaviour:
   - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
     Position: {x: 15, y: 50}
     Owner: 0
-  - Type: {fileID: 11400000, guid: fce89bd34c07a0843b317528de5db439, type: 2}
-    Position: {x: 10, y: 25}
-    Owner: 1
-  - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
-    Position: {x: 11, y: 25}
-    Owner: 1
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
     Position: {x: 20, y: 25}
     Owner: 1

@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
 {
 	public Image BackgroundImage;
 	public Image ProgressImage;
+	public AnimationCurve HealthBarScale;
 
 	UnitView unitView;
 
@@ -29,6 +30,14 @@ public class HealthBar : MonoBehaviour
 			return;
 
 		ProgressImage.fillAmount = unit.HealthPercent;
+		CameraController cameraController = unitView.ViewController.CameraController;
+		Camera camera = cameraController.Camera;
+		Vector3 worldPosition = unitView.transform.position + unitView.Height * Vector3.up;
+		Vector3 viewportPosition = camera.WorldToViewportPoint(worldPosition);
+		RectTransform rect = (RectTransform)transform.parent;
+		Vector3 uiPosition = new Vector3(rect.sizeDelta.x * viewportPosition.x, rect.sizeDelta.y * viewportPosition.y, 0);
+		transform.position = uiPosition;
+		transform.localScale = HealthBarScale.Evaluate(cameraController.Distance) * Vector3.one;
 	}
 
 	public void Hide()

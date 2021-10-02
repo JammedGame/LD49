@@ -25,7 +25,7 @@ public class HealthBarController : MonoBehaviour
 				return instance;
 		}
 
-        return Instantiate(HealthBarPrefab);
+        return Instantiate(HealthBarPrefab, transform);
 	}
 
 	public void Dispose(HealthBar healthBar)
