@@ -68,6 +68,7 @@ namespace Game.Simulation
 		{
 			var newObject = new Projectile(source, position, velocity);
 			AllProjectiles.Add(newObject);
+			AllBattleObjects.Add(newObject);
 			DispatchViewEvent(newObject, ViewEventType.Created);
 			DispatchViewEvent(source, ViewEventType.ProjectileFired, newObject);
 			return newObject;
