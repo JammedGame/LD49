@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.View
 {
-	public class BuildingView : UnitView
+	public class BuildingView : BattleObjectView
 	{
 		public override void OnInitialized(BattleObject data)
 		{
