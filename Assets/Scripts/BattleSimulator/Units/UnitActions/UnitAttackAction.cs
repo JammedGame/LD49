@@ -24,7 +24,7 @@ namespace Game.Simulation
 
 		[Tooltip("Offset from view pivot to the spawn position of the projectile.")]
 		public Vector3 ProjectileOffset;
-		public float ProjectileVelocity = 20f;
+		public float ProjectileVelocity;
 
 		/// <summary>
 		/// Ticks unit's action context.
