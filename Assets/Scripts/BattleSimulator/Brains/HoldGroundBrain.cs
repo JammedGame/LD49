@@ -6,7 +6,8 @@ namespace BattleSimulator.Brains
 	{
 		public Decision Think(Unit myUnit)
 		{
-			if (myUnit.CurrentActionType == UnitActionType.Idle)
+			if (myUnit.CurrentActionType == UnitActionType.Idle
+			|| !myUnit.CurrentTarget.IsValid)
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
 				if (target != null) return new Decision(myUnit.Settings.PrimaryAttack, target);

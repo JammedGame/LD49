@@ -12,27 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45dd10a291eca549840dfa0596ac3f8, type: 3}
   m_Name: Wave 1
   m_EditorClassIdentifier: 
-  name: Level 1
   multiUnits:
   - delay: 3
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 75, y: 10}
+      Position: {x: 40, y: 10}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 76, y: 10}
+      Position: {x: 40, y: 10}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 77, y: 10}
+      Position: {x: 40, y: 10}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 40, y: 10}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 40, y: 10}
       Owner: 1
   - delay: 6
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 76, y: 60}
+      Position: {x: 40, y: 90}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 76, y: 60}
+      Position: {x: 40, y: 90}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 77, y: 60}
+      Position: {x: 40, y: 90}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 40, y: 90}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 40, y: 90}
       Owner: 1

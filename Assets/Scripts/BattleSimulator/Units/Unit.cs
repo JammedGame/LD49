@@ -123,6 +123,12 @@ namespace Game.Simulation
 			if (newAction == null)
 				throw new NullReferenceException();
 
+			// don't reset context if order is the same.
+			if (this.currentAction == newAction && actionContext.Target.Equals(target))
+			{
+				return;
+			}
+
 			currentAction = newAction;
 			actionContext = new UnitActionContext()
 			{

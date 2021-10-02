@@ -7,7 +7,20 @@ namespace Game.View.Debugging
 	public static class UnitGizmos
 	{
 		[Gizmo]
-		public static void DrawUnitViewGizmos(GameWrapper gameWrapper)
+		public static void DrawUnitViewTargets(GameWrapper gameWrapper)
+		{
+			foreach (var unit in gameWrapper.GameWorld.AllUnits)
+			{
+				if (unit.CurrentAction is DoNothingAction || unit.CurrentAction is UnitMoveWithDirectionAction)
+					continue;
+
+				Gizmos.color = unit.CurrentTarget.IsValid ? Color.red : Color.gray;
+				Gizmos.DrawLine(unit.GetPosition3D(), ViewUtil.ConvertTo3D(unit.CurrentTarget.Position));
+			}
+		}
+
+		[Gizmo]
+		public static void DrawUnitViewColliders(GameWrapper gameWrapper)
 		{
 			foreach(var unit in gameWrapper.GameWorld.AllUnits)
 			{

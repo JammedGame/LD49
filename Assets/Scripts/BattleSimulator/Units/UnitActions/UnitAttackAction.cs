@@ -70,8 +70,7 @@ namespace Game.Simulation
 			if (!target.IsValid)
 				return true;
 
-			var distanceToTarget = math.distance(unit.Position, target.Position);
-			if (distanceToTarget > AttackRange)
+			if (!unit.IsWithinAttackRange(target))
 				return true;
 
 			if (AttackType == UnitAttackType.Ranged)

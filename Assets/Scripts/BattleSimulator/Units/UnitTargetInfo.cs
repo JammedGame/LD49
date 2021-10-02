@@ -20,7 +20,7 @@ namespace Game.Simulation
 		public UnitTargetInfo(BattleObject targetObject)
         {
             this.targetObject = targetObject;
-            this.targetPosition = targetObject?.GetPosition2D() ?? default;
+            this.targetPosition = default;
         }
 
         public UnitTargetInfo(float2 targetPosition)
@@ -28,6 +28,12 @@ namespace Game.Simulation
             this.targetObject = null;
             this.targetPosition = targetPosition;
         }
+
+        public bool Equals(UnitTargetInfo rhs)
+        {
+			return rhs.targetObject == targetObject
+				&& rhs.targetPosition.Equals(targetPosition);
+		}
 
         public static implicit operator UnitTargetInfo(BattleObject targetObject) => new UnitTargetInfo(targetObject);
         public static implicit operator UnitTargetInfo(float2 targetPosition) => new UnitTargetInfo(targetPosition);

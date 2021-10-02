@@ -18,7 +18,7 @@ public class GameDebugWindow : EditorWindow
 	{
 		EditorGUI.indentLevel = 1;
 		EditorGUILayout.Space();
-		EditorGUIUtility.labelWidth = Screen.width * 0.4f;
+		EditorGUIUtility.labelWidth = Mathf.Min(300, Screen.width * 0.4f);
 
 		EditorGUILayout.LabelField("Gizmos", EditorStyles.boldLabel);
 		foreach (var gizmo in GizmoService.GetAllGizmoMethods())
