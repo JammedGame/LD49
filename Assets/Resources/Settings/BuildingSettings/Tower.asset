@@ -16,12 +16,12 @@ MonoBehaviour:
   Size: 0.85
   Health: 20
   PrimaryAttack:
-    AttackType: 0
-    Damage: 0
-    AttackRange: 0
-    AttackSpeed: 0
-    AttackUpswing: 0
-    ProjectileOffset: {x: 0, y: 0, z: 0}
+    AttackType: 1
+    Damage: 4
+    AttackRange: 8
+    AttackSpeed: 1
+    AttackUpswing: 1
+    ProjectileOffset: {x: 0, y: 1.8, z: 0.9}
     MinPitch: -15
     MaxPitch: -7.5
     MaxYError: 7.5

@@ -1,4 +1,5 @@
 using System;
+using BattleSimulator.Brains;
 using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Unity.Mathematics;
@@ -42,11 +43,11 @@ namespace Game.Simulation
 		public float Health => health;
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
-
-		// todo jole
-		public bool IsValidAttackTarget => false;
+		public virtual bool IsValidAttackTarget => true;
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
+
+		private IBrain brain;
 
 		public override Vector3 GetPosition3D() => GameWorld.Board.GetPosition3D(Position);
 		public override float2 GetPosition2D() => Position;
@@ -75,6 +76,11 @@ namespace Game.Simulation
 			if (currentActionType == UnitActionType.EndCurrentAction)
 			{
 				OrderIdle();
+			}
+			else
+			{
+				var decision = brain?.Think();
+				if (decision?.Action != null) StartAction(decision.Action, decision.Target);
 			}
 		}
 
@@ -179,6 +185,16 @@ namespace Game.Simulation
 		public void MoveToPosition(float2 newPosition)
 		{
 			Position = GameWorld.Board.ClampPosition(newPosition, Radius);
+		}
+
+		public bool IsWithinRange(Unit other)
+		{
+			return length(Position - other.Position) <= Settings.PrimaryAttack.AttackRange;
+		}
+
+		public void SetBrain(IBrain newBrain)
+		{
+			brain = newBrain;
 		}
 
 		#endregion
