@@ -15,13 +15,13 @@ MonoBehaviour:
   Speed: 0
   Size: 0.85
   Health: 20
+  CastUpswing: 0
   PrimaryAttack:
-    AttackType: 0
-    Damage: 0
-    AttackRange: 0
-    AttackSpeed: 0
-    AttackUpswing: 0
-    ProjectileOffset: {x: 0, y: 0, z: 0}
-    MinPitch: -15
-    MaxPitch: -7.5
-    MaxYError: 7.5
+    AttackType: 1
+    Damage: 4
+    AttackRange: 10
+    AttackSpeed: 1
+    AttackUpswing: 1
+    ProjectileOffset: {x: 0, y: 1.8, z: 0.9}
+    ProjectileVelocity: 20
+  Spells: []

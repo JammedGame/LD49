@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834a516c1d630440faaa36fdf030a710, type: 3}
+  m_Name: Acolyte
+  m_EditorClassIdentifier: 
+  Speed: 2.8
+  Size: 0.35
+  Health: 10
+  CastUpswing: 0.1
+  PrimaryAttack:
+    AttackType: 0
+    Damage: 2
+    AttackRange: 0.85
+    AttackSpeed: 1
+    AttackUpswing: 0.4
+    ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
+    MinPitch: -5
+    MaxPitch: -10
+    MaxYError: 5
+  Spells:
+  - {fileID: 11400000, guid: 3cfb92bad176dc04abc1d17a98714c06, type: 2}

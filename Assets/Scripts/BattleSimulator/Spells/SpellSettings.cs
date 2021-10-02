@@ -1,13 +1,14 @@
 ﻿using Game.Simulation;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace BattleSimulator.Spells
 {
-    public class SpellSettings : BattleObjectSettings
+    public abstract class SpellSettings : BattleObjectSettings
     {
-        public override BattleObject Spawn(GameWorld world, float2 position, OwnerId owner)
-        {
-            throw new System.NotImplementedException();
-        }
+        public string spellName;
+        public float manaCost;
+        public float castRange;
+        public float castDurationSeconds;
     }
 }

@@ -74,7 +74,7 @@ namespace Game.View
 						case ViewEventType.End:
 						{
 							if (battleObject2ViewDict.TryGetValue(evt.Parent, out view))
-								view.OnDeactivated();
+								view.Deactivate();
 							break;
 						}
 

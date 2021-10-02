@@ -1,4 +1,5 @@
 using System;
+using BattleSimulator.Spells;
 using Game.Simulation;
 using Game.Simulation.Board;
 using Game.View;
@@ -31,6 +32,11 @@ namespace Game.UI
 			if (Input.GetMouseButtonDown(0))
 			{
 				AttackSelectedPoint();
+			}
+
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				CastSpell(0);
 			}
 
 			ControlUnitWASD(SelectedUnit);
@@ -71,6 +77,15 @@ namespace Game.UI
 				var selectedUnit = SelectedUnit;
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
 				SelectedUnit.StartAttacking(targetPosition);
+			}
+		}
+
+		private void CastSpell(int spellSlot)
+		{
+			if (gameWrapper.TryMouseRaycast(out var hitResult))
+			{
+				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
+				SelectedUnit.OrderSpellCast(spellSlot, targetPosition);
 			}
 		}
 

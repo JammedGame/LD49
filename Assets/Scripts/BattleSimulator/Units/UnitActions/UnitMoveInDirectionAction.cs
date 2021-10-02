@@ -23,7 +23,7 @@ namespace Game.Simulation
 			var speed01 = math.clamp(math.length(targetDirection), 0, 1);
 
 			// move towards goal - end action if reached it
-			var movementDelta = unit.Settings.Speed * speed01 * dT;
+			var movementDelta = unit.Speed * speed01 * dT;
 			var newPosition = unit.Position + movementDelta * rotationDirection;
 			unit.MoveToPosition(newPosition);
 			return UnitActionType.Movement;

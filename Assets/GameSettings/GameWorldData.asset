@@ -22,18 +22,30 @@ MonoBehaviour:
     BounceAbsorbConstant: 1
     BounceAbsorbRelative: 0.75
   UnitSpawns:
-  - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
+  - Type: {fileID: 11400000, guid: 17fe5b39a7534754480e75b50d1d3135, type: 2}
     Position: {x: 15, y: 50}
     Owner: 0
-  - Type: {fileID: 11400000, guid: fce89bd34c07a0843b317528de5db439, type: 2}
+  - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
     Position: {x: 25, y: 50}
     Owner: 1
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
     Position: {x: 20, y: 25}
-    Owner: 1
+    Owner: 0
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
     Position: {x: 20, y: 75}
-    Owner: 1
+    Owner: 0
   - Type: {fileID: 11400000, guid: 7fd2603fec5f5974a8025546403af8b3, type: 2}
     Position: {x: 5, y: 50}
-    Owner: 1
+    Owner: 0
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 10, y: 40}
+    Owner: 0
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 10, y: 60}
+    Owner: 0
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 15, y: 47}
+    Owner: 0
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 15, y: 53}
+    Owner: 0

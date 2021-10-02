@@ -23,7 +23,7 @@ namespace Game.Simulation
 			}
 
 			// get direction and update orientation towards target angle.
-			var targetDirection = Pathfinding.CalculateTargetDirection(unit, targetPosition);
+			var targetDirection = Pathfinding.CalculateTargetDirection(unit, actionContext.Target);
 			var targetOrientation = MathUtil.ConvertDirectionToOrientation(targetDirection);
 			unit.RotateTowardTarget(targetOrientation, dT);
 
@@ -33,12 +33,12 @@ namespace Game.Simulation
 
 			// if too close, threshold should be very harsh (1)
 			// if far away, we can afford to start moving even if direction to target is not perfectly aligned with the forward direction
-			var secondsToTarget = distanceToTarget / unit.Settings.Speed;
+			var secondsToTarget = distanceToTarget / unit.Speed;
 			var directionMatchThreshold = Mathf.Clamp(1f - secondsToTarget, -1f, 1f - 0.02f);
 			var speed01 = Mathf.Clamp01((directionMatch - directionMatchThreshold) / (1 - directionMatchThreshold));
 
 			// move towards goal - end action if reached it
-			var movementDelta = unit.Settings.Speed * speed01 * dT;
+			var movementDelta = unit.Speed * speed01 * dT;
 			if (movementDelta > distanceToTarget)
 			{
 				unit.MoveToPosition(targetPosition);

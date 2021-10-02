@@ -12,10 +12,12 @@ namespace Game.View
 		public float Height = 1.5f;
 
 		[Header("Animation")]
+		public AnimationInfo DeathAnimation;
 		public AnimationInfo MovementAnimation;
 		public AnimationInfo IdleAnimation;
 		public AnimationInfo PrimaryAttackAnimation;
 		public Unit Unit => (Unit)Data;
+		public AnimationInfo CastSpellAnimation;
 
 		HealthBar healthBar;
 		Animation animationComponent;
@@ -96,20 +98,27 @@ namespace Game.View
 		{
 			switch(unit.CurrentActionType)
 			{
+				case UnitActionType.Death:
+					return DeathAnimation;
+
 				case UnitActionType.Attack:
 					return PrimaryAttackAnimation;
 
 				case UnitActionType.Movement:
 					return MovementAnimation;
-
+				
+				case UnitActionType.CastSpell:
+					return CastSpellAnimation;
+				
 				default:
 					return IdleAnimation;
 			}
 		}
 
-		public override void OnDeactivated()
+		protected override void OnDeactivated()
 		{
 			base.OnDeactivated();
+			SyncUnitAnimation(Unit);
 			if (healthBar != null)
 				ViewController.HealthBarController.Dispose(healthBar);
 		}

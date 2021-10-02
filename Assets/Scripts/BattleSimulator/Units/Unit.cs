@@ -1,8 +1,11 @@
 using System;
+using BattleSimulator.Brains;
+using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Unity.Mathematics;
 using static Unity.Mathematics.math;
 using UnityEngine;
+using float2 = Unity.Mathematics.float2;
 
 namespace Game.Simulation
 {
@@ -16,6 +19,9 @@ namespace Game.Simulation
 		private UnitActionType currentActionType;
 		private UnitActionContext actionContext;
 		private float health;
+
+		// stats
+		public Stat Speed;
 
 		// transform state
 		public float2 Position;
@@ -37,11 +43,11 @@ namespace Game.Simulation
 		public float Health => health;
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
-
-		// todo jole
-		public bool IsValidAttackTarget => false;
+		public virtual bool IsValidAttackTarget => true;
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
+
+		private IBrain brain;
 
 		public override Vector3 GetPosition3D() => GameWorld.Board.GetPosition3D(Position);
 		public override float2 GetPosition2D() => Position;
@@ -53,6 +59,12 @@ namespace Game.Simulation
 			health = unitSettings.Health;
 			Settings = unitSettings;
 			Position = position;
+			Speed = unitSettings.Speed;
+		}
+
+		public virtual void ResetModifiers()
+		{
+			Speed.Reset();
 		}
 
 		public virtual void Tick()
@@ -64,6 +76,11 @@ namespace Game.Simulation
 			if (currentActionType == UnitActionType.EndCurrentAction)
 			{
 				OrderIdle();
+			}
+			else
+			{
+				var decision = brain?.Think();
+				if (decision?.Action != null) StartAction(decision.Action, decision.Target);
 			}
 		}
 
@@ -96,6 +113,11 @@ namespace Game.Simulation
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
+		public void OrderSpellCast(int spellSlot, UnitTargetInfo targetInfo)
+		{
+			StartAction(new CastSpellAction(Settings.Spells[spellSlot], Settings.CastUpswing), targetInfo);
+		}
+
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
 		{
 			if (newAction == null)
@@ -116,6 +138,12 @@ namespace Game.Simulation
 		{
 			base.DealDamage(damage, damageSource);
 			health -= damage;
+		}
+
+		public override void OnDeactivate()
+		{
+			base.OnDeactivate();
+			currentActionType = UnitActionType.Death;
 		}
 
 		#endregion
@@ -156,6 +184,16 @@ namespace Game.Simulation
 		public void MoveToPosition(float2 newPosition)
 		{
 			Position = GameWorld.Board.ClampPosition(newPosition, Radius);
+		}
+
+		public bool IsWithinRange(Unit other)
+		{
+			return length(Position - other.Position) <= Settings.PrimaryAttack.AttackRange;
+		}
+
+		public void SetBrain(IBrain newBrain)
+		{
+			brain = newBrain;
 		}
 
 		#endregion

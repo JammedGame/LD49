@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Game.Simulation.Physics;
 using Unity.Mathematics;
@@ -21,7 +22,9 @@ namespace Game.Simulation
         public readonly List<BattleObject> AllBattleObjects = new List<BattleObject>();
         public readonly List<Unit> AllUnits = new List<Unit>();
         public readonly List<Building> AllBuildings = new List<Building>();
+        public readonly List<Spell> AllSpells = new List<Spell>();
         public readonly WaveController Wave;
+
 
         /// <summary>
         /// Current simulation time.
@@ -65,22 +68,43 @@ namespace Game.Simulation
             return newObject;
         }
 
-        public Projectile SpawnProjectile(BattleObject source, Vector3 position, Vector3 velocity)
+        public Projectile SpawnProjectile(BattleObject source, Vector3 position, Vector3 velocity, BattleObject target)
         {
-            var newObject = new Projectile(source, position, velocity);
+            var newObject = new Projectile(source, position, velocity, target);
             AllProjectiles.Add(newObject);
+            AllBattleObjects.Add(newObject);
             DispatchViewEvent(newObject, ViewEventType.Created);
             DispatchViewEvent(source, ViewEventType.ProjectileFired, newObject);
             return newObject;
         }
 
+        public Spell CastSpell(SpellSettings spellSettings, UnitTargetInfo targetInfo, BattleObject caster)
+        {
+            Spell newSpell = (Spell)spellSettings.Spawn(this, targetInfo.Position, caster.Owner, caster);
+            AllSpells.Add(newSpell);
+            AllBattleObjects.Add(newSpell);
+            DispatchViewEvent(newSpell, ViewEventType.Created);
+            return newSpell;
+        }
+
         public void Tick(GameTick tick)
         {
+            // reset modifiers
+            ResetModifiers();
+
             // update projectiles.
             Profiler.BeginSample("Tick Projectiles");
             foreach (var projectile in AllProjectiles)
             {
                 projectile.Tick();
+            }
+            Profiler.EndSample();
+
+            // update spells
+            Profiler.BeginSample("Tick Spells");
+            foreach (Spell spell in AllSpells)
+            {
+                spell.Tick();
             }
             Profiler.EndSample();
 
@@ -105,6 +129,14 @@ namespace Game.Simulation
 
             // update time
             currentTime += GameTick.TickDuration;
+        }
+
+        public void ResetModifiers()
+        {
+            foreach (var unit in AllUnits)
+            {
+                unit.ResetModifiers();
+            }
         }
 
         public void DispatchViewEvent(BattleObject parent, ViewEventType type, object data = null)
@@ -133,9 +165,9 @@ namespace Game.Simulation
                     if (obj is Projectile p) AllProjectiles.Remove(p);
                     if (obj is Unit u) AllUnits.Remove(u);
                     if (obj is Building b) AllBuildings.Remove(b);
+                    if (obj is Spell s) AllSpells.Remove(s);
                 }
             }
-
         }
 
         public void Dispose()
