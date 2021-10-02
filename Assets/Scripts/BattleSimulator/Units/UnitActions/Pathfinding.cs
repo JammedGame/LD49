@@ -14,12 +14,14 @@ namespace Game.Simulation
 		/* gameplay data */
 		private static readonly Rotator Rotator = new Rotator();
 
-		public static float2 CalculateTargetDirection(Unit unit, float2 targetPosition)
+		public static float2 CalculateTargetDirection(Unit unit, UnitTargetInfo targetInfo)
 		{
 			var board = unit.GameWorld.Board;
 			var obstacles = unit.GameWorld.AllUnits;
 			var direction = unit.GetDirection();
+			var targetPosition = targetInfo.Position;
 			var distToTarget = length(targetPosition - unit.Position);
+			var raycastDistance = min(distToTarget, MaxObstacleDist);
 			var initDir = normalizesafe(targetPosition - unit.Position, direction);
 
 			// go through directions to find the best.
@@ -30,11 +32,12 @@ namespace Game.Simulation
 			for (var j = 0; j < Rotator.Count; j++)
 			{
 				var dir = Rotator.GetRotation(initDir, j);
-				var targetPos = unit.Position + dir * min(distToTarget, MaxObstacleDist);
+				var targetPos = unit.Position + dir * raycastDistance;
 
 				// check if out of bounds
 				if (targetPos.x < board.MinX || targetPos.x > board.MaxX ||
-					targetPos.y < board.MinY || targetPos.y > board.MaxY) continue;
+					targetPos.y < board.MinY || targetPos.y > board.MaxY)
+						continue;
 
 				// add cost for staying away from target / changing direction
 				var cost = (1 - dot(dir, initDir)) * AwayFromTargetPenalty;
@@ -43,9 +46,10 @@ namespace Game.Simulation
 				// add cost for obstacles
 				foreach (var obstacle in obstacles)
 				{
-					if (obstacle == unit) continue;
-
-					if (obstacle.IsValidAttackTarget && obstacle.Owner != unit.Owner) continue;
+					if (obstacle == unit)
+						continue;
+					if (obstacle == targetInfo.TargetObject)
+						continue;
 
 					var distToObstacle = Math2D.LineDistance(unit.Position, targetPos, obstacle.Position);
 					if (distToObstacle < obstacle.Radius + unit.Radius)
