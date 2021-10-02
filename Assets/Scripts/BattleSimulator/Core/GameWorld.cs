@@ -108,8 +108,27 @@ namespace Game.Simulation
 
 		public void CleanInactiveObjects()
 		{
-			AllProjectiles.RemoveAll(x => !x.IsActive);
-			AllUnits.RemoveAll(x => !x.IsActive);
+			// deactivate units with not enough health.
+			foreach(var unit in AllUnits)
+			{
+				if (unit.HealthPercent <= 0f)
+				{
+					unit.Deactivate();
+				}
+			}
+
+			// clean deactivated objects.
+			for (int i = 0; i < AllBattleObjects.Count; i++)
+			{
+				BattleObject obj = AllBattleObjects[i];
+				if (!obj.IsActive)
+				{
+					AllBattleObjects.RemoveAt(i--);
+					if (obj is Projectile p) AllProjectiles.Remove(p);
+					if (obj is Unit u) AllUnits.Remove(u);
+					if (obj is Building b) AllBuildings.Remove(b);
+				}
+			}
 		}
 
 		public void Dispose()

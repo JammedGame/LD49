@@ -106,6 +106,20 @@ namespace Game.View
 					return IdleAnimation;
 			}
 		}
+
+		public override void OnDeactivated()
+		{
+			base.OnDeactivated();
+			if (healthBar != null)
+				ViewController.HealthBarController.Dispose(healthBar);
+		}
+
+		public override void OnDispose()
+		{
+			base.OnDispose();
+			if (healthBar != null)
+				ViewController.HealthBarController.Dispose(healthBar);
+		}
 	}
 
 	[Serializable]

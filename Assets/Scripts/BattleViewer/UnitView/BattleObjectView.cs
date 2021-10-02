@@ -8,10 +8,15 @@ namespace Game.View
 {
 	public abstract class BattleObjectView : MonoBehaviour
     {
-        protected BattleObject data;
-        protected GameViewController viewController;
+		// serialized
+		public float DeathAnimationDuration = 999f;
 
-        public BattleObject Data => data;
+		// runtiem data
+		protected BattleObject data;
+        protected GameViewController viewController;
+		protected float deactivateTime;
+
+		public BattleObject Data => data;
         public GameViewController ViewController => viewController;
 
         public static BattleObjectView Create(BattleObject data, GameViewController viewController)
@@ -48,6 +53,10 @@ namespace Game.View
 		/// </summary>
 		public virtual void SyncDeadView(float dT)
 		{
+			if (Data.GameWorld.CurrentTime > deactivateTime + DeathAnimationDuration)
+            {
+				Destroy(gameObject);
+			}
 		}
 
         /// <summary>
@@ -56,6 +65,15 @@ namespace Game.View
         public virtual void OnViewEvent(ViewEvent evt)
         {
         }
+
+		/// <summary>
+		/// Called on object deactivation.
+		/// </summary>
+        public void Deactivate()
+        {
+			deactivateTime = Data.GameWorld.CurrentTime;
+			OnDeactivated();
+		}
 
 		/// <summary>
 		/// Called on object deactivation.

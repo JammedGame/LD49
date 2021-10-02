@@ -33,6 +33,7 @@ public class HealthBarController : MonoBehaviour
         if (!healthBar)
 			return;
 
+		healthBar.Hide();
 		healthBarPool.Push(healthBar);
 	}
 }

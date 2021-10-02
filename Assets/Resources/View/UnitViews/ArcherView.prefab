@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a5cdaa63b0040dbbf8cc463e3536ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathAnimationDuration: 1
   Height: 1.3
   MovementAnimation:
     ClipName: anim_standing-run-forward
