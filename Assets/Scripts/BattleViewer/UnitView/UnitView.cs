@@ -8,9 +8,6 @@ namespace Game.View
 {
 	public class UnitView : BattleObjectView
 	{
-		[Header("Health Bar")]
-		public float Height = 1.5f;
-
 		[Header("Animation")]
 		public AnimationInfo DeathAnimation;
 		public AnimationInfo MovementAnimation;

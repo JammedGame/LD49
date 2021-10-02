@@ -15,6 +15,7 @@ namespace Game.Simulation
 
 		[Header("Collision")]
 		public float Size;
+		public float Height = 1.5f;
 
 		[Header("Health")]
 		public float Health;
