@@ -6,32 +6,34 @@ using UnityEngine;
 
 namespace Game.Simulation
 {
-	[Serializable]
-	[CreateAssetMenu]
-	public class GameWorldData : ScriptableObject
-	{
-		public BoardData Board;
-		public GamePhysicsSettings PhysicsSettings;
+    [Serializable]
+    [CreateAssetMenu]
+    public class GameWorldData : ScriptableObject
+    {
+        public BoardData Board;
+        public GamePhysicsSettings PhysicsSettings;
 
-		[Table]
-		public List<UnitSpawn> UnitSpawns;
-	}
+        [Table]
+        public List<UnitSpawn> UnitSpawns;
 
-	[Serializable]
-	public struct UnitSpawn
-	{
-		public BattleObjectSettings Type;
-		public Vector2 Position;
-		public OwnerId Owner;
+        public List<WaveData> WaveData;
+    }
 
-		public void Execute(GameWorld world)
-		{
-			Type?.Spawn(world, Position, Owner);
-		}
-	}
+    [Serializable]
+    public struct UnitSpawn
+    {
+        public BattleObjectSettings Type;
+        public Vector2 Position;
+        public OwnerId Owner;
 
-	[Serializable]
-	public class GamePhysicsSettings : PhysicsSettings
-	{
-	}
+        public void Execute(GameWorld world)
+        {
+            Type?.Spawn(world, Position, Owner);
+        }
+    }
+
+    [Serializable]
+    public class GamePhysicsSettings : PhysicsSettings
+    {
+    }
 }
