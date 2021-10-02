@@ -27,3 +27,4 @@ MonoBehaviour:
     ProjectileVelocity: 15
   Spells:
   - {fileID: 11400000, guid: 3cfb92bad176dc04abc1d17a98714c06, type: 2}
+  - {fileID: 11400000, guid: 106b670ff5be6ca4288b4c4142fe4348, type: 2}

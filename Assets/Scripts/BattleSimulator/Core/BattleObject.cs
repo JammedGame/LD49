@@ -82,5 +82,10 @@ namespace Game.Simulation
 		/// Called when unit gets deactivated.
 		/// </summary>
 		public virtual void OnDeactivate() {}
+
+		public float DistanceTo(BattleObject other)
+		{
+			return (other.GetPosition3D() - GetPosition3D()).magnitude;
+		}
 	}
 }

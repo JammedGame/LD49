@@ -13,9 +13,15 @@ namespace Game.UI
 		private GameWrapper gameWrapper;
 		public Unit SelectedUnit => gameWrapper.GameWorld.AllUnits[0];
 
+		private BlightSpellSettings blightSpell;
 		public GameInputController(GameWrapper gameWrapper)
 		{
 			this.gameWrapper = gameWrapper;
+			blightSpell = Resources.Load("Settings/SpellSettings/Blight") as BlightSpellSettings;
+			if (blightSpell == null)
+			{
+				Debug.LogError("Blight spell asset not found!");
+			}
 		}
 
 		/// <summary>
@@ -36,7 +42,7 @@ namespace Game.UI
 
 			if (Input.GetKeyDown(KeyCode.R))
 			{
-				CastSpell(0);
+				CastSpell(blightSpell);
 			}
 
 			ControlUnitWASD(SelectedUnit);
@@ -82,12 +88,12 @@ namespace Game.UI
 			}
 		}
 
-		private void CastSpell(int spellSlot)
+		private void CastSpell(SpellSettings spellSettings)
 		{
 			if (gameWrapper.TryMouseRaycast(out var hitResult))
 			{
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
-				SelectedUnit.OrderSpellCast(spellSlot, targetPosition);
+				SelectedUnit.OrderSpellCast(spellSettings, targetPosition);
 			}
 		}
 

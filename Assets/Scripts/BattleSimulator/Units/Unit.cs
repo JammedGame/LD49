@@ -117,9 +117,9 @@ namespace Game.Simulation
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
-		public void OrderSpellCast(int spellSlot, UnitTargetInfo targetInfo)
+		public void OrderSpellCast(SpellSettings spellSettings, UnitTargetInfo targetInfo)
 		{
-			StartAction(new CastSpellAction(Settings.Spells[spellSlot], Settings.CastUpswing), targetInfo);
+			StartAction(new CastSpellAction(spellSettings, Settings.CastUpswing), targetInfo);
 		}
 
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
