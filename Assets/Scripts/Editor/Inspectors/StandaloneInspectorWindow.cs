@@ -21,6 +21,7 @@ public class StandaloneInspectorWindow : EditorWindow
 			{
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Paladin.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/CameraSettings.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/GameSettings/GameWorldData.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Scenes/Game_Profiles/Camera Profile.asset"),
 			};
 		}

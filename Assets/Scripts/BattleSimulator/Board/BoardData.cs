@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game.Simulation.Board
 {
-	public partial class BoardData : ScriptableObject
+	[Serializable]
+	public class BoardData
 	{
 		[SerializeField] private int width;
 		[SerializeField] private int height;
@@ -18,15 +19,6 @@ namespace Game.Simulation.Board
 		public float MinY => 0;
 		public float MaxY => height;
 		public int Version => version;
-
-		public static BoardData CreateNew(int width, int height)
-		{
-			var boardData = ScriptableObject.CreateInstance<BoardData>();
-			boardData.width = width;
-			boardData.height = height;
-			return boardData;
-		}
-
 
 		/// <summary>
 		/// Converts tile index into a 2d center of the tile.

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e907d183c30d4e68a6152a9e31ca4dd, type: 3}
+  m_Name: GameWorldData
+  m_EditorClassIdentifier:
+  Board:
+    width: 100
+    height: 100
+  PhysicsSettings:
+    Passes: 1
+    VelocityDragConstant: 5
+    VelocityDragRelative: 0.95
+    BounceAbsorbConstant: 1
+    BounceAbsorbRelative: 0.75
+  UnitSpawns:
+  - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
+    Position: {x: 15, y: 50}
+    Owner: 0
+  - Type: {fileID: 11400000, guid: fce89bd34c07a0843b317528de5db439, type: 2}
+    Position: {x: 10, y: 25}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: 3e6b8177439f4c048b2b950cca5d4088, type: 2}
+    Position: {x: 11, y: 25}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
+    Position: {x: 20, y: 25}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
+    Position: {x: 20, y: 75}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: 7fd2603fec5f5974a8025546403af8b3, type: 2}
+    Position: {x: 5, y: 50}
+    Owner: 1

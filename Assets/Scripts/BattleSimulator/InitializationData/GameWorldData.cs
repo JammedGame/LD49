@@ -7,7 +7,8 @@ using UnityEngine;
 namespace Game.Simulation
 {
 	[Serializable]
-	public class GameWorldData
+	[CreateAssetMenu]
+	public class GameWorldData : ScriptableObject
 	{
 		public BoardData Board;
 		public GamePhysicsSettings PhysicsSettings;
