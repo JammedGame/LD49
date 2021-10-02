@@ -24,8 +24,7 @@ namespace Game.Simulation
 
 		[Tooltip("Offset from view pivot to the spawn position of the projectile.")]
 		public Vector3 ProjectileOffset;
-		public float ProjectileVelocity = 15f;
-		public float MinPitch = -15f, MaxPitch = -7.5f, MaxYError = 7.5f;
+		public float ProjectileVelocity = 20f;
 
 		/// <summary>
 		/// Ticks unit's action context.
@@ -101,11 +100,7 @@ namespace Game.Simulation
 		public Projectile FireProjectileAt(Unit unit, UnitTargetInfo targetInfo)
 		{
 			var fromPosition = unit.GetPosition3D() + Quaternion.Euler(0, unit.Orientation, 0) * ProjectileOffset;
-			var fromPosition2D = new float2(fromPosition.x, fromPosition.z);
-			var projectileOrientation = MathUtil.ConvertDirectionToOrientation(fromPosition2D, targetInfo.Position);
-			var verticalAngle = UnityEngine.Random.Range(MinPitch, MaxPitch);
-			projectileOrientation += UnityEngine.Random.Range(-MaxYError, MaxYError);
-			var projectileDirection = Quaternion.Euler(verticalAngle, projectileOrientation, 0) * Vector3.forward;
+			var projectileDirection = (targetInfo.TargetObject.GetPosition3D() - unit.GetPosition3D()).normalized;
 			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity, targetInfo.TargetObject);
 		}
 	}

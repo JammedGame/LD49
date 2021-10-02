@@ -31,9 +31,10 @@ namespace Game.Simulation
 			if (target != null)
 			{
 				var currentDirection = velocity.normalized;
-				var targetDirection = (target.GetPosition3D() - position).normalized;
+				var targetPosition = target.GetPosition3D();
+				var targetDirection = (targetPosition - position).normalized;
 				var newDirection =
-					Vector3.Lerp(currentDirection, targetDirection, HomingAmount * GameTick.TickDuration);
+					Vector3.Lerp(currentDirection, targetDirection, HomingAmount * GameTick.TickDuration).normalized;
 				velocity = velocity.magnitude * newDirection;
 			}
 			else
