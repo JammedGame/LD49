@@ -12,6 +12,7 @@ namespace Game.Simulation
 	{
 		public readonly List<BattleObject> AllBattleObjects = new List<BattleObject>();
 		public readonly List<Building> AllBuildings = new List<Building>();
+		public readonly List<Creep> AllCreeps = new List<Creep>();
 		public Altar Altar { get; private set; }
 
 		// collections of battle objects.
@@ -53,6 +54,7 @@ namespace Game.Simulation
 			AllUnits.Add(newUnit);
 			AllBattleObjects.Add(newUnit);
 			if (newUnit is Building building) AllBuildings.Add(building);
+			if (newUnit is Creep creep) AllCreeps.Add(creep);
 			if (newUnit is Altar altar) Altar = altar;
 			DispatchViewEvent(newUnit, ViewEventType.Created);
 			return newUnit;
@@ -140,6 +142,7 @@ namespace Game.Simulation
 					if (obj is Projectile p) AllProjectiles.Remove(p);
 					if (obj is Unit u) AllUnits.Remove(u);
 					if (obj is Building b) AllBuildings.Remove(b);
+					if (obj is Creep c) AllCreeps.Remove(c);
 					if (obj is Spell s) AllSpells.Remove(s);
 				}
 			}
