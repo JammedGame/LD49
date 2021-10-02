@@ -37,3 +37,15 @@ MonoBehaviour:
   - Type: {fileID: 11400000, guid: 7fd2603fec5f5974a8025546403af8b3, type: 2}
     Position: {x: 5, y: 50}
     Owner: 1
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 10, y: 40}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 10, y: 60}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 15, y: 47}
+    Owner: 1
+  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+    Position: {x: 15, y: 53}
+    Owner: 1
