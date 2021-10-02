@@ -19,12 +19,9 @@ MonoBehaviour:
   PrimaryAttack:
     AttackType: 0
     Damage: 2
-    AttackRange: 0.85
+    AttackRange: 1
     AttackSpeed: 1
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15
-    MinPitch: -5
-    MaxPitch: -10
-    MaxYError: 5
   Spells: []
