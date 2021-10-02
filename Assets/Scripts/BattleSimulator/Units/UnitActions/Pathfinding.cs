@@ -1,3 +1,4 @@
+using UnityEngine;
 using Unity.Mathematics;
 using static Unity.Mathematics.math;
 
@@ -51,7 +52,7 @@ namespace Game.Simulation
 					if (obstacle == targetInfo.TargetObject)
 						continue;
 
-					var distToObstacle = Math2D.LineDistance(unit.Position, targetPos, obstacle.Position);
+					var distToObstacle = Math2D.GetDistanceToPoint(unit.Position, targetPos, obstacle.Position);
 					if (distToObstacle < obstacle.Radius + unit.Radius)
 					{
 						var massRatio = obstacle.IsStatic ? 999f : 1f;

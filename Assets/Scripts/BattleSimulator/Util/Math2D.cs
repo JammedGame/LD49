@@ -51,6 +51,20 @@ public static class Math2D
 			/ Mathf.Sqrt(d_sqr);
 	}
 
+	public static float GetDistanceToPoint(float2 pointA, float2 pointB, float2 point)
+	{
+		float lineDistanceSQ = math.distancesq(pointB, pointA);
+		if (lineDistanceSQ < 0.000001f)
+			return 0.0f;
+
+		float u = ((point.x - pointA.x) * (pointB.x - pointA.x) + (point.y - pointA.y) * (pointB.y - pointA.y)) / lineDistanceSQ;
+		u = Mathf.Clamp01(u);
+		var intersect = new float2();
+		intersect.x = pointA.x + u * (pointB.x - pointA.x);
+		intersect.y = pointA.y + u * (pointB.y - pointA.y);
+		return math.distance(intersect, point);
+	}
+
 	public static float LineDistance(float2 from, float2 to, float2 circle)
 	{
 		return LineDistance(from.x, from.y, to.x, to.y, circle.x, circle.y);
