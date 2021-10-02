@@ -74,6 +74,9 @@ namespace Game.Simulation
 
 		public void Tick(GameTick tick)
 		{
+			// reset modifiers
+			ResetModifiers();
+
 			// update projectiles.
 			Profiler.BeginSample("Tick Projectiles");
 			foreach (var projectile in AllProjectiles)
@@ -99,6 +102,14 @@ namespace Game.Simulation
 
 			// update time
 			currentTime += GameTick.TickDuration;
+		}
+
+		public void ResetModifiers()
+		{
+			foreach(var unit in AllUnits)
+			{
+				unit.ResetModifiers();
+			}
 		}
 
 		public void DispatchViewEvent(BattleObject parent, ViewEventType type, object data = null)

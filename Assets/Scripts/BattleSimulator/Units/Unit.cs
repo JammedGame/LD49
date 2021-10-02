@@ -17,6 +17,9 @@ namespace Game.Simulation
 		private UnitActionContext actionContext;
 		private float health;
 
+		// stats
+		public Stat Speed;
+
 		// transform state
 		public float2 Position;
 		public float2 Velocity;
@@ -53,6 +56,12 @@ namespace Game.Simulation
 			health = unitSettings.Health;
 			Settings = unitSettings;
 			Position = position;
+			Speed = unitSettings.Speed;
+		}
+
+		public virtual void ResetModifiers()
+		{
+			Speed.Reset();
 		}
 
 		public virtual void Tick()
