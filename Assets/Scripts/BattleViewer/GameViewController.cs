@@ -8,9 +8,15 @@ namespace Game.View
 {
 	public class GameViewController : IViewEventHandler
 	{
+		public readonly HealthBarController HealthBarController;
 		readonly Dictionary<BattleObject, BattleObjectView> battleObject2ViewDict = new Dictionary<BattleObject, BattleObjectView>();
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
+
+		public GameViewController(HealthBarController healthBarController)
+		{
+			HealthBarController = healthBarController;
+		}
 
 		public void OnViewEvent(ViewEvent evt)
 		{

@@ -13,6 +13,7 @@ namespace Game
 	{
 		// scene references
 		public CameraController CameraController;
+		public HealthBarController HealthBarController;
 		public bool FollowSelectedUnit;
 		public GameWorldData GameData;
 
@@ -36,7 +37,7 @@ namespace Game
 			Application.targetFrameRate = 60;
 
 			// create new game world
-			viewController = new GameViewController();
+			viewController = new GameViewController(HealthBarController);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);

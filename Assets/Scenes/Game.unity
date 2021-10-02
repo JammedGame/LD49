@@ -391,6 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 787463737}
+  - component: {fileID: 787463738}
   m_Layer: 0
   m_Name: HealthBarRoot
   m_TagString: Untagged
@@ -412,6 +413,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &787463738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787463736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9039545dd54c8ed48ad90cd2b9403115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPrefab: {fileID: 0}
 --- !u!850595691 &807886001
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -548,6 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraController: {fileID: 1342583868}
+  HealthBarController: {fileID: 787463738}
   FollowSelectedUnit: 1
   GameData: {fileID: 11400000, guid: c5e6320c3e058a44a9c0c42769796826, type: 2}
 --- !u!1 &1342583867

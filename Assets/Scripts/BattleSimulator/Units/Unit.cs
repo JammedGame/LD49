@@ -15,6 +15,7 @@ namespace Game.Simulation
 		private UnitAction currentAction;
 		private UnitActionType currentActionType;
 		private UnitActionContext actionContext;
+		private float health;
 
 		// transform state
 		public float2 Position;
@@ -33,6 +34,8 @@ namespace Game.Simulation
 		public bool IsAttacking => currentActionType == UnitActionType.Attack;
 		public bool IsMoving => currentActionType == UnitActionType.Movement;
 		public float Radius => Settings.Size;
+		public float Health => health;
+		public float HealthPercent => health / Settings.Health;
 		public virtual bool IsStatic => false; // for collision purposes
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
@@ -44,6 +47,7 @@ namespace Game.Simulation
 			: base(gameWorld, owner, parent)
 		{
 			currentAction = DoNothingAction.Instance;
+			health = unitSettings.Health;
 			Settings = unitSettings;
 			Position = position;
 		}

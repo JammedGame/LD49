@@ -12,7 +12,9 @@ namespace Game.View
 		public AnimationInfo MovementAnimation;
 		public AnimationInfo IdleAnimation;
 		public AnimationInfo PrimaryAttackAnimation;
+		public Unit Unit => (Unit)Data;
 
+		HealthBar healthBar;
 		Animation animationComponent;
 		AnimationInfo currentClip;
 
