@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pikeman
   m_EditorClassIdentifier: 
   Speed: 2.8
-  Size: 0.35
+  Size: 0.3
   Health: 10
   CastUpswing: 0
   PrimaryAttack:
@@ -23,6 +23,7 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
+    ProjectileVelocity: 15
     MinPitch: -5
     MaxPitch: -10
     MaxYError: 5
