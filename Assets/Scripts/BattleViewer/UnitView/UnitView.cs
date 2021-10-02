@@ -17,6 +17,7 @@ namespace Game.View
 		public AnimationInfo IdleAnimation;
 		public AnimationInfo PrimaryAttackAnimation;
 		public Unit Unit => (Unit)Data;
+		public AnimationInfo CastSpellAnimation;
 
 		HealthBar healthBar;
 		Animation animationComponent;
@@ -105,7 +106,10 @@ namespace Game.View
 
 				case UnitActionType.Movement:
 					return MovementAnimation;
-
+				
+				case UnitActionType.CastSpell:
+					return CastSpellAnimation;
+				
 				default:
 					return IdleAnimation;
 			}

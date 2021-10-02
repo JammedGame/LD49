@@ -16,6 +16,7 @@ namespace Game.Simulation
 		Attack = 2,
 		Special = 3,
 		Death = 4,
+		CastSpell = 5,
 		EndCurrentAction = -1
 	}
 

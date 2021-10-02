@@ -468,6 +468,10 @@ MonoBehaviour:
     ClipName: anim_standing-draw-arrow
     Speed: 1
     Crossfade: 0.15
+  CastSpellAnimation:
+    ClipName: anim_standing-draw-arrow
+    Speed: 1
+    Crossfade: 0.15
 --- !u!111 &6037109296375217726
 Animation:
   m_ObjectHideFlags: 0

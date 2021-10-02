@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Game.Simulation.Physics;
 using Unity.Mathematics;
@@ -71,6 +72,7 @@ namespace Game.Simulation
 			DispatchViewEvent(source, ViewEventType.ProjectileFired, newObject);
 			return newObject;
 		}
+		
 
 		public void Tick(GameTick tick)
 		{

@@ -15,6 +15,7 @@ MonoBehaviour:
   Speed: 2.8
   Size: 0.35
   Health: 10
+  CastUpswing: 0.8
   PrimaryAttack:
     AttackType: 0
     Damage: 2

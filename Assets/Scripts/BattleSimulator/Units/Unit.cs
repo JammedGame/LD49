@@ -1,8 +1,10 @@
 using System;
+using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Unity.Mathematics;
 using static Unity.Mathematics.math;
 using UnityEngine;
+using float2 = Unity.Mathematics.float2;
 
 namespace Game.Simulation
 {
@@ -103,6 +105,12 @@ namespace Game.Simulation
 		public void StartAttacking(UnitTargetInfo attackTarget)
 		{
 			StartAction(Settings.PrimaryAttack, attackTarget);
+		}
+
+		public void OrderSpellCast(int spellSlot, UnitTargetInfo targetInfo)
+		{
+			Spell spell = (Spell) Settings.Spells[spellSlot].Spawn(GameWorld, float2.zero, Owner);
+			StartAction(new CastSpellAction(spell, Settings.CastUpswing), targetInfo);
 		}
 
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
