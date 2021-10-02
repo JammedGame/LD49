@@ -22,7 +22,6 @@ namespace Game
 		GameViewController viewController;
 		GameTimeline gameTimeline;
 		GameInputController inputController;
-		int lastBoardMeshSettingsVersion = -1;
 
 		// properties
 		public Camera Camera => CameraController.Camera;
