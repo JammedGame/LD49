@@ -23,14 +23,17 @@ namespace Game.Simulation
     [Serializable]
     public struct UnitSpawn
     {
-        public BattleObjectSettings Type;
+        public UnitSettings Type;
         public Vector2 Position;
         public OwnerId Owner;
 
         public void Execute(GameWorld world)
         {
-			Type?.Spawn(world, (float2) Position, Owner);
-        }
+			if (Type != null)
+			{
+				world.SpawnUnit(Type, Position, Owner, null);
+			}
+		}
     }
 
     [Serializable]

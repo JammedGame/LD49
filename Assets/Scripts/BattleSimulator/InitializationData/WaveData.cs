@@ -8,7 +8,6 @@ namespace Game.Simulation
     [CreateAssetMenu]
     public class WaveData : ScriptableObject
     {
-        public string name;
         public List<MultiUnitSpawnWithDelay> multiUnits;
     }
 
@@ -16,7 +15,6 @@ namespace Game.Simulation
     public class MultiUnitSpawnWithDelay
     {
         public float delay;
-        public List<UnitSpawn> unitSpawns;
-
+        [Table] public List<UnitSpawn> unitSpawns;
     }
 }

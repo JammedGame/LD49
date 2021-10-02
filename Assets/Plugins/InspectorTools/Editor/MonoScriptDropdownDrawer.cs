@@ -61,7 +61,7 @@ public class MonoScriptDropdownDrawer : PropertyDrawer
 			else
 			{
 				mScript.objectReferenceValue = newValue;
-				return true;
+				return serializedObject.ApplyModifiedProperties();
 			}
 		}
 

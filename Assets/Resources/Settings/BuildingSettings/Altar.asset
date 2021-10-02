@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154a2aff3c2ed4a4fa7388df21426eeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 498e531f8d9de8244811e825b6879ee0, type: 3}
   m_Name: Altar
   m_EditorClassIdentifier: 
   Speed: 0
   Size: 1.7
   Health: 20
+  CastUpswing: 0
   PrimaryAttack:
     AttackType: 0
     Damage: 0
@@ -22,6 +23,5 @@ MonoBehaviour:
     AttackSpeed: 0
     AttackUpswing: 0
     ProjectileOffset: {x: 0, y: 0, z: 0}
-    MinPitch: -15
-    MaxPitch: -7.5
-    MaxYError: 7.5
+    ProjectileVelocity: 15
+  Spells: []

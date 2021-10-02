@@ -7,7 +7,7 @@ namespace Game.Simulation
 	{
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
-			return gameWorld.SpawnBuilding(this, targetInfo.Position, owner);
+			return new Building(gameWorld, this, targetInfo.Position, owner, parent);
 		}
 	}
 }

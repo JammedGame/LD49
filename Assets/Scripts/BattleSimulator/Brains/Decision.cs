@@ -1,3 +1,4 @@
+using System;
 using Game.Simulation;
 
 namespace BattleSimulator.Brains
@@ -9,7 +10,7 @@ namespace BattleSimulator.Brains
 
 		public Decision(UnitAction action, UnitTargetInfo target)
 		{
-			Action = action;
+			Action = action ?? throw new NullReferenceException();
 			Target = target;
 		}
 	}

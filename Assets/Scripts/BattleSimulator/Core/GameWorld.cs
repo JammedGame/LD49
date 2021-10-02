@@ -48,22 +48,12 @@ namespace Game.Simulation
 
 		public Unit SpawnUnit(UnitSettings settings, float2 position, OwnerId owner, BattleObject parent = null)
 		{
-			var newUnit = new Unit(this, settings, position, owner, parent);
+			Unit newUnit = (Unit)settings.Spawn(this, position, owner, parent);
 			AllUnits.Add(newUnit);
 			AllBattleObjects.Add(newUnit);
+			if (newUnit is Building building) AllBuildings.Add(building);
 			DispatchViewEvent(newUnit, ViewEventType.Created);
 			return newUnit;
-		}
-
-		public Building SpawnBuilding(BuildingSettings settings, float2 position, OwnerId owner,
-			BattleObject parent = null)
-		{
-			var newObject = new Building(this, settings, position, owner, parent);
-			AllUnits.Add(newObject);
-			AllBuildings.Add(newObject);
-			AllBattleObjects.Add(newObject);
-			DispatchViewEvent(newObject, ViewEventType.Created);
-			return newObject;
 		}
 
 		public Projectile SpawnProjectile(BattleObject source, Vector3 position, Vector3 velocity, Unit target,

@@ -7,6 +7,11 @@ public class BattleObjectSettingsInspector : Editor<BattleObjectSettings>
 {
 	public override void OnInspectorGUI()
 	{
+		if (MonoScriptDropdownDrawer.Draw(serializedObject))
+		{
+			return;
+		}
+
 		base.OnInspectorGUI();
 	}
 }

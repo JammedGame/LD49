@@ -69,6 +69,11 @@ namespace Game.Simulation
 
 		public virtual void Tick()
 		{
+			// check what should be my current action.
+			var decision = brain?.Think(this);
+			if (decision != null)
+				StartAction(decision.Action, decision.Target);
+
 			// execute active action.
 			currentActionType = currentAction.Tick(this, ref actionContext, GameTick.TickDuration);
 
@@ -76,11 +81,6 @@ namespace Game.Simulation
 			if (currentActionType == UnitActionType.EndCurrentAction)
 			{
 				OrderIdle();
-			}
-			else
-			{
-				var decision = brain?.Think();
-				if (decision?.Action != null) StartAction(decision.Action, decision.Target);
 			}
 		}
 

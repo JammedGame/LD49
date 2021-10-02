@@ -2,7 +2,7 @@ using Game.Simulation;
 
 namespace BattleSimulator.Brains
 {
-	public class HoldGroundBrain : IBrain
+	public class AggroPortalBrain : IBrain
 	{
 		public Decision Think(Unit myUnit)
 		{
@@ -21,8 +21,7 @@ namespace BattleSimulator.Brains
 			var maxAggro = 0f;
 			foreach (var candidate in myUnit.GameWorld.AllUnits)
 				if (candidate.IsValidAttackTarget &&
-					myUnit.Owner != candidate.Owner &&
-					myUnit.IsWithinRange(candidate))
+					myUnit.Owner != candidate.Owner && myUnit.IsWithinRange(candidate))
 				{
 					var aggro = CalculateAggro(myUnit, candidate);
 					if (aggro > maxAggro)

@@ -49,3 +49,5 @@ MonoBehaviour:
   - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
     Position: {x: 15, y: 53}
     Owner: 0
+  WaveData:
+  - {fileID: 11400000, guid: 60307a554530b694397fad8b7a75b300, type: 2}

@@ -1,7 +1,9 @@
+using Game.Simulation;
+
 namespace BattleSimulator.Brains
 {
 	public interface IBrain
 	{
-		Decision Think();
+		Decision Think(Unit unit);
 	}
 }
