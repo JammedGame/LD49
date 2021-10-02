@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public static class Math2D
@@ -48,5 +49,10 @@ public static class Math2D
 
 		return Mathf.Abs(d_y * circle_x - d_x * circle_y + to_x * from_y - to_y * from_x)
 			/ Mathf.Sqrt(d_sqr);
+	}
+
+	public static float LineDistance(float2 from, float2 to, float2 circle)
+	{
+		return LineDistance(from.x, from.y, to.x, to.y, circle.x, circle.y);
 	}
 }

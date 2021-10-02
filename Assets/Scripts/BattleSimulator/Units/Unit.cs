@@ -38,6 +38,9 @@ namespace Game.Simulation
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
 
+		// todo jole
+		public bool IsValidAttackTarget => false;
+
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
 
 		public override Vector3 GetPosition3D() => GameWorld.Board.GetPosition3D(Position);

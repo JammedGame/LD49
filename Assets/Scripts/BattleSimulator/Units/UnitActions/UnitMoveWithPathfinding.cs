@@ -23,7 +23,7 @@ namespace Game.Simulation
 			}
 
 			// get direction and update orientation towards target angle.
-			var targetDirection = (targetPosition - unit.Position) / distanceToTarget;
+			var targetDirection = Pathfinding.CalculateTargetDirection(unit, targetPosition);
 			var targetOrientation = MathUtil.ConvertDirectionToOrientation(targetDirection);
 			unit.RotateTowardTarget(targetOrientation, dT);
 
