@@ -29,15 +29,9 @@ namespace Game.UI
 		/// </summary>
 		public void Update()
 		{
-			// move unit to the point.
 			if (Input.GetMouseButtonDown(1))
 			{
-				MoveSelectedUnit();
-			}
-
-			if (Input.GetMouseButtonDown(0))
-			{
-				AttackSelectedPoint();
+				AttackMove();
 			}
 
 			if (Input.GetKeyDown(KeyCode.R))
@@ -78,15 +72,11 @@ namespace Game.UI
 			}
 		}
 
-		private void AttackSelectedPoint()
+		private void AttackMove()
 		{
 			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
-			var targetPosition = raycastInfo.TargetPosition;
-			var targetUnit = raycastInfo.TargetUnit;
-			var targetInfo = targetUnit != null
-				? new UnitTargetInfo(targetUnit)
-				: new UnitTargetInfo(targetPosition);
-			SelectedUnit.StartAttacking(targetInfo);
+			if (raycastInfo.TargetUnit != null) SelectedUnit.StartAttacking(new UnitTargetInfo(raycastInfo.TargetUnit));
+			else SelectedUnit.OrderMoveToPoint(raycastInfo.TargetPosition);
 		}
 
 		private void CastSpell(SpellSettings spellSettings)
@@ -95,14 +85,6 @@ namespace Game.UI
 			{
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
 				SelectedUnit.OrderSpellCast(spellSettings, targetPosition);
-			}
-		}
-
-		private void MoveSelectedUnit()
-		{
-			if (gameWrapper.TryMouseRaycast(out var hitResult))
-			{
-				SelectedUnit.OrderMoveToPoint(hitResult);
 			}
 		}
 	}
