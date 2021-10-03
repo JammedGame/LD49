@@ -47,6 +47,7 @@ namespace Game.Simulation
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
 		public bool IsValidAttackTarget => IsActive && !IsInvulnerable;
+		public bool CanAttack(Unit unit) => unit != null && unit.IsValidAttackTarget && unit.Owner != Owner;
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
 
@@ -115,8 +116,7 @@ namespace Game.Simulation
 
 		public void OrderAttacking(UnitTargetInfo attackTarget)
 		{
-			if (!attackTarget.IsValid
-			|| attackTarget.TargetUnit != null && !attackTarget.TargetUnit.IsValidAttackTarget)
+			if (attackTarget.TargetUnit != null && !CanAttack(attackTarget.TargetUnit))
 			{
 				Debug.LogWarning($"Skipped attacking {attackTarget}");
 				return;
