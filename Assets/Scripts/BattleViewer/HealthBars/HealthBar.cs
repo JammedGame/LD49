@@ -14,13 +14,13 @@ public class HealthBar : MonoBehaviour
 	public Image ProgressImage;
 	public AnimationCurve HealthBarScale;
 
-	UnitView unitView;
+	BattleObjectView unitView;
 
-	public void Initialize(UnitView unitView)
+	public void Initialize(BattleObjectView unitView)
 	{
 		gameObject.SetActive(true);
 		this.unitView = unitView;
-		this.ProgressImage.color = unitView.Unit.Owner == OwnerId.Player1
+		this.ProgressImage.color = unitView.Data.Owner == OwnerId.Player1
 			? player1Color : player2Color;
 	}
 
@@ -29,14 +29,14 @@ public class HealthBar : MonoBehaviour
 		if (!unitView)
 			return;
 
-		var unit = unitView.Unit;
+		var unit = unitView.Data as Unit;
 		if (unit == null)
 			return;
 
 		ProgressImage.fillAmount = unit.HealthPercent;
 		CameraController cameraController = unitView.ViewController.CameraController;
 		Camera camera = cameraController.Camera;
-		Vector3 worldPosition = unitView.transform.position + unitView.Unit.Settings.Height * Vector3.up;
+		Vector3 worldPosition = unitView.transform.position + unit.Settings.Height * Vector3.up;
 		Vector3 viewportPosition = camera.WorldToViewportPoint(worldPosition);
 		RectTransform rect = (RectTransform)transform.parent;
 		Vector3 uiPosition = new Vector3(rect.sizeDelta.x * (viewportPosition.x - 0.5f), rect.sizeDelta.y * (viewportPosition.y - 0.5f), 0f);

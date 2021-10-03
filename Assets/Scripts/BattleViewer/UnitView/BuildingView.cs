@@ -9,6 +9,8 @@ namespace Game.View
 {
 	public class BuildingView : BattleObjectView
 	{
+		HealthBar healthBar;
+
 		public override void OnInitialized(BattleObject data)
 		{
 			if (!(data is Building))
@@ -16,6 +18,31 @@ namespace Game.View
 				Debug.LogError($"{this} only accepts data of type Unit, not {data}", this);
 				return;
 			}
+		}
+
+		public override void SyncView(float dT)
+		{
+			base.SyncView(dT);
+			transform.localPosition = Data.GetPosition3D();
+
+			if (healthBar == null)
+				healthBar = ViewController.HealthBarController.Fetch(this);
+			if (healthBar != null)
+				healthBar.Sync();
+		}
+
+		protected override void OnDeactivated()
+		{
+			base.OnDeactivated();
+			if (healthBar != null)
+				healthBar.Hide();
+		}
+
+		public override void OnDispose()
+		{
+			base.OnDispose();
+			if (healthBar != null)
+				healthBar.Hide();
 		}
 	}
 }

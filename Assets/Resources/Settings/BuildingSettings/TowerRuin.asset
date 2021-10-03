@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   Size: 1
+  Height: 1.75
   Health: 20
   CastUpswing: 0
   PrimaryAttack:
@@ -23,7 +24,5 @@ MonoBehaviour:
     AttackSpeed: 0
     AttackUpswing: 0
     ProjectileOffset: {x: 0, y: 0, z: 0}
-    MinPitch: -15
-    MaxPitch: -7.5
-    MaxYError: 7.5
+    ProjectileVelocity: 0
   Spells: []

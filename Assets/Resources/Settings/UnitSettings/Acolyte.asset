@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 2.8
   Size: 0.35
-  Height: 1.5
+  Height: 1.75
   Health: 10
   CastUpswing: 0.1
   PrimaryAttack:

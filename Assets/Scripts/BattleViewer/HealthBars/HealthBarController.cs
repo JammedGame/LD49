@@ -9,7 +9,7 @@ public class HealthBarController : MonoBehaviour
 
 	Stack<HealthBar> healthBarPool = new Stack<HealthBar>();
 
-	public HealthBar Fetch(UnitView unitView)
+	public HealthBar Fetch(BattleObjectView unitView)
 	{
 		HealthBar instance = FetchInstance();
 		if (instance != null) instance.Initialize(unitView);
