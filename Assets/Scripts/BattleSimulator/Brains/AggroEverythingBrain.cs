@@ -3,15 +3,12 @@ using Unity.Mathematics;
 
 namespace BattleSimulator.Brains
 {
-	public class AggroAltarBrain : IBrain
+	public class AggroEverythingBrain : IBrain
 	{
-		public const float DefaultAggroRange = 7;
-		public const float BreakAggroRange = 14;
-
 		public Decision Think(Unit myUnit)
 		{
 			if (myUnit.CurrentActionType != UnitActionType.Attack
-			|| !myUnit.IsWithinRange(myUnit.CurrentTarget, BreakAggroRange))
+			|| !myUnit.CurrentTarget.IsValid)
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
 				if (target != null)
@@ -23,24 +20,20 @@ namespace BattleSimulator.Brains
 
 		private Unit PickHighestAggroTargetInRange(Unit myUnit)
 		{
-			Unit currentTarget = myUnit.CurrentTarget.TargetUnit;
 			Unit target = null;
-			float aggroRange = math.max(DefaultAggroRange, myUnit.Settings.PrimaryAttack.AttackRange);
+
 			foreach (var candidate in myUnit.GameWorld.AllUnits)
 			{
-				if (!myUnit.CanAttack(candidate)) continue;
+				if (!myUnit.CanAttack(candidate))
+					continue;
 
-				if (currentTarget == candidate && myUnit.IsWithinRange(candidate, BreakAggroRange)
-				|| myUnit.IsWithinRange(candidate, DefaultAggroRange))
+				if (target == null || IsBetterAggro(myUnit, candidate, target))
 				{
-					if (target == null || IsBetterAggro(myUnit, candidate, target))
-					{
-						target = candidate;
-					}
+					target = candidate;
 				}
 			}
 
-			return target ?? myUnit.GameWorld.Altar;
+			return target;
 		}
 
 		private bool IsBetterAggro(Unit myUnit, Unit candidate, Unit currentTarget)
