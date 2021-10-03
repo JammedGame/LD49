@@ -33,7 +33,8 @@ namespace Game
 		void OnEnable()
 		{
 			// update unity stuff
-			Application.targetFrameRate = 60;
+			QualitySettings.vSyncCount = 1;
+			Application.targetFrameRate = -60;
 
 			// create new game world
 			viewController = new GameViewController(HealthBarController, CameraController);
@@ -47,6 +48,11 @@ namespace Game
 			CameraController.MinZ = gameWorld.Board.MinY;
 			CameraController.MaxZ = gameWorld.Board.MaxY;
 			CameraController.SetCentralPosition();
+		}
+
+		void OnGUI()
+		{
+			GUI.Label(new Rect(20, 20, 100, 100), $"{Screen.width}x{Screen.height} FPS:{1f / Time.deltaTime}");
 		}
 
 		void Update()

@@ -41,10 +41,17 @@ public class CameraController : MonoBehaviour
 
 		// update transform.
 		transform.SetPositionAndRotation(Position, Quaternion.Euler(Settings.Pitch, Yaw, Settings.Roll));
-		Camera.transform.localPosition = new Vector3(0, 0, -Distance);
 		Camera.fieldOfView = Settings.FieldOfView;
-		QualitySettings.shadowDistance = Distance * 2f;
+
+		if (Distance != lastDistance)
+		{
+			QualitySettings.shadowDistance = Distance * 1.5f;
+			Camera.transform.localPosition = new Vector3(0, 0, -Distance);
+			lastDistance = Distance;
+		}
 	}
+
+	float lastDistance;
 
 	private void ClampValues()
 	{

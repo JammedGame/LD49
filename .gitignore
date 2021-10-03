@@ -1,6 +1,6 @@
 Library/
 build/
-webglBuild/
+webgl/
 *.apk
 /*.csproj
 *.unityproj
