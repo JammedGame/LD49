@@ -18,6 +18,10 @@ namespace Game.UI
 		private Unit player;
 
 		private KeyCode[] spellKeys = {KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4};
+
+		private readonly KeyCode[] summoningKeys =
+			{ KeyCode.Alpha0, KeyCode.Alpha9, KeyCode.Alpha8, KeyCode.Alpha7, KeyCode.Alpha6, KeyCode.Alpha5 };
+
 		public GameInputController(GameWrapper gameWrapper)
 		{
 			this.gameWrapper = gameWrapper;
@@ -51,6 +55,14 @@ namespace Game.UI
 				if (Input.GetKeyDown(spellKeys[i]))
 				{
 					CastSpell(i);
+				}
+			}
+
+			for (var i = 0; i < summoningKeys.Length; i++)
+			{
+				if (Input.GetKeyDown(summoningKeys[i]))
+				{
+					Summon(i);
 				}
 			}
 
@@ -145,6 +157,20 @@ namespace Game.UI
 			{
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
 				player.OrderSpellCast(index, targetPosition);
+			}
+		}
+
+		private void Summon(int index)
+		{
+			if (selectedOther?.Settings.SummoningList != null && selectedOther.Settings.SummoningList.Count > 0)
+			{
+				gameWrapper.GameWorld.SummonBuilding(selectedOther.Settings.SummoningList[index], selectedOther);
+			}
+			else if (gameWrapper.TryMouseRaycast(out var hitResult))
+			{
+				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
+				gameWrapper.GameWorld.SummonCreep(gameWrapper.GameWorld.Data.DefaultSummoningList[index],
+					targetPosition, SelectedUnit.Owner);
 			}
 		}
 	}

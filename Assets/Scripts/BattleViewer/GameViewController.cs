@@ -88,7 +88,7 @@ namespace Game.View
 							break;
 
 						case ViewEventType.SummoningListUpdated:
-							SyncSummoningUI(evt.Data as List<UnitSettings>);
+							SyncSummoningUI(evt.Data as List<SummoningOption>);
 							break;
 
 						case ViewEventType.End:
@@ -137,9 +137,9 @@ namespace Game.View
 			}
 		}
 
-		private void SyncSummoningUI(List<UnitSettings> summoningList)
+		private void SyncSummoningUI(List<SummoningOption> summoningList)
 		{
-			SummoningUIController.SetModel(summoningList);
+			SummoningUIController.SetData(summoningList);
 		}
 
 		/// <summary>

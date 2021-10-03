@@ -20,6 +20,8 @@ namespace Game.Simulation
         public List<UnitSpawn> UnitSpawns;
 
         public List<WaveData> WaveData;
+
+        public List<UnitSettings> DefaultSummoningList;
     }
 
     [Serializable]

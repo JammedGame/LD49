@@ -29,4 +29,8 @@ MonoBehaviour:
     ProjectileVelocity: 20
   Spells: []
   SpawnOnDeath: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+  SummoningList:
+  - {fileID: 11400000, guid: 7b852504d50cc4ebaaea6148ceffbc95, type: 2}
+  - {fileID: 11400000, guid: 1d8a380412afd4e0795741dc39583eb8, type: 2}
   GoldCost: 40
+  UnitName: FireTower

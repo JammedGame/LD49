@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class SummoningUIController : MonoBehaviour
 {
-	[SerializeField] private List<SummoningButton> buttons;
+	[SerializeField] private List<SummoningOptionView> buttons;
 
-	private List<UnitSettings> model;
+	private List<SummoningOption> data;
 
-	private void Start()
+	public void SetData(List<SummoningOption> newData)
 	{
-		SetModel(null);
-	}
-
-	public void SetModel(List<UnitSettings> newModel)
-	{
-		model = newModel;
+		data = newData;
 		UpdateButtons();
 	}
 
@@ -24,10 +19,10 @@ public class SummoningUIController : MonoBehaviour
 		for (var i = 0; i < buttons.Count; i++)
 		{
 			var button = buttons[i];
-			if (model != null && i < model.Count)
+			if (data != null && i < data.Count)
 			{
-				var unitSettings = model[i];
-				button.SetModel(unitSettings);
+				var unitSettings = data[i];
+				button.SetData(unitSettings);
 				button.gameObject.SetActive(true);
 			}
 			else

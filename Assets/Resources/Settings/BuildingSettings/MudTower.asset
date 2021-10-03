@@ -29,4 +29,7 @@ MonoBehaviour:
     ProjectileVelocity: 20
   Spells: []
   SpawnOnDeath: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+  SummoningList:
+  - {fileID: 11400000, guid: 9b8f9452ac2694c828c2a1ea38347143, type: 2}
   GoldCost: 50
+  UnitName: MudTower

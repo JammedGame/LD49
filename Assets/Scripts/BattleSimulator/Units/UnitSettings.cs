@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BattleSimulator.Spells;
 using Physics2D;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game.Simulation
@@ -35,13 +36,20 @@ namespace Game.Simulation
 
 		public int GoldCost;
 
-		// todo actual name
-		[SerializeField] private string unitName;
-		public string UnitName => !string.IsNullOrEmpty(unitName) ? unitName : name;
+		public string UnitName;
 
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
 			return new Unit(gameWorld, this, targetInfo.Position, owner, parent);
+		}
+
+		private void OnValidate()
+		{
+			if (string.IsNullOrEmpty(UnitName))
+			{
+				UnitName = name;
+				EditorUtility.SetDirty(this);
+			}
 		}
 	}
 }

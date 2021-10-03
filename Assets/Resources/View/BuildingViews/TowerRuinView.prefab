@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ee82797fa293542af79adc63c9419a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathAnimationDuration: 999
+  DeathAnimationDuration: 0
 --- !u!1 &8265458235965478034
 GameObject:
   m_ObjectHideFlags: 0

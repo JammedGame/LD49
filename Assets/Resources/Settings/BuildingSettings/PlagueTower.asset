@@ -29,4 +29,8 @@ MonoBehaviour:
     ProjectileVelocity: 20
   Spells: []
   SpawnOnDeath: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+  SummoningList:
+  - {fileID: 11400000, guid: 39f286e9e072f4e6ab0d8871c9a78545, type: 2}
+  - {fileID: 11400000, guid: 96b865e304fc34355a3420e635a6a392, type: 2}
   GoldCost: 50
+  UnitName: PlagueTower

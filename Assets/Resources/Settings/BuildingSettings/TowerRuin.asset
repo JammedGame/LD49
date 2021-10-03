@@ -29,3 +29,10 @@ MonoBehaviour:
     ProjectileVelocity: 0
   Spells: []
   SpawnOnDeath: {fileID: 0}
+  SummoningList:
+  - {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
+  - {fileID: 11400000, guid: e3b86cec11e294586a415845bc45d929, type: 2}
+  - {fileID: 11400000, guid: e9e0f1f57fca84ae7ab68f4f1f02d947, type: 2}
+  - {fileID: 11400000, guid: 40aec905902904d0eab20defef346d31, type: 2}
+  GoldCost: 0
+  UnitName: TowerRuin

@@ -66,3 +66,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 096dc1cdb011b441d9832fcd015e77d3, type: 2}
   - {fileID: 11400000, guid: 2e118782bbe524619b98032ec528acdb, type: 2}
   - {fileID: 11400000, guid: 8fc2b089f65a04403b92d3764d818e60, type: 2}
+  DefaultSummoningList:
+  - {fileID: 11400000, guid: 17fe5b39a7534754480e75b50d1d3135, type: 2}
+  - {fileID: 11400000, guid: 363d62369631e4b53b54417b4110c0c4, type: 2}
+  - {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}

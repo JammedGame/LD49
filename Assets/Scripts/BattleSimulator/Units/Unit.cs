@@ -193,11 +193,16 @@ namespace Game.Simulation
 			health -= damage;
 		}
 
+		public void Die()
+		{
+			Deactivate();
+			SpawnOnDeath();
+		}
+
 		public override void OnDeactivate()
 		{
 			base.OnDeactivate();
 			currentActionType = UnitActionType.Death;
-			SpawnOnDeath();
 		}
 
 		private void SpawnOnDeath()

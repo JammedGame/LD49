@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BattleSimulator.Brains;
 using BattleSimulator.Spells;
 using Game.Simulation.Board;
 using Game.Simulation.Physics;
@@ -36,6 +37,7 @@ namespace Game.Simulation
 			Physics = new GameWorldPhysics();
 			waveController = new WaveController(Data.WaveData, this);
 			goldAmount = data.StartingGold;
+			UpdateSummoningList(null);
 
 			// spawn initial object
 			foreach (var unitSpawn in data.UnitSpawns)
@@ -150,7 +152,7 @@ namespace Game.Simulation
 			// deactivate units with not enough health.
 			foreach (var unit in AllUnits)
 				if (unit.HealthPercent <= 0f)
-					unit.Deactivate();
+					unit.Die();
 
 			// clean deactivated objects.
 			for (var i = 0; i < AllBattleObjects.Count; i++)
@@ -205,7 +207,23 @@ namespace Game.Simulation
 		public void UpdateSummoningList(Unit selectedOther)
 		{
 			var summoningList = selectedOther?.Settings.SummoningList;
-			DispatchViewEvent(selectedOther, ViewEventType.SummoningListUpdated, summoningList);
+			if (summoningList == null || summoningList.Count == 0) summoningList = Data.DefaultSummoningList;
+			var summoningOptions = summoningList.ConvertAll(us => new SummoningOption(us, true));
+			DispatchViewEvent(selectedOther, ViewEventType.SummoningListUpdated, summoningOptions);
+		}
+
+		public void SummonBuilding(UnitSettings buildingToSummon, Unit selectedOther)
+		{
+			selectedOther.Deactivate();
+
+			var newUnit = SpawnUnit(buildingToSummon, selectedOther.Position, selectedOther.Owner, selectedOther.Parent);
+			newUnit?.SetBrain(new HoldGroundBrain());
+		}
+
+		public void SummonCreep(UnitSettings creepToSummon, float2 targetPosition, OwnerId owner)
+		{
+			var newUnit = SpawnUnit(creepToSummon, targetPosition, owner);
+			newUnit?.SetBrain(new HoldGroundBrain());
 		}
 	}
 }

@@ -31,4 +31,4 @@ MonoBehaviour:
   SpawnOnDeath: {fileID: 0}
   SummoningList: []
   GoldCost: 0
-  unitName: 
+  UnitName: Altar
