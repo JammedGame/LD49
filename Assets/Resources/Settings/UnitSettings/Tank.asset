@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d818cc70865c44c7b585ac181d0b490b, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
-  Speed: 2.9
+  Speed: 2.75
   Size: 0.7
   Height: 3.2
   IsInvulnerable: 0

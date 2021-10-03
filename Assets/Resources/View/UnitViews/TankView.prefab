@@ -208,7 +208,7 @@ MonoBehaviour:
     Crossfade: 0.15
   MovementAnimation:
     ClipName: anim_Walk
-    Speed: 1
+    Speed: 1.1
     Crossfade: 0.15
   IdleAnimation:
     ClipName: anim_Idle

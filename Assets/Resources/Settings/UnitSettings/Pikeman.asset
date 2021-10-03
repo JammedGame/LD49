@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d818cc70865c44c7b585ac181d0b490b, type: 3}
   m_Name: Pikeman
   m_EditorClassIdentifier: 
-  Speed: 2.8
+  Speed: 2.65
   Size: 0.3
   Height: 1.75
   IsInvulnerable: 0
