@@ -54,10 +54,9 @@ namespace Game.Simulation
 		private void ExecuteMultiSpawn(MultiSpawn multiSpawn)
 		{
 			Debug.Log($"Spawning enemies at {TimeSinceStartOfWave}");
-			for (var i = 0; i < multiSpawn.unitSpawns.Count; i++)
+			foreach (var unitSpawn in multiSpawn.unitSpawns)
 			{
-				// execute
-				var unit = multiSpawn.unitSpawns[i].Execute(world);
+				var unit = unitSpawn.Execute(world);
 				unit?.SetBrain(new AggroAltarBrain());
 			}
 		}
