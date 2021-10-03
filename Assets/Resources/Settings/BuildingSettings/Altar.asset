@@ -29,5 +29,6 @@ MonoBehaviour:
     ProjectileVelocity: 15
   Spells: []
   SpawnOnDeath: {fileID: 0}
+  SummoningList: []
   GoldCost: 0
   unitName: 
