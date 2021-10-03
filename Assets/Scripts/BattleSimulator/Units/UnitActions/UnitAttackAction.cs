@@ -65,7 +65,7 @@ namespace Game.Simulation
 			if (newProgress > 1f)
 			{
 				actionContext.ResetProgress();
-				actionContext.Progress = newProgress - 1f;
+				actionContext.Progress = Mathf.Clamp01(newProgress - 1f);
 			}
 
 			return UnitActionType.Attack;

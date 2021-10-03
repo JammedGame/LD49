@@ -6,13 +6,13 @@ namespace Game.Simulation
 {
     public class CastSpellAction : UnitAction
     {
-        private SpellSettings SpellSettings;
+        private EquippedSpell EquipedSpell;
         private float CastUpswing;
-        private float CastSpeed => 1f / SpellSettings.castDurationSeconds;
+        private float CastSpeed => 1f / EquipedSpell.SpellSettings.castDurationSeconds;
 
-        public CastSpellAction(SpellSettings spellSettings, float upswing)
+        public CastSpellAction(EquippedSpell spellSettings, float upswing)
         {
-            SpellSettings = spellSettings;
+            EquipedSpell = spellSettings;
             CastUpswing = upswing;
         }
 
@@ -35,7 +35,8 @@ namespace Game.Simulation
             // land strike if reached the right frame
             if (!actionContext.Executed && newProgress >= CastUpswing)
             {
-                unit.GameWorld.CastSpell(SpellSettings, actionContext.Target, unit);
+                unit.GameWorld.CastSpell(EquipedSpell.SpellSettings, actionContext.Target, unit);
+				EquipedSpell.StartCooldown();
 				actionContext.Executed = true;
 			}
 
@@ -53,13 +54,13 @@ namespace Game.Simulation
 
         private bool ShouldBreakAttack(Unit unit, UnitTargetInfo target)
         {
-            if (SpellSettings.castRange == 0)
+            if (EquipedSpell.SpellSettings.castRange == 0)
             {
                 return false;
             }
 
             var distanceToTarget = math.distance(unit.Position, target.Position);
-            if (distanceToTarget > SpellSettings.castRange)
+            if (distanceToTarget > EquipedSpell.SpellSettings.castRange)
             {
                 return true;
             }

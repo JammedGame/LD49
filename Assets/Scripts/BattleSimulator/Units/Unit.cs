@@ -142,9 +142,9 @@ namespace Game.Simulation
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
-		public void OrderSpellCast(SpellSettings spellSettings, UnitTargetInfo targetInfo, Action SuccessCallback = null, Action FailCallback = null)
+		public void OrderSpellCast(EquippedSpell spell, UnitTargetInfo targetInfo)
 		{
-			StartAction(new CastSpellAction(spellSettings, Settings.CastUpswing), targetInfo, SuccessCallback);
+			StartAction(new CastSpellAction(spell, Settings.CastUpswing), targetInfo);
 		}
 
 		public void OrderSpellCast(int spellIndex, UnitTargetInfo targetInfo)
@@ -158,10 +158,7 @@ namespace Game.Simulation
 			EquippedSpell spell = EquippedSpells[spellIndex];
 			if (spell.IsReady)
 			{
-				OrderSpellCast(spell.SpellSettings, targetInfo, () =>
-				{
-					spell.StartCooldown();
-				});
+				OrderSpellCast(spell, targetInfo);
 			}
 			else
 			{
@@ -271,23 +268,7 @@ namespace Game.Simulation
 		public UnitTargetInfo Target;
 		public bool Started;
 		public float Progress;
-		private bool _executed;
-		public bool Executed
-		{
-			get
-			{
-				return _executed;
-			}
-
-			set
-			{
-				if (!_executed && value)
-				{
-					_executed = true;
-					OnSuccess?.Invoke();
-				}
-			}
-		}
+		public bool Executed;
 		public bool Finished;
 		public Action OnSuccess;
 		public Action OnFail;
