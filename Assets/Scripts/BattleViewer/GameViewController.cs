@@ -11,6 +11,7 @@ namespace Game.View
 	{
 		public readonly HealthBarController HealthBarController;
 		public readonly SpellUIController SpellUIController;
+		public readonly SummoningUIController SummoningUIController;
 		public readonly CameraController CameraController;
 
 		private readonly SelectionCircle selectionCircle;
@@ -20,11 +21,12 @@ namespace Game.View
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SelectionCircle selectionCircle, MovementCross movementCross)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SummoningUIController summoningUIController, SelectionCircle selectionCircle, MovementCross movementCross)
 		{
 			HealthBarController = healthBarController;
 			CameraController = cameraController;
 			SpellUIController = spellUIController;
+			SummoningUIController = summoningUIController;
 			this.selectionCircle = selectionCircle;
 			this.movementCross = movementCross;
 		}
@@ -85,6 +87,10 @@ namespace Game.View
 							SyncSpellUI(evt.Parent as Unit);
 							break;
 
+						case ViewEventType.SummoningListUpdated:
+							SyncSummoningUI(evt.Data as List<UnitSettings>);
+							break;
+
 						case ViewEventType.End:
 						{
 							if (battleObject2ViewDict.TryGetValue(evt.Parent, out view))
@@ -129,6 +135,11 @@ namespace Game.View
 			{
 				SpellUIController.equippedSpellViews[i].gameObject.SetActive(false);
 			}
+		}
+
+		private void SyncSummoningUI(List<UnitSettings> summoningList)
+		{
+			SummoningUIController.SetModel(summoningList);
 		}
 
 		/// <summary>

@@ -16,6 +16,7 @@ namespace Game
 		public CameraController CameraController;
 		public HealthBarController HealthBarController;
 		public SpellUIController SpellUIController;
+		public SummoningUIController SummoningUIController;
 		public GameWorldData GameData;
 
 		// state
@@ -42,7 +43,7 @@ namespace Game
 			// create new game world
 			selectionCircle = Instantiate(SelectionCircle.LoadPrefab());
 			movementCross = Instantiate(MovementCross.LoadPrefab());
-			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController, selectionCircle, movementCross);
+			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController, SummoningUIController, selectionCircle, movementCross);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);
