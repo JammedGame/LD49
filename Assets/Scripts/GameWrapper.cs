@@ -14,7 +14,6 @@ namespace Game
 		// scene references
 		public CameraController CameraController;
 		public HealthBarController HealthBarController;
-		public bool FollowSelectedUnit;
 		public GameWorldData GameData;
 
 		// state
@@ -73,9 +72,9 @@ namespace Game
 			}
 
 			// update camera
-			if (FollowSelectedUnit && SelectedUnit is Unit selectedUnit)
+			if (SelectedUnit is Unit selectedUnit)
 			{
-				CameraController.Follow(selectedUnit.GetPosition3D());
+				CameraController.Position = selectedUnit.GetCenterPosition3D();
 			}
 			CameraController.UpdateCamera();
 

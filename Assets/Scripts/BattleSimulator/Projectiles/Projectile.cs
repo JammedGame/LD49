@@ -70,5 +70,10 @@ namespace Game.Simulation
 		{
 			return position;
 		}
+
+		public override Vector3 GetCenterPosition3D()
+		{
+			return position;
+		}
 	}
 }

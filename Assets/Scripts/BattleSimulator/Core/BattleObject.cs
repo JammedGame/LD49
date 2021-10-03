@@ -79,6 +79,11 @@ namespace Game.Simulation
 		public abstract Vector3 GetPosition3D();
 
 		/// <summary>
+		/// Gets 3d position of the object's visual center.
+		/// </summary>
+		public abstract Vector3 GetCenterPosition3D();
+
+		/// <summary>
 		/// Called when unit gets deactivated.
 		/// </summary>
 		public virtual void OnDeactivate() {}

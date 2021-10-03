@@ -7,12 +7,12 @@ namespace BattleSimulator.Spells
     public abstract class Spell : BattleObject
     {
         public readonly SpellSettings Settings;
-        
+
         protected Spell(BattleObject caster, SpellSettings settings, GameWorld gameWorld) : base(gameWorld, caster.Owner, caster)
         {
             Settings = settings;
         }
-        
+
         public override string ViewPath => $"View/SpellViews/{Settings.name}View";
 
         public bool IsSingleTarget => Settings.isSingleTarget;
@@ -27,9 +27,14 @@ namespace BattleSimulator.Spells
             return Vector3.zero;
         }
 
-        public virtual void Tick()
+		public override Vector3 GetCenterPosition3D()
+		{
+			return GetPosition3D();
+		}
+
+		public virtual void Tick()
         {
-            
+
         }
 
         public bool ShouldCreepBeIncludedInTargets(Creep creep)

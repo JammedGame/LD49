@@ -64,9 +64,4 @@ public class CameraController : MonoBehaviour
 	{
 		Position = new Vector3(MinX + MaxX, 0, MinZ + MaxZ) / 2f;
 	}
-
-	public void Follow(Vector3 position)
-	{
-		Position = position + Settings.FollowOffset;
-	}
 }

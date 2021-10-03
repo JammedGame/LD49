@@ -54,6 +54,7 @@ namespace Game.Simulation
 		private IBrain brain;
 
 		public override Vector3 GetPosition3D() => GameWorld.Board.GetPosition3D(Position);
+		public override Vector3 GetCenterPosition3D() => GameWorld.Board.GetPosition3D(Position) + new Vector3(0, Settings.Height / 2, 0f);
 		public override float2 GetPosition2D() => Position;
 
 		public Unit(GameWorld gameWorld, UnitSettings unitSettings, float2 position, OwnerId owner, BattleObject parent)

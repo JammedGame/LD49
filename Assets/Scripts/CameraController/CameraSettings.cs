@@ -20,9 +20,6 @@ public class CameraSettings : ScriptableObject
 	public float MinZoom, MaxZoom;
 	public float ScrollWheelZoomSpeed;
 
-	[Header("Follow target")]
-	public Vector3 FollowOffset;
-
 	void OnValidate()
 	{
 		if (MinZoom > StartZoom) MinZoom = StartZoom;
