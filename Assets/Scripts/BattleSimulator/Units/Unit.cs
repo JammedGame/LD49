@@ -136,17 +136,16 @@ namespace Game.Simulation
 			if (newAction == null)
 				throw new NullReferenceException();
 
-			// don't reset context if order is the same.
-			if (this.currentAction == newAction && actionContext.Target.Equals(target))
+			// don't reset progress if animation is the same.
+			if (this.currentAction == newAction)
 			{
-				return;
+				actionContext.Target = target;
 			}
-
-			currentAction = newAction;
-			actionContext = new UnitActionContext()
+			else
 			{
-				Target = target
-			};
+				currentAction = newAction;
+				actionContext = new UnitActionContext() { Target = target };
+			}
 		}
 
 		#endregion
