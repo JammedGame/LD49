@@ -45,7 +45,7 @@ namespace BattleSimulator.Brains
 
 		private float CalculateAggro(Unit myUnit, Unit other)
 		{
-			var aggro = other.Settings.PrimaryAttack.Damage / other.Settings.Health;
+			var aggro = other.Settings.PrimaryAttack.MaxDamage / other.Settings.Health;
 			if (other.CurrentTarget.TargetUnit == myUnit) aggro *= 1000f;
 			return aggro;
 		}

@@ -20,7 +20,8 @@ MonoBehaviour:
   CastUpswing: 0.1
   PrimaryAttack:
     AttackType: 0
-    Damage: 2
+    MinDamage: 1
+    MaxDamage: 4
     AttackRange: 0.7
     AttackSpeed: 1
     AttackUpswing: 0.4

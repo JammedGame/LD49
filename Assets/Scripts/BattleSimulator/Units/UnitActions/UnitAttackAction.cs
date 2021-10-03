@@ -13,7 +13,8 @@ namespace Game.Simulation
 		public UnitActionType ActionType => UnitActionType.Attack;
 
 		public UnitAttackType AttackType;
-		public float Damage;
+		public float MinDamage;
+		public float MaxDamage;
 		public float AttackRange;
 
 		[Tooltip("Inverse of the attack duration in seconds")]
@@ -25,6 +26,7 @@ namespace Game.Simulation
 		[Tooltip("Offset from view pivot to the spawn position of the projectile.")]
 		public Vector3 ProjectileOffset;
 		public float ProjectileVelocity;
+		public float GetRandomDamage() => UnityEngine.Random.Range(MinDamage, MaxDamage);
 
 		/// <summary>
 		/// Ticks unit's action context.
@@ -87,7 +89,7 @@ namespace Game.Simulation
 				case UnitAttackType.Melee:
 					if (targetInfo.TargetUnit != null)
 					{
-						targetInfo.TargetUnit.DealDamage(Damage, unit);
+						targetInfo.TargetUnit.DealDamage(GetRandomDamage(), unit);
 					}
 					break;
 				case UnitAttackType.Ranged:
@@ -101,7 +103,7 @@ namespace Game.Simulation
 			var fromPosition = unit.GetPosition3D() + Quaternion.Euler(0, unit.Orientation, 0) * ProjectileOffset;
 			var projectileDirection = (targetInfo.TargetUnit.GetPosition3D() - unit.GetPosition3D()).normalized;
 			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity,
-				targetInfo.TargetUnit, unit.Settings.PrimaryAttack.Damage);
+				targetInfo.TargetUnit, GetRandomDamage());
 		}
 	}
 

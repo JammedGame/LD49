@@ -22,26 +22,27 @@ namespace BattleSimulator.Brains
 			var maxAggro = 0f;
 
 			foreach (var candidate in myUnit.GameWorld.AllUnits)
-				if (candidate.IsValidAttackTarget &&
-					myUnit.Owner != candidate.Owner)
-				{
-					if (!myUnit.IsWithinAttackRange(candidate) && !candidate.IsAttackingUnit(myUnit))
-						continue;
+			{
+				if (!myUnit.CanAttack(candidate))
+					continue;
 
-					var aggro = CalculateAggro(myUnit, candidate);
-					if (aggro > maxAggro)
-					{
-						target = candidate;
-						maxAggro = aggro;
-					}
+				if (!myUnit.IsWithinAttackRange(candidate) && !candidate.IsAttackingUnit(myUnit))
+					continue;
+
+				var aggro = CalculateAggro(myUnit, candidate);
+				if (aggro > maxAggro)
+				{
+					target = candidate;
+					maxAggro = aggro;
 				}
+			}
 
 			return target;
 		}
 
 		private float CalculateAggro(Unit myUnit, Unit other)
 		{
-			var aggro = other.Settings.PrimaryAttack.Damage / other.Settings.Health;
+			var aggro = other.Settings.PrimaryAttack.MaxDamage / other.Settings.Health;
 			if (other.CurrentTarget.TargetUnit == myUnit) aggro *= 1000f;
 			return aggro;
 		}

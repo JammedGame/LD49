@@ -15,14 +15,15 @@ MonoBehaviour:
   Speed: 0
   Size: 0.85
   Height: 3
-  Health: 20
+  IsInvulnerable: 0
+  Health: 30
   CastUpswing: 0
   PrimaryAttack:
     AttackType: 1
-    Damage: 4
+    MinDamage: 2
+    MaxDamage: 2
     AttackRange: 10
-    AttackSpeed: 1
+    AttackSpeed: 0.6666667
     AttackUpswing: 1
     ProjectileOffset: {x: 0, y: 1.8, z: 0.9}
     ProjectileVelocity: 20
-  Spells: []

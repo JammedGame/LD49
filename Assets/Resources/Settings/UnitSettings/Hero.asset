@@ -16,13 +16,14 @@ MonoBehaviour:
   Size: 0.35
   Height: 1.75
   IsInvulnerable: 0
-  Health: 50
+  Health: 15
   CastUpswing: 0.1
   PrimaryAttack:
     AttackType: 1
-    Damage: 2
+    MinDamage: 3
+    MaxDamage: 4
     AttackRange: 5
-    AttackSpeed: 1
+    AttackSpeed: 0.6666667
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15

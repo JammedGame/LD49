@@ -32,7 +32,7 @@ namespace Game.Simulation
 			var newPosition = position + velocity * GameTick.TickDuration;
 			if (target != null)
 			{
-				var targetPosition = target.GetPosition3D() + target.Settings.Height * 0.5f * Vector3.up;
+				var targetPosition = target.GetCenterPosition3D();
 				var targetDirection = (targetPosition - position).normalized;
 				velocity += targetDirection * HomingAmount * GameTick.TickDuration;
 			}
@@ -44,7 +44,7 @@ namespace Game.Simulation
 			position = newPosition;
 			if (target != null)
 			{
-				var targetPosition = target.GetPosition3D() + target.Settings.Height * 0.5f * Vector3.up;
+				var targetPosition = target.GetCenterPosition3D();
 				var vectorToTarget = targetPosition - position;
 				if (vectorToTarget.magnitude < target.Radius || Vector3.Dot(vectorToTarget, velocity) < 0)
 				{
