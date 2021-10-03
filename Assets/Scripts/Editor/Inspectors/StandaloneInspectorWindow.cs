@@ -19,7 +19,10 @@ public class StandaloneInspectorWindow : EditorWindow
 		{
 			targetObjects = new List<TargetObject>()
 			{
-				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Paladin.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Acolyte.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Pikeman.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Hero.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Tower.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/CameraSettings.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/GameSettings/GameWorldData.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Scenes/Game_Profiles/Camera Profile.asset"),
