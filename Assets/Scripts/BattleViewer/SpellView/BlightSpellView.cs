@@ -12,7 +12,8 @@ namespace Game.View.SpellView
         
         public override void OnInitialized(BattleObject data)
         {
-            ActiveDeathCoil = Instantiate(DeathCoilPrefab, SpellData.coilPosition,
+            Vector3 pos = new Vector3(SpellData.coilPosition.x, 1.5f, SpellData.coilPosition.y);
+            ActiveDeathCoil = Instantiate(DeathCoilPrefab, pos,
                 DeathCoilPrefab.transform.rotation).transform;
         }
 
@@ -23,8 +24,8 @@ namespace Game.View.SpellView
                 return;
             }
             
-            ActiveDeathCoil.position = SpellData.coilPosition;
-            ActiveDeathCoil.LookAt(SpellData.currentTarget.GetPosition3D());
+            ActiveDeathCoil.position = new Vector3(SpellData.coilPosition.x, 1.5f, SpellData.coilPosition.y);
+            ActiveDeathCoil.LookAt(SpellData.currentTarget.GetPosition3D() + Vector3.up * 2f);
         }
 
         protected override void OnDeactivated()

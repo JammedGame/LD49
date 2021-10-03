@@ -1,5 +1,6 @@
 ﻿
 using Game.Simulation;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace BattleSimulator.Spells
@@ -11,7 +12,7 @@ namespace BattleSimulator.Spells
         public BlightSpellSettings settings;
         public BattleObject caster;
         public BattleObject currentTarget;
-        public Vector3 coilPosition;
+        public float2 coilPosition;
 
         public BlightSpell(BattleObject caster, UnitTargetInfo targetInfo, SpellSettings settings, GameWorld gameWorld) : base(caster, settings, gameWorld)
         {
@@ -19,41 +20,38 @@ namespace BattleSimulator.Spells
             this.settings = settings as BlightSpellSettings;
             hopsRemaining = this.settings.maxHops;
             damagePerHop = this.settings.damagePerHop;
-            coilPosition = caster.GetPosition3D();
-            currentTarget = targetInfo.TargetObject;
-
+            coilPosition = caster.GetPosition2D();
+            //currentTarget = targetInfo.TargetObject;
+            currentTarget = FindNextTarget();
+            
             Debug.Log($"Blight spell initiated with target: {currentTarget}");
         }
 
         public override void Tick()
         {
-            if (currentTarget == null)
+            if (currentTarget == null || hopsRemaining <= 0)
             {
                 Deactivate();
                 return;
             }
             
-            Vector3 delta = currentTarget.GetPosition3D() - coilPosition;
-            float distance = delta.magnitude;
+            float2 delta = currentTarget.GetPosition2D() - coilPosition;
+            float distance = math.distance(delta.x, delta.y);
 
-            if (distance < 0.1f)
+            if (distance > 0.1f)
             {
-                currentTarget.DealDamage(damagePerHop, caster);
-                currentTarget = FindNextTarget();
-                
-                if (currentTarget == null || hopsRemaining <= 1)
-                {
-                    Deactivate();
-                    return;
-                }
-
-                damagePerHop *= settings.damageDecay;
-                hopsRemaining--;
-                delta = currentTarget.GetPosition3D() - coilPosition;
+                // keep moving, not close enough
+                float2 direction = math.normalize(delta);
+                coilPosition += direction * (settings.coilSpeed * GameTick.TickDuration);
+                return;
             }
             
-            Vector3 direction = delta.normalized;
-            coilPosition += direction * (settings.coilSpeed * GameTick.TickDuration);
+            // hit the unit and hop to the next
+            currentTarget.DealDamage(damagePerHop, caster);
+            currentTarget = FindNextTarget();
+
+            damagePerHop *= settings.damageDecay;
+            hopsRemaining--;
         }
 
         private BattleObject FindNextTarget()
@@ -61,14 +59,15 @@ namespace BattleSimulator.Spells
             BattleObject closest = null;
             float closestDistance = float.MaxValue;
 
-            foreach (BattleObject obj in GameWorld.AllBattleObjects)
+            foreach (Unit obj in GameWorld.AllUnits)
             {
-                if (obj.Owner == caster.Owner)
+                if (obj.Owner == caster.Owner || obj == currentTarget)
                 {
                     continue;
                 }
 
-                float distance = DistanceTo(obj);
+                float2 delta = obj.GetPosition2D() - coilPosition;
+                float distance = math.distance(delta.x, delta.y);
                 if (distance < settings.hopRadius && distance < closestDistance)
                 {
                     closestDistance = distance;
