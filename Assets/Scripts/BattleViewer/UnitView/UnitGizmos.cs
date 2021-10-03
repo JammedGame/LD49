@@ -1,5 +1,5 @@
+using System;
 using Game.Simulation;
-using Physics2D;
 using UnityEngine;
 
 namespace Game.View.Debugging
@@ -22,14 +22,15 @@ namespace Game.View.Debugging
 		[Gizmo]
 		public static void DrawUnitViewColliders(GameWrapper gameWrapper)
 		{
-			foreach(var unit in gameWrapper.GameWorld.AllUnits)
+			foreach (var unit in gameWrapper.GameWorld.AllUnits)
 			{
 				var unitView = gameWrapper.ViewController.GetView(unit);
 				if (!unitView)
 					continue;
 
 				Gizmos.color = Color.white;
-				Gizmos.matrix = Matrix4x4.TRS(unit.GetPosition3D(), unit.GetRotation3D(), new Vector3(unit.Radius, 0.1f, unit.Radius));
+				Gizmos.matrix = Matrix4x4.TRS(unit.GetPosition3D(), unit.GetRotation3D(),
+					new Vector3(unit.Radius, 0.1f, unit.Radius));
 				Gizmos.DrawWireSphere(default, 1f);
 			}
 		}
@@ -42,6 +43,17 @@ namespace Game.View.Debugging
 			{
 				Gizmos.color = projectile.IsActive ? Color.red : Color.black;
 				Gizmos.DrawSphere(projectile.Position, 0.2f);
+			}
+		}
+
+		[Gizmo]
+		public static void DrawSpawnPositionGizmos(GameWrapper gameWrapper)
+		{
+			foreach (SpawnPosition spawnPosition in Enum.GetValues(typeof(SpawnPosition)))
+			{
+				var position3D = gameWrapper.GameWorld.Board.GetPosition3D(spawnPosition.ToFloat2());
+				Gizmos.color = Color.red;
+				Gizmos.DrawSphere(position3D, 1f);
 			}
 		}
 	}

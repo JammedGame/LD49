@@ -4,6 +4,7 @@ using Game.Simulation.Board;
 using Physics2D;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Simulation
 {
@@ -25,14 +26,15 @@ namespace Game.Simulation
     public struct UnitSpawn
     {
         public UnitSettings Type;
-        public Vector2 Position;
+        public SpawnPosition SpawnPosition;
+        [FormerlySerializedAs("Position")] public Vector2 PositionOffset;
         public OwnerId Owner;
 
         public Unit Execute(GameWorld world)
         {
 			if (Type != null)
 			{
-				return world.SpawnUnit(Type, Position, Owner, null);
+				return world.SpawnUnit(Type, SpawnPosition.ToFloat2() + (float2)PositionOffset, Owner, null);
 			}
 			else
 			{

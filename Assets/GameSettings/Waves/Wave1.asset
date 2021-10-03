@@ -17,51 +17,66 @@ MonoBehaviour:
   - delay: 3
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 10}
+      SpawnPosition: 1
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 10}
+      SpawnPosition: 1
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
-      Position: {x: 40, y: 10}
+      SpawnPosition: 1
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 10}
+      SpawnPosition: 1
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 10}
+      SpawnPosition: 1
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
   - delay: 6
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 90}
+      SpawnPosition: 3
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 90}
+      SpawnPosition: 3
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
-      Position: {x: 40, y: 90}
+      SpawnPosition: 3
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 90}
+      SpawnPosition: 3
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 90}
+      SpawnPosition: 3
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
   - delay: 9
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 75, y: 50}
+      SpawnPosition: 2
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 75, y: 50}
+      SpawnPosition: 2
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
-      Position: {x: 75, y: 50}
+      SpawnPosition: 2
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 75, y: 50}
+      SpawnPosition: 2
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 75, y: 50}
+      SpawnPosition: 2
+      PositionOffset: {x: 0, y: 0}
       Owner: 1
