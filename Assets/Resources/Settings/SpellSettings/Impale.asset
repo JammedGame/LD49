@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f51f6a00344b9f89f4610434d1756e, type: 3}
-  m_Name: Blight
+  m_Script: {fileID: 11500000, guid: 49ba3c8618f0400480f4f82e99c0a59c, type: 3}
+  m_Name: Impale
   m_EditorClassIdentifier: 
-  spellName: Blight
+  spellName: Impale
   manaCost: 10
-  cooldownSeconds: 3
-  castRange: 10
-  castDurationSeconds: 0.5
+  cooldownSeconds: 2
+  castRange: 7
+  castDurationSeconds: 1.5
   isSingleTarget: 0
-  hopRadius: 10
-  maxHops: 5
-  damagePerHop: 7
-  damageDecay: 0.9
-  coilSpeed: 5
+  damage: 3
+  protrudeSeconds: 0.5
+  protrudeHoldSeconds: 2
+  spikeUpswing: 0.8
+  aoeRadius: 3

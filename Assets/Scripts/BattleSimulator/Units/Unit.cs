@@ -160,7 +160,6 @@ namespace Game.Simulation
 			{
 				Debug.Log($"Can't cast spell {spell.SpellSettings.spellName}, {spell.CooldownSecondsLeft}s of cooldown left!");
 			}
-
 		}
 
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
