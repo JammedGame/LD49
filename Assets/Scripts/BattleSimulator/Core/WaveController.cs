@@ -23,7 +23,7 @@ namespace Game.Simulation
 		public bool AnyWavesRemaining => currentWaveIndex < waves.Count;
 
 		public bool AnySpawnsRemaining => CurrentWave != null &&
-			CurrentWave.multiSpawns.Exists(ms => TimeSinceStartOfWave <= ms.delay);
+			CurrentWave.multiSpawns.Exists(ms => prevSpawnTime < ms.delay);
 
 		private WaveData CurrentWave =>
 			currentWaveIndex >= 0 && currentWaveIndex < waves.Count ? waves[currentWaveIndex] : null;
@@ -38,9 +38,7 @@ namespace Game.Simulation
 
 		public void Tick()
 		{
-			if (currentWaveIndex < 0 || currentWaveIndex >= waves.Count) return;
-
-			if (!AnySpawnsRemaining) return;
+			if (CurrentWave == null || !AnySpawnsRemaining) return;
 
 			foreach (var multiSpawn in CurrentWave.multiSpawns)
 				if (multiSpawn.delay <= TimeSinceStartOfWave && multiSpawn.delay > prevSpawnTime)
