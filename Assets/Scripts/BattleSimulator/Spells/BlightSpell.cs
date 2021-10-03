@@ -25,6 +25,7 @@ namespace BattleSimulator.Spells
             damagePerHop = this.settings.damagePerHop;
             coilPosition = caster.GetPosition2D();
             currentTarget = FindNextTarget();
+
         }
 
         public override void Tick()
@@ -34,9 +35,9 @@ namespace BattleSimulator.Spells
                 Deactivate();
                 return;
             }
-            
+
             float2 delta = currentTarget.GetPosition2D() - coilPosition;
-            float distance = math.distance(delta.x, delta.y);
+            float distance = math.length(delta);
 
             if (distance > 0.1f)
             {
@@ -45,7 +46,7 @@ namespace BattleSimulator.Spells
                 coilPosition += direction * (settings.coilSpeed * GameTick.TickDuration);
                 return;
             }
-            
+
             // hit the unit and hop to the next
             alreadyVisited.Add(currentTarget);
             currentTarget.DealDamage(damagePerHop, caster);
@@ -67,8 +68,7 @@ namespace BattleSimulator.Spells
                     continue;
                 }
 
-                float2 delta = obj.GetPosition2D() - coilPosition;
-                float distance = math.distance(delta.x, delta.y);
+                float distance = math.distance(obj.Position, coilPosition);
                 if (distance < settings.hopRadius && distance < closestDistance)
                 {
                     closestDistance = distance;
