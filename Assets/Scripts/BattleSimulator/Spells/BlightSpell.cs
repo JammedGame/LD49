@@ -25,7 +25,6 @@ namespace BattleSimulator.Spells
             damagePerHop = this.settings.damagePerHop;
             coilPosition = caster.GetPosition2D();
             currentTarget = FindNextTarget();
-
         }
 
         public override void Tick()
