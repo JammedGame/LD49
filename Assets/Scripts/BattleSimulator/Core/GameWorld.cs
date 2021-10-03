@@ -168,7 +168,6 @@ namespace Game.Simulation
 					{
 						AllCreeps.Remove(c);
 						graveyard.Add((c, CurrentTime));
-						Debug.Log(c);
 					}
 				}
 			}
