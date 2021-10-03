@@ -22,7 +22,7 @@ MonoBehaviour:
     AttackType: 0
     MinDamage: 1
     MaxDamage: 1
-    AttackRange: 0.7
+    AttackRange: 1
     AttackSpeed: 0.5
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
