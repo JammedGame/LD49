@@ -10,5 +10,6 @@ namespace BattleSimulator.Spells
         public float manaCost;
         public float castRange;
         public float castDurationSeconds;
+        public bool isSingleTarget;
     }
 }

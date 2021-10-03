@@ -14,6 +14,9 @@ namespace BattleSimulator.Spells
         }
         
         public override string ViewPath => $"View/SpellViews/{Settings.name}View";
+
+        public bool IsSingleTarget => Settings.isSingleTarget;
+
         public override float2 GetPosition2D()
         {
             return float2.zero;
@@ -27,6 +30,11 @@ namespace BattleSimulator.Spells
         public virtual void Tick()
         {
             
+        }
+
+        public bool ShouldCreepBeIncludedInTargets(Creep creep)
+        {
+            return creep.IsValidAttackTarget && creep.Owner != Owner;
         }
     }
 }

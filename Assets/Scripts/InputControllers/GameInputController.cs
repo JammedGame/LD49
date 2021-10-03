@@ -80,12 +80,13 @@ namespace Game.UI
 
 		private void AttackSelectedPoint()
 		{
-			if (gameWrapper.TryMouseRaycast(out var hitResult))
-			{
-				var selectedUnit = SelectedUnit;
-				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
-				SelectedUnit.StartAttacking(targetPosition);
-			}
+			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
+			var targetPosition = raycastInfo.TargetPosition;
+			var targetUnit = raycastInfo.TargetUnit;
+			var targetInfo = targetUnit != null
+				? new UnitTargetInfo(targetUnit)
+				: new UnitTargetInfo(targetPosition);
+			SelectedUnit.StartAttacking(targetInfo);
 		}
 
 		private void CastSpell(SpellSettings spellSettings)
