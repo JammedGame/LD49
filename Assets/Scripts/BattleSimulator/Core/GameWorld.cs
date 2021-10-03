@@ -24,6 +24,7 @@ namespace Game.Simulation
 		private readonly IViewEventHandler viewBridge;
 		private readonly WaveController waveController;
 		private readonly List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
+		private readonly List<(Creep creep, float time)> graveyard = new List<(Creep, float)>();
 
 		private int goldAmount;
 
@@ -161,9 +162,14 @@ namespace Game.Simulation
 					if (obj is Projectile p) AllProjectiles.Remove(p);
 					if (obj is Unit u) AllUnits.Remove(u);
 					if (obj is Building b) AllBuildings.Remove(b);
-					if (obj is Creep c) AllCreeps.Remove(c);
 					if (obj is Spell s) AllSpells.Remove(s);
 					if (obj == Altar) Altar = null;
+					if (obj is Creep c)
+					{
+						AllCreeps.Remove(c);
+						graveyard.Add((c, CurrentTime));
+						Debug.Log(c);
+					}
 				}
 			}
 
@@ -180,6 +186,21 @@ namespace Game.Simulation
 		public void ScheduleSpawn(UnitSettings settingsSpawnOnDeath, float2 position, OwnerId owner, BattleObject parent)
 		{
 			scheduledSpawns.Add(new ScheduledSpawn(settingsSpawnOnDeath, position, owner, parent));
+		}
+
+		public List<Creep> GetCreepsThatDiedSince(float time)
+		{
+			List<Creep> creeps = new List<Creep>();
+			for (int i = 0; i < graveyard.Count; i++)
+			{
+				var (creep, graveTime) = graveyard[i];
+				if (creep != null && graveTime >= time)
+				{
+					creeps.Add(creep);
+					graveyard.RemoveAt(i--);
+				}
+			}
+			return creeps;
 		}
 	}
 }

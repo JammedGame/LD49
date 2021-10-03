@@ -1,4 +1,5 @@
-﻿using Game.Simulation;
+﻿using System.Threading.Tasks;
+using Game.Simulation;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -42,4 +43,13 @@ namespace BattleSimulator.Spells
             return creep.IsValidAttackTarget && creep.Owner != Owner;
         }
     }
+
+    public abstract class Spell<T> : Spell where T : SpellSettings
+    {
+		protected Spell(BattleObject caster, T settings, GameWorld gameWorld) : base(caster, settings, gameWorld)
+		{
+		}
+
+		public new T Settings => (T)base.Settings;
+	}
 }
