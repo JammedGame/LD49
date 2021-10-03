@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45dd10a291eca549840dfa0596ac3f8, type: 3}
   m_Name: Wave2
   m_EditorClassIdentifier: 
-  goldReward: 250
+  goldReward: 300
   multiSpawns:
+  - delay: 0
+    unitSpawns:
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 40, y: 10}
+      Owner: 1
   - delay: 2
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
@@ -38,9 +43,4 @@ MonoBehaviour:
     unitSpawns:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
       Position: {x: 40, y: 90}
-      Owner: 1
-  - delay: 12
-    unitSpawns:
-    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
-      Position: {x: 40, y: 10}
       Owner: 1
