@@ -41,13 +41,7 @@ namespace Game.UI
 
 			ControlUnitWASD(SelectedUnit);
 
-			if (Input.GetKey(KeyCode.Alpha1))
-			{
-				var selectedUnit = gameWrapper.GameWorld.AllUnits[1];
-				selectedUnit.StartAttacking(SelectedUnit);
-			}
-
-			Time.timeScale = Input.GetKey(KeyCode.Alpha5) ? 3f : 1f;
+			Time.timeScale = Input.GetKey(KeyCode.Alpha5) ? 4f : 1f;
 		}
 
 		private void ControlUnitWASD(Unit unit)

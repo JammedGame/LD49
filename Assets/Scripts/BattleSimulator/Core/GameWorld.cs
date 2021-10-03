@@ -144,6 +144,7 @@ namespace Game.Simulation
 					if (obj is Building b) AllBuildings.Remove(b);
 					if (obj is Creep c) AllCreeps.Remove(c);
 					if (obj is Spell s) AllSpells.Remove(s);
+					if (obj == Altar) Altar = null;
 				}
 			}
 		}

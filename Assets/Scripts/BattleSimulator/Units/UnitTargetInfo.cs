@@ -8,34 +8,38 @@ namespace Game.Simulation
     /// </summary>
     public struct UnitTargetInfo
     {
-        BattleObject targetObject;
+        Unit targetUnit;
         float2 targetPosition;
 
-        public float2 Position => targetObject != null ? targetObject.GetPosition2D() : targetPosition;
-        public float Radius => targetObject is Unit unit ? unit.Radius : 0f;
-        public BattleObject TargetObject => targetObject;
-        public Unit TargetUnit => targetObject as Unit;
-		public bool IsValid => targetObject == null || targetObject.IsActive;
+        public float2 Position => targetUnit != null ? targetUnit.GetPosition2D() : targetPosition;
+        public float Radius => targetUnit is Unit unit ? unit.Radius : 0f;
+        public Unit TargetUnit => targetUnit;
+		public bool IsValid => targetUnit == null || targetUnit.IsActive;
 
-		public UnitTargetInfo(BattleObject targetObject)
+		public UnitTargetInfo(Unit targetObject)
         {
-            this.targetObject = targetObject;
+            this.targetUnit = targetObject;
             this.targetPosition = default;
         }
 
         public UnitTargetInfo(float2 targetPosition)
         {
-            this.targetObject = null;
+            this.targetUnit = null;
             this.targetPosition = targetPosition;
         }
 
         public bool Equals(UnitTargetInfo rhs)
         {
-			return rhs.targetObject == targetObject
+			return rhs.targetUnit == targetUnit
 				&& rhs.targetPosition.Equals(targetPosition);
 		}
 
-        public static implicit operator UnitTargetInfo(BattleObject targetObject) => new UnitTargetInfo(targetObject);
+        public static implicit operator UnitTargetInfo(Unit targetObject) => new UnitTargetInfo(targetObject);
         public static implicit operator UnitTargetInfo(float2 targetPosition) => new UnitTargetInfo(targetPosition);
+
+        public override string ToString()
+        {
+			return targetUnit != null ? targetUnit.ToString() : targetPosition.ToString();
+        }
     }
 }

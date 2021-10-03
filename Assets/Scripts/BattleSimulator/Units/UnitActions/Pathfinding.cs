@@ -49,7 +49,7 @@ namespace Game.Simulation
 				{
 					if (obstacle == unit)
 						continue;
-					if (obstacle == targetInfo.TargetObject)
+					if (obstacle == targetInfo.TargetUnit)
 						continue;
 
 					var distToObstacle = Math2D.GetDistanceToPoint(unit.Position, targetPos, obstacle.Position);

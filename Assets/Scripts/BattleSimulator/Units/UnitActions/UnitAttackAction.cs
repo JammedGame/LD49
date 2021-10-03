@@ -99,7 +99,7 @@ namespace Game.Simulation
 		public Projectile FireProjectileAt(Unit unit, UnitTargetInfo targetInfo)
 		{
 			var fromPosition = unit.GetPosition3D() + Quaternion.Euler(0, unit.Orientation, 0) * ProjectileOffset;
-			var projectileDirection = (targetInfo.TargetObject.GetPosition3D() - unit.GetPosition3D()).normalized;
+			var projectileDirection = (targetInfo.TargetUnit.GetPosition3D() - unit.GetPosition3D()).normalized;
 			return unit.GameWorld.SpawnProjectile(unit, fromPosition, projectileDirection * ProjectileVelocity,
 				targetInfo.TargetUnit, unit.Settings.PrimaryAttack.Damage);
 		}

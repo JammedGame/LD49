@@ -11,7 +11,7 @@ namespace BattleSimulator.Brains
 		public Decision Think(Unit myUnit)
 		{
 			if (myUnit.CurrentActionType == UnitActionType.Idle
-			|| myUnit.CurrentTarget.TargetObject == myUnit.GameWorld.Altar
+			|| myUnit.CurrentTarget.TargetUnit == myUnit.GameWorld.Altar
 			|| !myUnit.IsWithinRange(myUnit.CurrentTarget, BreakAggroRange))
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
@@ -46,7 +46,7 @@ namespace BattleSimulator.Brains
 		private float CalculateAggro(Unit myUnit, Unit other)
 		{
 			var aggro = other.Settings.PrimaryAttack.Damage / other.Settings.Health;
-			if (other.CurrentTarget.TargetObject == myUnit) aggro *= 1000f;
+			if (other.CurrentTarget.TargetUnit == myUnit) aggro *= 1000f;
 			return aggro;
 		}
 	}

@@ -112,8 +112,15 @@ namespace Game.Simulation
 			StartAction(MovementAction, point);
 		}
 
-		public void StartAttacking(UnitTargetInfo attackTarget)
+		public void OrderAttacking(UnitTargetInfo attackTarget)
 		{
+			if (!attackTarget.IsValid
+			|| attackTarget.TargetUnit != null && !attackTarget.TargetUnit.IsValidAttackTarget)
+			{
+				Debug.LogWarning($"Skipped attacking {attackTarget}");
+				return;
+			}
+
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
