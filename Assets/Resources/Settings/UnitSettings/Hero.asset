@@ -25,8 +25,8 @@ MonoBehaviour:
     AttackRange: 7
     AttackSpeed: 0.6666667
     AttackUpswing: 0.4
-    ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
-    ProjectileVelocity: 15
+    ProjectileOffset: {x: 0, y: 0.73333335, z: 0}
+    ProjectileVelocity: 12
   Spells:
   - {fileID: 11400000, guid: 106b670ff5be6ca4288b4c4142fe4348, type: 2}
   - {fileID: 11400000, guid: 3ed622c1fa3ee014ebe4f9d423a1995e, type: 2}
