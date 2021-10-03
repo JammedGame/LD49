@@ -201,5 +201,11 @@ namespace Game.Simulation
 			}
 			return creeps;
 		}
+
+		public void UpdateSummoningList(Unit selectedOther)
+		{
+			var summoningList = selectedOther?.Settings.SummoningList;
+			DispatchViewEvent(selectedOther, ViewEventType.SummoningListUpdated, summoningList);
+		}
 	}
 }

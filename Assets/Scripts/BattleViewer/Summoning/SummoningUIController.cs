@@ -10,7 +10,7 @@ public class SummoningUIController : MonoBehaviour
 
 	private void Start()
 	{
-		SetModel(new List<UnitSettings>());
+		SetModel(null);
 	}
 
 	public void SetModel(List<UnitSettings> newModel)
@@ -24,7 +24,7 @@ public class SummoningUIController : MonoBehaviour
 		for (var i = 0; i < buttons.Count; i++)
 		{
 			var button = buttons[i];
-			if (i < model.Count)
+			if (model != null && i < model.Count)
 			{
 				var unitSettings = model[i];
 				button.SetModel(unitSettings);

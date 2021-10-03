@@ -31,6 +31,8 @@ namespace Game.Simulation
 
 		public UnitSettings SpawnOnDeath;
 
+		public List<UnitSettings> SummoningList;
+
 		public int GoldCost;
 
 		// todo actual name

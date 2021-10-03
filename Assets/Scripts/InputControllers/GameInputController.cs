@@ -102,6 +102,8 @@ namespace Game.UI
 				selectedOther = null;
 				gameWrapper.ViewController.UnselectObject();
 			}
+
+			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
 		}
 
 		private void AttackMove()
@@ -133,6 +135,8 @@ namespace Game.UI
 				gameWrapper.ViewController.SelectPosition(ViewUtil.ConvertTo3D(targetPosition));
 				SelectedUnit.OrderMoveToPoint(targetPosition);
 			}
+
+			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
 		}
 
 		private void CastSpell(int index)
