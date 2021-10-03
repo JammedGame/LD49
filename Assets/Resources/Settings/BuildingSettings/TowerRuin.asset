@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   Size: 1
-  Height: 1
+  Height: 0.75
   IsInvulnerable: 1
   Health: 20
   CastUpswing: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
     ProjectileOffset: {x: 0, y: 0, z: 0}
     ProjectileVelocity: 0
   Spells: []
+  SpawnOnDeath: {fileID: 0}

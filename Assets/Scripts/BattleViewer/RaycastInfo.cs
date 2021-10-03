@@ -51,16 +51,18 @@ namespace Game.View
 			var nearestUnit = default(Unit);
 			var nearestUnitDist = float.MaxValue;
 
-			var threshold = 50f * (Screen.height / 800f);
+			var threshold = 100f * (Screen.height / 800f);
 			var allUnits = wrapper.GameWorld.AllUnits;
 			foreach (var unit in allUnits)
 			{
 				if (spell != null && unit is Creep creep && !spell.ShouldCreepBeIncludedInTargets(creep))
 					continue;
 
-				var pos = camera3D.WorldToScreenPoint(unit.GetCenterPosition3D());
-				var diff = new Vector2(pos.x - mousePosition.x, (pos.y - mousePosition.y) * 0.85f);
-				var dist = diff.magnitude;
+				var pos1 = camera3D.WorldToScreenPoint(unit.GetCenterPosition3D());
+				var diff1 = new Vector2(pos1.x - mousePosition.x, (pos1.y - mousePosition.y) * 0.85f);
+				var pos2 = camera3D.WorldToScreenPoint(unit.GetPosition3D());
+				var diff2 = new Vector2(pos2.x - mousePosition.x, (pos2.y - mousePosition.y) * 0.85f);
+				var dist = Mathf.Min(diff1.magnitude, diff2.magnitude);
 				if (dist < threshold)
 				{
 					// prefer enemies for raycast.
