@@ -18,12 +18,11 @@ public class HealthBarController : MonoBehaviour
 
         if (shouldHaveHealthBar)
         {
-            if (healthBar == null)
-            {
+			if (healthBar == null)
+			{
 				healthBar = FetchInstance();
-			    healthBar.Initialize(unitView);
-            }
-			healthBar.Sync();
+			}
+			healthBar.Sync(unitView);
 		}
         else
         {

@@ -24,19 +24,26 @@ public class HealthBar : MonoBehaviour
 			? player1Color : player2Color;
 	}
 
-	public void Sync()
+	public void Sync(BattleObjectView newUnitView)
 	{
-		if (!unitView)
+		if (!newUnitView)
+		{
+			Hide();
 			return;
+		}
+		if (this.unitView != newUnitView)
+		{
+			Initialize(newUnitView);
+		}
 
-		var unit = unitView.Data as Unit;
+		var unit = newUnitView.Data as Unit;
 		if (unit == null)
 			return;
 
 		ProgressImage.fillAmount = unit.HealthPercent;
-		CameraController cameraController = unitView.ViewController.CameraController;
+		CameraController cameraController = newUnitView.ViewController.CameraController;
 		Camera camera = cameraController.Camera;
-		Vector3 worldPosition = unitView.transform.position + unit.Settings.Height * Vector3.up;
+		Vector3 worldPosition = newUnitView.transform.position + unit.Settings.Height * Vector3.up;
 		Vector3 viewportPosition = camera.WorldToViewportPoint(worldPosition);
 		RectTransform rect = (RectTransform)transform.parent;
 		Vector3 uiPosition = new Vector3(rect.sizeDelta.x * (viewportPosition.x - 0.5f), rect.sizeDelta.y * (viewportPosition.y - 0.5f), 0f);
