@@ -35,6 +35,7 @@ namespace Game.Simulation
 
 		// API
 		public float CurrentActionProgress => actionContext.Progress;
+		public bool CurrentActionExecuted => actionContext.Executed;
 		public UnitActionType CurrentActionType => currentActionType;
 		public UnitTargetInfo CurrentTarget => actionContext.Target;
 		public UnitAction CurrentAction => currentAction;
@@ -69,7 +70,7 @@ namespace Game.Simulation
 			Position = position;
 			Speed = unitSettings.Speed;
 			ResetModifiers();
-			
+
 			// load spells
 			foreach (SpellSettings spellSettings in Settings.Spells)
 			{
@@ -98,7 +99,7 @@ namespace Game.Simulation
 			{
 				OrderIdle();
 			}
-			
+
 			// tick equipped spells
 			foreach (EquippedSpell spell in EquippedSpells)
 			{
@@ -159,7 +160,7 @@ namespace Game.Simulation
 			{
 				Debug.Log($"Can't cast spell {spell.SpellSettings.spellName}, {spell.CooldownSecondsLeft}s of cooldown left!");
 			}
-			
+
 		}
 
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
@@ -168,7 +169,7 @@ namespace Game.Simulation
 				throw new NullReferenceException();
 
 			// don't reset progress if animation is the same.
-			if (currentAction == newAction && actionContext.Target.Equals(target))
+			if (currentAction == newAction)
 			{
 				actionContext.Target = target;
 			}

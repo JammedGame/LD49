@@ -36,6 +36,9 @@ namespace Game.Simulation
 			// if not currently in attack animation - break attack loop if needed.
 			if (!actionContext.Started && ShouldBreakAttack(unit, actionContext.Target))
 			{
+				if (!actionContext.Target.IsValid)
+					return UnitActionType.EndCurrentAction;
+
 				actionContext.ResetProgress();
 				return unit.MovementAction.Tick(unit, ref actionContext, dT);
 			}

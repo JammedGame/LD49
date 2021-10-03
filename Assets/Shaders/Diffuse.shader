@@ -18,6 +18,8 @@ Shader "Game/Diffuse"
 		[MaterialToggle] USE_FRESNEL("Use Fresnel", Float) = 0
 		_FresnelPower ("Fresnel Power", float) = 5
 		_FresnelColor("Fresnel Color", Color) = (1, 1, 1, 1)
+
+		[Enum(UnityEngine.Rendering.CullMode)] HARDWARE_CullMode ("Cull faces", Float) = 2
 	}
 	SubShader
 	{
