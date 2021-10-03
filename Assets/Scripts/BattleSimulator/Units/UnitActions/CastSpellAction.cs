@@ -15,7 +15,7 @@ namespace Game.Simulation
             SpellSettings = spellSettings;
             CastUpswing = upswing;
         }
-        
+
         public UnitActionType Tick(Unit unit, ref UnitActionContext actionContext, float dT)
         {
             // if not currently in attack animation - break attack loop if needed.
@@ -33,10 +33,11 @@ namespace Game.Simulation
             var newProgress = oldProgress + dT * CastSpeed;
 
             // land strike if reached the right frame
-            if (!actionContext.Executed && newProgress >= CastUpswing && oldProgress < CastUpswing)
+            if (!actionContext.Executed && newProgress >= CastUpswing)
             {
                 unit.GameWorld.CastSpell(SpellSettings, actionContext.Target, unit);
-            }
+				actionContext.Executed = true;
+			}
 
             // update progress
             actionContext.Progress = newProgress;
@@ -49,20 +50,20 @@ namespace Game.Simulation
 
             return UnitActionType.CastSpell;
         }
-        
+
         private bool ShouldBreakAttack(Unit unit, UnitTargetInfo target)
         {
             if (SpellSettings.castRange == 0)
             {
                 return false;
             }
-            
+
             var distanceToTarget = math.distance(unit.Position, target.Position);
             if (distanceToTarget > SpellSettings.castRange)
             {
                 return true;
             }
-            
+
             return false;
         }
     }

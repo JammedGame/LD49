@@ -26,7 +26,7 @@ namespace Game.Simulation
 		[Tooltip("Offset from view pivot to the spawn position of the projectile.")]
 		public Vector3 ProjectileOffset;
 		public float ProjectileVelocity;
-		public float GetRandomDamage() => UnityEngine.Random.Range(MinDamage, MaxDamage);
+		public float GetRandomDamage() => Mathf.RoundToInt(UnityEngine.Random.Range(MinDamage, MaxDamage));
 
 		/// <summary>
 		/// Ticks unit's action context.
@@ -48,8 +48,9 @@ namespace Game.Simulation
 			var newProgress = oldProgress + dT * AttackSpeed;
 
 			// land strike if reached the right frame
-			if (!actionContext.Executed && newProgress >= AttackUpswing && oldProgress < AttackUpswing)
+			if (!actionContext.Executed && newProgress >= AttackUpswing)
 			{
+				actionContext.Executed = true;
 				ExecuteAction(unit, actionContext.Target);
 			}
 
