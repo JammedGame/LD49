@@ -21,6 +21,7 @@ public class StandaloneInspectorWindow : EditorWindow
 			{
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Acolyte.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Pikeman.asset"),
+				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Tank.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/UnitSettings/Hero.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/BuildingSettings/Tower.asset"),
 				AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Settings/BuildingSettings/Altar.asset"),
