@@ -18,7 +18,6 @@ public class HealthBar : MonoBehaviour
 
 	public void Initialize(BattleObjectView unitView)
 	{
-		gameObject.SetActive(true);
 		this.unitView = unitView;
 		this.ProgressImage.color = unitView.Data.Owner == OwnerId.Player1
 			? player1Color : player2Color;
@@ -41,6 +40,7 @@ public class HealthBar : MonoBehaviour
 			return;
 
 		ProgressImage.fillAmount = unit.HealthPercent;
+		gameObject.SetActive(true);
 		CameraController cameraController = newUnitView.ViewController.CameraController;
 		Camera camera = cameraController.Camera;
 		Vector3 worldPosition = newUnitView.transform.position + unit.Settings.Height * Vector3.up;

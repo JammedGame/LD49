@@ -48,3 +48,20 @@ MonoBehaviour:
     - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
       Position: {x: 40, y: 90}
       Owner: 1
+  - delay: 9
+    unitSpawns:
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 75, y: 50}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 75, y: 50}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 75, y: 50}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 75, y: 50}
+      Owner: 1
+    - Type: {fileID: 11400000, guid: 604bedc66eeae6d4ebe196347bb0c236, type: 2}
+      Position: {x: 75, y: 50}
+      Owner: 1

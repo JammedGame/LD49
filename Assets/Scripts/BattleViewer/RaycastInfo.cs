@@ -49,13 +49,14 @@ namespace Game.View
 		private static Unit GetNearestUnit(GameWrapper wrapper, Camera camera3D, Vector2 mousePosition, Spell spell = null)
 		{
 			var nearestUnit = default(Unit);
-			var nearest = 30f;
+			var nearest = 50f * (Screen.height / 800f);
 			var allUnits = wrapper.GameWorld.AllUnits;
 			foreach (var unit in allUnits)
 			{
-				if (spell != null && unit is Creep creep && !spell.ShouldCreepBeIncludedInTargets(creep)) continue;
+				if (spell != null && unit is Creep creep && !spell.ShouldCreepBeIncludedInTargets(creep))
+					continue;
 
-				var pos = camera3D.WorldToScreenPoint(unit.GetPosition3D() + Vector3.up * 0.5f);
+				var pos = camera3D.WorldToScreenPoint(unit.GetCenterPosition3D());
 				var diff = new Vector2(pos.x - mousePosition.x, (pos.y - mousePosition.y) * 0.85f);
 				var dist = diff.magnitude;
 				if (dist < nearest)
