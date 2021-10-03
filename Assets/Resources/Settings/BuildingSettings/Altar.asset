@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: Altar
   m_EditorClassIdentifier: 
   Speed: 0
-  Size: 1.7
+  Size: 6
   Height: 5
+  IsInvulnerable: 0
   Health: 5000
   CastUpswing: 0
   PrimaryAttack:
     AttackType: 0
-    Damage: 0
+    MinDamage: 0
+    MaxDamage: 0
     AttackRange: 0
     AttackSpeed: 0
     AttackUpswing: 0
     ProjectileOffset: {x: 0, y: 0, z: 0}
     ProjectileVelocity: 15
   Spells: []
+  SpawnOnDeath: {fileID: 0}
+  GoldCost: 0
+  unitName: 

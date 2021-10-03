@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2e9b05ae6a5f3499ad6f1dfabe6558, type: 3}
   m_Name: CameraSettings
   m_EditorClassIdentifier: 
-  Pitch: 40
+  Pitch: 50
   Yaw: 90
   Roll: 0
   FieldOfView: 15
