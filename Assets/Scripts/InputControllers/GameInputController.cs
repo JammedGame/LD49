@@ -69,7 +69,7 @@ namespace Game.UI
 		private void AttackMove()
 		{
 			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
-			if (raycastInfo.TargetUnit != null) SelectedUnit.StartAttacking(new UnitTargetInfo(raycastInfo.TargetUnit));
+			if (raycastInfo.TargetUnit != null) SelectedUnit.OrderAttacking(new UnitTargetInfo(raycastInfo.TargetUnit));
 			else SelectedUnit.OrderMoveToPoint(raycastInfo.TargetPosition);
 		}
 
