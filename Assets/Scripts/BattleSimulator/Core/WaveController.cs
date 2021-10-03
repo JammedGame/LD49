@@ -38,7 +38,7 @@ namespace Game.Simulation
 
 		public void Tick()
 		{
-			if (CurrentWave == null || !AnySpawnsRemaining) return;
+			if (!AnySpawnsRemaining) return;
 
 			foreach (var multiSpawn in CurrentWave.multiSpawns)
 				if (multiSpawn.delay <= TimeSinceStartOfWave && multiSpawn.delay > prevSpawnTime)
