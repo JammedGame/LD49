@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af455589bba4d7e409a611252e165e4d, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
-  Speed: 2.8
+  Speed: 4.5
   Size: 0.35
   Height: 1.75
   IsInvulnerable: 0
   Health: 50
   CastUpswing: 0.1
   PrimaryAttack:
-    AttackType: 0
+    AttackType: 1
     Damage: 2
-    AttackRange: 0.7
+    AttackRange: 5
     AttackSpeed: 1
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}

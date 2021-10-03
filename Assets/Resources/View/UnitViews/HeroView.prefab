@@ -287,14 +287,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathAnimationDuration: 2
-  Height: 2
   DeathAnimation:
     ClipName: anim_Death
     Speed: 2
     Crossfade: 0.15
   MovementAnimation:
     ClipName: anim_Running
-    Speed: 0.7
+    Speed: 0.86
     Crossfade: 0.15
   IdleAnimation:
     ClipName: anim_Idle
