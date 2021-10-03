@@ -21,6 +21,10 @@ namespace Game.Simulation
 			// if too close, threshold should be very harsh (1)
 			// if far away, we can afford to start moving even if direction to target is not perfectly aligned with the forward direction
 			var speed01 = math.clamp(math.length(targetDirection), 0, 1);
+			if (speed01 <= 0)
+			{
+				return UnitActionType.EndCurrentAction;
+			}
 
 			// move towards goal - end action if reached it
 			var movementDelta = unit.Speed * speed01 * dT;

@@ -39,6 +39,7 @@ namespace Game.Simulation
 		public UnitAction CurrentAction => currentAction;
 		public float2 GetDirection() => MathUtil.ConvertOrientationToDirection(Orientation);
 		public bool IsAttacking => currentActionType == UnitActionType.Attack;
+		public bool IsAttackingUnit(Unit rhs) => currentActionType == UnitActionType.Attack && CurrentTarget.TargetUnit == rhs;
 		public bool IsMoving => currentActionType == UnitActionType.Movement;
 		public float Radius => Settings.Size;
 		public float Health => health;
