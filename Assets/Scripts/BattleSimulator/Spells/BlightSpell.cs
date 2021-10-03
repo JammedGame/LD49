@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Game.Simulation;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,8 +12,10 @@ namespace BattleSimulator.Spells
         public float damagePerHop;
         public BlightSpellSettings settings;
         public BattleObject caster;
-        public BattleObject currentTarget;
+        public Unit currentTarget;
         public float2 coilPosition;
+
+        private List<Unit> alreadyVisited = new List<Unit>();
 
         public BlightSpell(BattleObject caster, UnitTargetInfo targetInfo, SpellSettings settings, GameWorld gameWorld) : base(caster, settings, gameWorld)
         {
@@ -21,7 +24,6 @@ namespace BattleSimulator.Spells
             hopsRemaining = this.settings.maxHops;
             damagePerHop = this.settings.damagePerHop;
             coilPosition = caster.GetPosition2D();
-            //currentTarget = targetInfo.TargetObject;
             currentTarget = FindNextTarget();
             
             Debug.Log($"Blight spell initiated with target: {currentTarget}");
@@ -47,6 +49,7 @@ namespace BattleSimulator.Spells
             }
             
             // hit the unit and hop to the next
+            alreadyVisited.Add(currentTarget);
             currentTarget.DealDamage(damagePerHop, caster);
             currentTarget = FindNextTarget();
 
@@ -54,14 +57,14 @@ namespace BattleSimulator.Spells
             hopsRemaining--;
         }
 
-        private BattleObject FindNextTarget()
+        private Unit FindNextTarget()
         {
-            BattleObject closest = null;
+            Unit closest = null;
             float closestDistance = float.MaxValue;
 
             foreach (Unit obj in GameWorld.AllUnits)
             {
-                if (obj.Owner == caster.Owner || obj == currentTarget)
+                if (obj.Owner == caster.Owner || alreadyVisited.Contains(obj))
                 {
                     continue;
                 }
