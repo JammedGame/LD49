@@ -6,7 +6,7 @@ namespace BattleSimulator.Brains
 	public class AggroAltarBrain : IBrain
 	{
 		public const float DefaultAggroRange = 7;
-		public const float BreakAggroRange = 11;
+		public const float BreakAggroRange = 14;
 
 		public Decision Think(Unit myUnit)
 		{

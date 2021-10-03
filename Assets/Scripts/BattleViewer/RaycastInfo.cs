@@ -49,7 +49,9 @@ namespace Game.View
 		private static Unit GetNearestUnit(GameWrapper wrapper, Camera camera3D, Vector2 mousePosition, Spell spell = null)
 		{
 			var nearestUnit = default(Unit);
-			var nearest = 50f * (Screen.height / 800f);
+			var nearestUnitDist = float.MaxValue;
+
+			var threshold = 50f * (Screen.height / 800f);
 			var allUnits = wrapper.GameWorld.AllUnits;
 			foreach (var unit in allUnits)
 			{
@@ -59,10 +61,16 @@ namespace Game.View
 				var pos = camera3D.WorldToScreenPoint(unit.GetCenterPosition3D());
 				var diff = new Vector2(pos.x - mousePosition.x, (pos.y - mousePosition.y) * 0.85f);
 				var dist = diff.magnitude;
-				if (dist < nearest)
+				if (dist < threshold)
 				{
-					nearest = dist;
-					nearestUnit = unit;
+					// prefer enemies for raycast.
+					if (nearestUnit == null
+					|| (nearestUnit.Owner == OwnerId.Player1 && unit.Owner == OwnerId.Player2)
+					|| (nearestUnit.Owner == unit.Owner && dist < nearestUnitDist))
+					{
+						nearestUnit = unit;
+						nearestUnitDist = dist;
+					}
 				}
 			}
 
