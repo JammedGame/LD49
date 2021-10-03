@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 154a2aff3c2ed4a4fa7388df21426eeb, type: 3}
-  m_Name: Tower
+  m_Name: ExertionTower
   m_EditorClassIdentifier: 
   Speed: 0
   Size: 0.85
@@ -20,12 +20,13 @@ MonoBehaviour:
   CastUpswing: 0
   PrimaryAttack:
     AttackType: 1
-    MinDamage: 2
-    MaxDamage: 2
-    AttackRange: 10
-    AttackSpeed: 0.6666667
+    MinDamage: 0
+    MaxDamage: 0
+    AttackRange: 6.6666665
+    AttackSpeed: 0
     AttackUpswing: 0
     ProjectileOffset: {x: 0, y: 1.8, z: 0.9}
     ProjectileVelocity: 20
   Spells: []
   SpawnOnDeath: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
+  GoldCost: 50

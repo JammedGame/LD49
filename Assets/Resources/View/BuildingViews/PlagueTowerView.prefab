@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1234759034580901433}
   - component: {fileID: 4601625949543485885}
   m_Layer: 0
-  m_Name: TowerView
+  m_Name: PlagueTowerView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
