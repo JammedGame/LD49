@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d818cc70865c44c7b585ac181d0b490b, type: 3}
+  m_Name: Cleric
+  m_EditorClassIdentifier: 
+  Speed: 2.65
+  Size: 0.3
+  Height: 1.75
+  IsInvulnerable: 0
+  Health: 7
+  CastUpswing: 0
+  PrimaryAttack:
+    AttackType: 1
+    MinDamage: 1
+    MaxDamage: 3
+    AttackRange: 5
+    AttackSpeed: 0.33333334
+    AttackUpswing: 0.4
+    ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
+    ProjectileVelocity: 15
+  Spells: []
+  SpawnOnDeath: {fileID: 0}
+  GoldCost: 0

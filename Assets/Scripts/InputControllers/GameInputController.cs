@@ -21,9 +21,9 @@ namespace Game.UI
 		public GameInputController(GameWrapper gameWrapper)
 		{
 			this.gameWrapper = gameWrapper;
-			
+
 			player = gameWrapper.GameWorld.AllUnits[0];
-			
+
 			BlightSpellSettings blightSpell = Resources.Load("Settings/SpellSettings/Blight") as BlightSpellSettings;
 			if (blightSpell == null)
 			{
@@ -53,7 +53,7 @@ namespace Game.UI
 					CastSpell(i);
 				}
 			}
-			
+
 
 			ControlUnitWASD(SelectedUnit);
 
@@ -62,6 +62,11 @@ namespace Game.UI
 
 		private void ControlUnitWASD(Unit unit)
 		{
+			if (unit.CurrentAction is CastSpellAction && !unit.CurrentActionExecuted)
+			{
+				return;
+			}
+
 			var isHoldingKeys = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
 			var horizontal = Input.GetAxis("Horizontal");
 			var vertical = Input.GetAxis("Vertical");
@@ -132,7 +137,6 @@ namespace Game.UI
 
 		private void CastSpell(int index)
 		{
-			
 			if (gameWrapper.TryMouseRaycast(out var hitResult))
 			{
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);

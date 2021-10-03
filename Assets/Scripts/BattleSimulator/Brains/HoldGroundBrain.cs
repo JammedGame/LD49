@@ -10,7 +10,8 @@ namespace BattleSimulator.Brains
 			|| !myUnit.CurrentTarget.IsValid)
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
-				if (target != null) return new Decision(myUnit.Settings.PrimaryAttack, target);
+				if (target != null)
+					return new Decision(myUnit.Settings.PrimaryAttack, target);
 			}
 
 			return null;

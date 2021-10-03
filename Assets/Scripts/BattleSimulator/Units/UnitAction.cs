@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Simulation
 {
 	public interface UnitAction

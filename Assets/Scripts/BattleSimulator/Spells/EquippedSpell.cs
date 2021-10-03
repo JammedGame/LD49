@@ -11,6 +11,7 @@ namespace BattleSimulator.Spells
 
         public float CooldownProgress => 1f - cooldownSecondsLeft / SpellSettings.cooldownSeconds;
         public float CooldownSecondsLeft => cooldownSecondsLeft;
+        public bool IsReady => cooldownSecondsLeft == 0;
 
         public EquippedSpell(SpellSettings spellSettings, Unit owner)
         {
@@ -27,17 +28,9 @@ namespace BattleSimulator.Spells
             }
         }
 
-        public bool TryCast(UnitTargetInfo targetInfo)
+        public void StartCooldown()
         {
-            if (cooldownSecondsLeft > 0)
-            {
-                return false;
-            }
-            
-            owner.OrderSpellCast(SpellSettings, targetInfo);
             cooldownSecondsLeft = SpellSettings.cooldownSeconds;
-            
-            return true;
         }
     }
 }

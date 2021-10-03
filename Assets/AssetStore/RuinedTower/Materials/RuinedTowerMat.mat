@@ -36,11 +36,11 @@ Material:
     - USE_NORMAL_MAP: 1
     - USE_PROJECT_UV: 0
     - USE_VERTEX_COLOR: 0
-    - _FresnelPower: 0.5
     - _ColorMult: 1
+    - _FresnelPower: 0.5
     - _Shininess: 1
     m_Colors:
-    - _FresnelColor: {r: 0.16981131, g: 0.12500776, b: 0.08570665, a: 1}
     - _Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    - _FresnelColor: {r: 0.16981131, g: 0.12500776, b: 0.08570665, a: 1}
     - _SpecColor: {r: 0.64179105, g: 0.64179105, b: 0.64179105, a: 1}
   m_BuildTextureStacks: []

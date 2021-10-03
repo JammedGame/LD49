@@ -35,6 +35,7 @@ namespace Game.Simulation
 
 		// API
 		public float CurrentActionProgress => actionContext.Progress;
+		public bool CurrentActionExecuted => actionContext.Executed;
 		public UnitActionType CurrentActionType => currentActionType;
 		public UnitTargetInfo CurrentTarget => actionContext.Target;
 		public UnitAction CurrentAction => currentAction;
@@ -69,7 +70,7 @@ namespace Game.Simulation
 			Position = position;
 			Speed = unitSettings.Speed;
 			ResetModifiers();
-			
+
 			// load spells
 			foreach (SpellSettings spellSettings in Settings.Spells)
 			{
@@ -98,7 +99,7 @@ namespace Game.Simulation
 			{
 				OrderIdle();
 			}
-			
+
 			// tick equipped spells
 			foreach (EquippedSpell spell in EquippedSpells)
 			{
@@ -141,9 +142,9 @@ namespace Game.Simulation
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
-		public void OrderSpellCast(SpellSettings spellSettings, UnitTargetInfo targetInfo)
+		public void OrderSpellCast(SpellSettings spellSettings, UnitTargetInfo targetInfo, Action SuccessCallback = null, Action FailCallback = null)
 		{
-			StartAction(new CastSpellAction(spellSettings, Settings.CastUpswing), targetInfo);
+			StartAction(new CastSpellAction(spellSettings, Settings.CastUpswing), targetInfo, SuccessCallback);
 		}
 
 		public void OrderSpellCast(int spellIndex, UnitTargetInfo targetInfo)
@@ -155,27 +156,33 @@ namespace Game.Simulation
 			}
 
 			EquippedSpell spell = EquippedSpells[spellIndex];
-			if (!spell.TryCast(targetInfo))
+			if (spell.IsReady)
+			{
+				OrderSpellCast(spell.SpellSettings, targetInfo, () =>
+				{
+					spell.StartCooldown();
+				});
+			}
+			else
 			{
 				Debug.Log($"Can't cast spell {spell.SpellSettings.spellName}, {spell.CooldownSecondsLeft}s of cooldown left!");
 			}
-			
 		}
 
-		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
+		public void StartAction(UnitAction newAction, UnitTargetInfo target = default, Action SuccessCallback = null, Action FailCallback = null)
 		{
 			if (newAction == null)
 				throw new NullReferenceException();
 
 			// don't reset progress if animation is the same.
-			if (currentAction == newAction && actionContext.Target.Equals(target))
+			if (currentAction == newAction)
 			{
 				actionContext.Target = target;
 			}
 			else
 			{
 				currentAction = newAction;
-				actionContext = new UnitActionContext() { Target = target };
+				actionContext = new UnitActionContext() { Target = target, OnSuccess = SuccessCallback, OnFail = FailCallback };
 			}
 		}
 
@@ -193,6 +200,12 @@ namespace Game.Simulation
 		{
 			base.OnDeactivate();
 			currentActionType = UnitActionType.Death;
+			SpawnOnDeath();
+		}
+
+		private void SpawnOnDeath()
+		{
+			if (Settings.SpawnOnDeath != null) GameWorld.ScheduleSpawn(Settings.SpawnOnDeath, Position, Owner, Parent);
 		}
 
 		#endregion
@@ -258,8 +271,26 @@ namespace Game.Simulation
 		public UnitTargetInfo Target;
 		public bool Started;
 		public float Progress;
-		public bool Executed;
+		private bool _executed;
+		public bool Executed
+		{
+			get
+			{
+				return _executed;
+			}
+
+			set
+			{
+				if (!_executed && value)
+				{
+					_executed = true;
+					OnSuccess?.Invoke();
+				}
+			}
+		}
 		public bool Finished;
+		public Action OnSuccess;
+		public Action OnFail;
 
 		public void ResetProgress()
 		{

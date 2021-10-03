@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45dd10a291eca549840dfa0596ac3f8, type: 3}
   m_Name: Wave10
   m_EditorClassIdentifier: 
-  goldReward: 700
+  goldReward: 800
   multiSpawns: []

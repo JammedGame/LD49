@@ -15,11 +15,11 @@ MonoBehaviour:
   spellName: Blight
   manaCost: 10
   cooldownSeconds: 3
-  castRange: 10
+  castRange: 20
   castDurationSeconds: 0.5
   isSingleTarget: 0
   hopRadius: 10
   maxHops: 5
-  damagePerHop: 5
-  damageDecay: 0.8
-  coilSpeed: 3
+  damagePerHop: 7
+  damageDecay: 0.9
+  coilSpeed: 5

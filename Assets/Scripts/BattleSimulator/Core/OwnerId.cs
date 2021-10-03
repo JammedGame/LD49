@@ -19,7 +19,7 @@ namespace Game.Simulation
 				case OwnerId.Player2:
 					return OwnerId.Player1;
 				default:
-					throw new Exception();
+					throw new ArgumentOutOfRangeException(nameof(owner), owner, null);
 			}
 		}
 	}

@@ -23,6 +23,10 @@ namespace Game.Simulation
 		public readonly GameWorldData Data;
 		private readonly IViewEventHandler viewBridge;
 		private readonly WaveController waveController;
+		private readonly List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
+		private readonly List<(Creep creep, float time)> graveyard = new List<(Creep, float)>();
+
+		private int goldAmount;
 
 		public GameWorld(GameWorldData data, IViewEventHandler viewBridge)
 		{
@@ -31,6 +35,7 @@ namespace Game.Simulation
 			this.viewBridge = viewBridge;
 			Physics = new GameWorldPhysics();
 			waveController = new WaveController(Data.WaveData, this);
+			goldAmount = data.StartingGold;
 
 			// spawn initial object
 			foreach (var unitSpawn in data.UnitSpawns)
@@ -48,7 +53,9 @@ namespace Game.Simulation
         /// </summary>
         public GameWorldPhysics Physics { get; }
 
-		public Unit SpawnUnit(UnitSettings settings, float2 position, OwnerId owner, BattleObject parent = null)
+        private void SpawnUnit(ScheduledSpawn ss) => SpawnUnit(ss.Settings, ss.Position, ss.Owner, ss.Parent);
+
+        public Unit SpawnUnit(UnitSettings settings, float2 position, OwnerId owner, BattleObject parent = null)
 		{
 			Unit newUnit = (Unit)settings.Spawn(this, position, owner, parent);
 			AllUnits.Add(newUnit);
@@ -108,14 +115,24 @@ namespace Game.Simulation
 			// update waves
 			if (waveController.AnyWavesRemaining)
 			{
-				if (waveController.AnySpawnsRemaining) waveController.Tick();
-				else waveController.StartNextWave();
+				waveController.Tick();
+				if (waveController.WaveComplete)
+				{
+					AddGold(waveController.CurrentWaveGoldReward);
+					waveController.StartNextWave();
+				}
 			}
 
 			CleanInactiveObjects();
 
 			// update time
 			CurrentTime += GameTick.TickDuration;
+		}
+
+		private void AddGold(int amount)
+		{
+			goldAmount += amount;
+			Debug.Log($"Gold amount is now {goldAmount}");
 		}
 
 		public void ResetModifiers()
@@ -145,16 +162,45 @@ namespace Game.Simulation
 					if (obj is Projectile p) AllProjectiles.Remove(p);
 					if (obj is Unit u) AllUnits.Remove(u);
 					if (obj is Building b) AllBuildings.Remove(b);
-					if (obj is Creep c) AllCreeps.Remove(c);
 					if (obj is Spell s) AllSpells.Remove(s);
 					if (obj == Altar) Altar = null;
+					if (obj is Creep c)
+					{
+						AllCreeps.Remove(c);
+						graveyard.Add((c, CurrentTime));
+						Debug.Log(c);
+					}
 				}
 			}
+
+			// execute scheduled spawns.
+			foreach (var scheduledSpawn in scheduledSpawns) SpawnUnit(scheduledSpawn);
+			scheduledSpawns.Clear();
 		}
 
 		public void Dispose()
 		{
 			Physics.Dispose();
+		}
+
+		public void ScheduleSpawn(UnitSettings settingsSpawnOnDeath, float2 position, OwnerId owner, BattleObject parent)
+		{
+			scheduledSpawns.Add(new ScheduledSpawn(settingsSpawnOnDeath, position, owner, parent));
+		}
+
+		public List<Creep> GetCreepsThatDiedSince(float time)
+		{
+			List<Creep> creeps = new List<Creep>();
+			for (int i = 0; i < graveyard.Count; i++)
+			{
+				var (creep, graveTime) = graveyard[i];
+				if (creep != null && graveTime >= time)
+				{
+					creeps.Add(creep);
+					graveyard.RemoveAt(i--);
+				}
+			}
+			return creeps;
 		}
 	}
 }

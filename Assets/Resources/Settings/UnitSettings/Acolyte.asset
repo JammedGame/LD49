@@ -27,3 +27,6 @@ MonoBehaviour:
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15
+  Spells: []
+  SpawnOnDeath: {fileID: 0}
+  GoldCost: 10

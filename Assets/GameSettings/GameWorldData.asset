@@ -57,3 +57,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 096dc1cdb011b441d9832fcd015e77d3, type: 2}
   - {fileID: 11400000, guid: 2e118782bbe524619b98032ec528acdb, type: 2}
   - {fileID: 11400000, guid: 8fc2b089f65a04403b92d3764d818e60, type: 2}
+  StartingGold: 250

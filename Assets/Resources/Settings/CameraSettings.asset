@@ -22,4 +22,3 @@ MonoBehaviour:
   MinZoom: 4
   MaxZoom: 200
   ScrollWheelZoomSpeed: 1600
-  FollowOffset: {x: 0, y: 0, z: 0}

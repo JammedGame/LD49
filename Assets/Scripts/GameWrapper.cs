@@ -55,10 +55,10 @@ namespace Game
 			CameraController.SetCentralPosition();
 		}
 
-		void OnGUI()
-		{
-			GUI.Label(new Rect(20, 20, 100, 100), $"{Screen.width}x{Screen.height} FPS:{1f / Time.deltaTime}");
-		}
+		// void OnGUI()
+		// {
+		// 	GUI.Label(new Rect(20, 20, 100, 100), $"{Screen.width}x{Screen.height} FPS:{1f / Time.deltaTime}");
+		// }
 
 		void Update()
 		{

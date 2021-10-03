@@ -11,9 +11,6 @@ namespace Game.Simulation
 	{
 		public UnitActionType Tick(Unit unit, ref UnitActionContext actionContext, float dT)
 		{
-			if (!actionContext.Target.IsValid)
-				return UnitActionType.EndCurrentAction;
-
 			// get target position using pathfinding
 			var targetPosition = actionContext.Target.Position;
 			var distanceToTarget = math.distance(unit.Position, targetPosition);
