@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   Size: 1
-  Height: 1.75
+  Height: 1
   IsInvulnerable: 1
   Health: 20
   CastUpswing: 0
   PrimaryAttack:
     AttackType: 0
-    Damage: 0
+    MinDamage: 0
+    MaxDamage: 0
     AttackRange: 0
     AttackSpeed: 0
     AttackUpswing: 0
