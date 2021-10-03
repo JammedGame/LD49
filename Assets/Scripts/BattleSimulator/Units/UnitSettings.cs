@@ -18,6 +18,7 @@ namespace Game.Simulation
 		public float Height = 1.5f;
 
 		[Header("Health")]
+		public bool IsInvulnerable;
 		public float Health;
 
 		[Header("Cast Upswing")]

@@ -15,6 +15,7 @@ MonoBehaviour:
   Speed: 0
   Size: 1
   Height: 1.75
+  IsInvulnerable: 1
   Health: 20
   CastUpswing: 0
   PrimaryAttack:

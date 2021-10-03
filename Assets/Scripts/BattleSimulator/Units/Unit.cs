@@ -19,6 +19,7 @@ namespace Game.Simulation
 		private UnitActionType currentActionType;
 		private UnitActionContext actionContext;
 		private float health;
+		private bool isInvulnerable;
 
 		// stats
 		public Stat Speed;
@@ -41,9 +42,10 @@ namespace Game.Simulation
 		public bool IsMoving => currentActionType == UnitActionType.Movement;
 		public float Radius => Settings.Size;
 		public float Health => health;
+		public bool IsInvulnerable => isInvulnerable;
 		public float HealthPercent => Mathf.Clamp01(health / Settings.Health);
 		public virtual bool IsStatic => false; // for collision purposes
-		public bool IsValidAttackTarget => IsActive;
+		public bool IsValidAttackTarget => IsActive && !IsInvulnerable;
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
 
@@ -60,10 +62,12 @@ namespace Game.Simulation
 			Settings = unitSettings;
 			Position = position;
 			Speed = unitSettings.Speed;
+			ResetModifiers();
 		}
 
 		public virtual void ResetModifiers()
 		{
+			isInvulnerable = Settings.IsInvulnerable;
 			Speed.Reset();
 		}
 

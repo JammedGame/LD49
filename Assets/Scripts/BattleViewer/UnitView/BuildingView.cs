@@ -24,11 +24,7 @@ namespace Game.View
 		{
 			base.SyncView(dT);
 			transform.localPosition = Data.GetPosition3D();
-
-			if (healthBar == null)
-				healthBar = ViewController.HealthBarController.Fetch(this);
-			if (healthBar != null)
-				healthBar.Sync();
+			ViewController.HealthBarController.SyncHealthbar(this, ref healthBar);
 		}
 
 		protected override void OnDeactivated()

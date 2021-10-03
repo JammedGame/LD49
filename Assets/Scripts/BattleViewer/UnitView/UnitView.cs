@@ -38,7 +38,7 @@ namespace Game.View
 			// update transform
 			SyncUnitTransform(unit);
 			SyncUnitAnimation(unit);
-			SyncHealthBar(unit);
+			ViewController.HealthBarController.SyncHealthbar(this, ref healthBar);
 		}
 
 		private void SyncUnitTransform(Unit unit)
@@ -54,14 +54,6 @@ namespace Game.View
 				unit.GetPosition3D(),
 				unit.GetRotation3D()
 			);
-		}
-
-		private void SyncHealthBar(Unit unit)
-		{
-			if (healthBar == null)
-				healthBar = ViewController.HealthBarController.Fetch(this);
-
-			healthBar.Sync();
 		}
 
 		private void SyncUnitAnimation(Unit unit)
@@ -103,10 +95,10 @@ namespace Game.View
 
 				case UnitActionType.Movement:
 					return MovementAnimation;
-				
+
 				case UnitActionType.CastSpell:
 					return CastSpellAnimation;
-				
+
 				default:
 					return IdleAnimation;
 			}
