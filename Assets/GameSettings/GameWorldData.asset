@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e907d183c30d4e68a6152a9e31ca4dd, type: 3}
   m_Name: GameWorldData
   m_EditorClassIdentifier: 
+  StartingGold: 250
   Board:
     width: 100
     height: 100
@@ -23,28 +24,36 @@ MonoBehaviour:
     BounceAbsorbRelative: 0.75
   UnitSpawns:
   - Type: {fileID: 11400000, guid: 5aa610147d705ea42a70858a266cb6ec, type: 2}
-    Position: {x: 15, y: 50}
+    SpawnPosition: 0
+    PositionOffset: {x: 15, y: 50}
     Owner: 0
   - Type: {fileID: 11400000, guid: 7fd2603fec5f5974a8025546403af8b3, type: 2}
-    Position: {x: 5, y: 50}
+    SpawnPosition: 0
+    PositionOffset: {x: 0, y: 50}
     Owner: 0
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
-    Position: {x: 20, y: 25}
+    SpawnPosition: 0
+    PositionOffset: {x: 20, y: 25}
     Owner: 0
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
-    Position: {x: 20, y: 75}
+    SpawnPosition: 0
+    PositionOffset: {x: 20, y: 75}
     Owner: 0
   - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    Position: {x: 10, y: 40}
+    SpawnPosition: 0
+    PositionOffset: {x: 10, y: 40}
     Owner: 0
   - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    Position: {x: 10, y: 60}
+    SpawnPosition: 0
+    PositionOffset: {x: 10, y: 60}
     Owner: 0
   - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    Position: {x: 15, y: 47}
+    SpawnPosition: 0
+    PositionOffset: {x: 15, y: 47}
     Owner: 0
   - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    Position: {x: 15, y: 53}
+    SpawnPosition: 0
+    PositionOffset: {x: 15, y: 53}
     Owner: 0
   WaveData:
   - {fileID: 11400000, guid: 60307a554530b694397fad8b7a75b300, type: 2}
@@ -57,4 +66,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 096dc1cdb011b441d9832fcd015e77d3, type: 2}
   - {fileID: 11400000, guid: 2e118782bbe524619b98032ec528acdb, type: 2}
   - {fileID: 11400000, guid: 8fc2b089f65a04403b92d3764d818e60, type: 2}
-  StartingGold: 250
