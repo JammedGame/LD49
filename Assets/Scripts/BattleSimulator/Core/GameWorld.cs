@@ -24,6 +24,8 @@ namespace Game.Simulation
 		private readonly IViewEventHandler viewBridge;
 		private readonly WaveController waveController;
 
+		private int goldAmount;
+
 		public GameWorld(GameWorldData data, IViewEventHandler viewBridge)
 		{
 			Data = data;
@@ -31,6 +33,7 @@ namespace Game.Simulation
 			this.viewBridge = viewBridge;
 			Physics = new GameWorldPhysics();
 			waveController = new WaveController(Data.WaveData, this);
+			goldAmount = data.StartingGold;
 
 			// spawn initial object
 			foreach (var unitSpawn in data.UnitSpawns)
@@ -108,14 +111,24 @@ namespace Game.Simulation
 			// update waves
 			if (waveController.AnyWavesRemaining)
 			{
-				if (waveController.AnySpawnsRemaining) waveController.Tick();
-				else waveController.StartNextWave();
+				waveController.Tick();
+				if (waveController.WaveComplete)
+				{
+					AddGold(waveController.CurrentWaveGoldReward);
+					waveController.StartNextWave();
+				}
 			}
 
 			CleanInactiveObjects();
 
 			// update time
 			CurrentTime += GameTick.TickDuration;
+		}
+
+		private void AddGold(int amount)
+		{
+			goldAmount += amount;
+			Debug.Log($"Gold amount is now {goldAmount}");
 		}
 
 		public void ResetModifiers()

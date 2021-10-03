@@ -6,9 +6,9 @@ namespace Game.Simulation
 {
 	public class WaveController
 	{
+		private readonly List<Unit> currentWaveUnits = new List<Unit>();
 		private readonly List<WaveData> waves;
 		private readonly GameWorld world;
-
 		private int currentWaveIndex = -1;
 		private float prevSpawnTime;
 
@@ -19,17 +19,22 @@ namespace Game.Simulation
 		}
 
 		public string CurrentWaveName => CurrentWave != null ? CurrentWave.name : null;
+		public int CurrentWaveGoldReward => CurrentWave != null ? CurrentWave.goldReward : 0;
 		public float TimeSinceStartOfWave { get; private set; }
 		public bool AnyWavesRemaining => currentWaveIndex < waves.Count;
+		public bool WaveComplete => !AnyUnitsRemaining && !AnySpawnsRemaining;
 
-		public bool AnySpawnsRemaining => CurrentWave != null &&
-			CurrentWave.multiSpawns.Exists(ms => prevSpawnTime < ms.delay);
+		private bool AnyUnitsRemaining => currentWaveUnits.Exists(u => u != null && u.IsActive);
+
+		private bool AnySpawnsRemaining =>
+			CurrentWave != null && CurrentWave.multiSpawns.Exists(ms => ms.delay > prevSpawnTime);
 
 		private WaveData CurrentWave =>
 			currentWaveIndex >= 0 && currentWaveIndex < waves.Count ? waves[currentWaveIndex] : null;
 
 		public void StartNextWave()
 		{
+			currentWaveUnits.Clear();
 			currentWaveIndex++;
 			TimeSinceStartOfWave = 0;
 			prevSpawnTime = 0;
@@ -38,17 +43,15 @@ namespace Game.Simulation
 
 		public void Tick()
 		{
-			if (!AnySpawnsRemaining) return;
-
-			foreach (var multiSpawn in CurrentWave.multiSpawns)
-				if (multiSpawn.delay <= TimeSinceStartOfWave && multiSpawn.delay > prevSpawnTime)
-				{
-					// spawn
-					ExecuteMultiSpawn(multiSpawn);
-					prevSpawnTime = TimeSinceStartOfWave;
-				}
-
 			TimeSinceStartOfWave += GameTick.TickDuration;
+			if (AnySpawnsRemaining)
+				foreach (var multiSpawn in CurrentWave.multiSpawns)
+					if (multiSpawn.delay <= TimeSinceStartOfWave && multiSpawn.delay > prevSpawnTime)
+					{
+						// spawn
+						ExecuteMultiSpawn(multiSpawn);
+						prevSpawnTime = TimeSinceStartOfWave;
+					}
 		}
 
 		private void ExecuteMultiSpawn(MultiSpawn multiSpawn)
@@ -58,6 +61,7 @@ namespace Game.Simulation
 			{
 				var unit = unitSpawn.Execute(world);
 				unit?.SetBrain(new AggroAltarBrain());
+				currentWaveUnits.Add(unit);
 			}
 		}
 	}

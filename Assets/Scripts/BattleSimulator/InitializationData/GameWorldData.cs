@@ -11,6 +11,7 @@ namespace Game.Simulation
     [CreateAssetMenu]
     public class GameWorldData : ScriptableObject
     {
+        public int StartingGold = 250;
         public BoardData Board;
         public GamePhysicsSettings PhysicsSettings;
 
