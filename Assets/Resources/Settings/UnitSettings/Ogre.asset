@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d818cc70865c44c7b585ac181d0b490b, type: 3}
-  m_Name: Pikeman
+  m_Name: Ogre
   m_EditorClassIdentifier: 
-  Speed: 2.65
-  Size: 0.3
-  Height: 1.75
+  Speed: 2.75
+  Size: 0.7
+  Height: 3.2
   IsInvulnerable: 0
-  Health: 7
+  Health: 25
   CastUpswing: 0
   PrimaryAttack:
     AttackType: 0
     MinDamage: 1
-    MaxDamage: 2
+    MaxDamage: 3
     AttackRange: 0.7
-    AttackSpeed: 1
+    AttackSpeed: 0.5
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15
+  Spells: []
+  SpawnOnDeath: {fileID: 0}
+  GoldCost: 25

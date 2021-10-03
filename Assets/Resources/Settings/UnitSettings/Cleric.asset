@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d818cc70865c44c7b585ac181d0b490b, type: 3}
-  m_Name: Acolyte
+  m_Name: Cleric
   m_EditorClassIdentifier: 
-  Speed: 2.8
-  Size: 0.35
+  Speed: 2.65
+  Size: 0.3
   Height: 1.75
   IsInvulnerable: 0
-  Health: 10
-  CastUpswing: 0.1
+  Health: 7
+  CastUpswing: 0
   PrimaryAttack:
-    AttackType: 0
+    AttackType: 1
     MinDamage: 1
-    MaxDamage: 4
-    AttackRange: 0.7
-    AttackSpeed: 1
+    MaxDamage: 3
+    AttackRange: 5
+    AttackSpeed: 0.33333334
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15
   Spells: []
   SpawnOnDeath: {fileID: 0}
-  GoldCost: 10
+  GoldCost: 0

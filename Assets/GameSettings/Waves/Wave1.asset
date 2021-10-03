@@ -24,7 +24,7 @@ MonoBehaviour:
       SpawnPosition: 1
       PositionOffset: {x: 0, y: 0}
       Owner: 1
-    - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
+    - Type: {fileID: 11400000, guid: 974f03de7c0534b5e97f60f22b60bedb, type: 2}
       SpawnPosition: 1
       PositionOffset: {x: 0, y: 0}
       Owner: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
       SpawnPosition: 3
       PositionOffset: {x: 0, y: 0}
       Owner: 1
-    - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
+    - Type: {fileID: 11400000, guid: 974f03de7c0534b5e97f60f22b60bedb, type: 2}
       SpawnPosition: 3
       PositionOffset: {x: 0, y: 0}
       Owner: 1
@@ -68,7 +68,7 @@ MonoBehaviour:
       SpawnPosition: 2
       PositionOffset: {x: 0, y: 0}
       Owner: 1
-    - Type: {fileID: 11400000, guid: de02b116a67e87e4bab95c5caca8e8fe, type: 2}
+    - Type: {fileID: 11400000, guid: 974f03de7c0534b5e97f60f22b60bedb, type: 2}
       SpawnPosition: 2
       PositionOffset: {x: 0, y: 0}
       Owner: 1

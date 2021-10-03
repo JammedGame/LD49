@@ -31,6 +31,8 @@ namespace Game.Simulation
 
 		public UnitSettings SpawnOnDeath;
 
+		public int GoldCost;
+
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
 			return new Unit(gameWorld, this, targetInfo.Position, owner, parent);
