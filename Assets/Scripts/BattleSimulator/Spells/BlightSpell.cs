@@ -25,8 +25,6 @@ namespace BattleSimulator.Spells
             damagePerHop = this.settings.damagePerHop;
             coilPosition = caster.GetPosition2D();
             currentTarget = FindNextTarget();
-            
-            Debug.Log($"Blight spell initiated with target: {currentTarget}");
         }
 
         public override void Tick()
@@ -79,11 +77,6 @@ namespace BattleSimulator.Spells
             }
 
             return closest;
-        }
-
-        public override void OnDeactivate()
-        {
-            Debug.Log("Blight spell deactivated");
         }
     }
 }

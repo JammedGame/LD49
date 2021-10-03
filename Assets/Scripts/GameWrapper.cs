@@ -3,6 +3,7 @@ using Game.Simulation;
 using Game.Simulation.Board;
 using Game.UI;
 using Game.View;
+using Game.View.SpellView;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -14,6 +15,7 @@ namespace Game
 		// scene references
 		public CameraController CameraController;
 		public HealthBarController HealthBarController;
+		public SpellUIController SpellUIController;
 		public GameWorldData GameData;
 
 		// state
@@ -36,7 +38,7 @@ namespace Game
 			Application.targetFrameRate = -60;
 
 			// create new game world
-			viewController = new GameViewController(HealthBarController, CameraController);
+			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);

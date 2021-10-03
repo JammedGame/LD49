@@ -27,6 +27,7 @@ namespace Game.Simulation
         Undefined = 0,
         Created = 1,
         End = 2,
-        ProjectileFired = 3
+        ProjectileFired = 3,
+        PlayerSpellsUpdated = 4
     }
 }

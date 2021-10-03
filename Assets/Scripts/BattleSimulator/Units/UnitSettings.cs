@@ -27,6 +27,8 @@ namespace Game.Simulation
 		[Header("Attack")]
 		public UnitAttackAction PrimaryAttack;
 
+		public List<SpellSettings> Spells;
+
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
 			return new Unit(gameWorld, this, targetInfo.Position, owner, parent);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BattleSimulator.Spells;
 using Game.Simulation;
 using Game.Simulation.Board;
@@ -13,11 +14,16 @@ namespace Game.UI
 		private GameWrapper gameWrapper;
 		public Unit SelectedUnit => gameWrapper.GameWorld.AllUnits[0];
 
-		private BlightSpellSettings blightSpell;
+		private Unit player;
+
+		private KeyCode[] spellKeys = {KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4};
 		public GameInputController(GameWrapper gameWrapper)
 		{
 			this.gameWrapper = gameWrapper;
-			blightSpell = Resources.Load("Settings/SpellSettings/Blight") as BlightSpellSettings;
+			
+			player = gameWrapper.GameWorld.AllUnits[0];
+			
+			BlightSpellSettings blightSpell = Resources.Load("Settings/SpellSettings/Blight") as BlightSpellSettings;
 			if (blightSpell == null)
 			{
 				Debug.LogError("Blight spell asset not found!");
@@ -34,10 +40,14 @@ namespace Game.UI
 				AttackMove();
 			}
 
-			if (Input.GetKeyDown(KeyCode.R))
+			for (int i = 0; i < spellKeys.Length; i++)
 			{
-				CastSpell(blightSpell);
+				if (Input.GetKeyDown(spellKeys[i]))
+				{
+					CastSpell(i);
+				}
 			}
+			
 
 			ControlUnitWASD(SelectedUnit);
 
@@ -73,12 +83,13 @@ namespace Game.UI
 			else SelectedUnit.OrderMoveToPoint(raycastInfo.TargetPosition);
 		}
 
-		private void CastSpell(SpellSettings spellSettings)
+		private void CastSpell(int index)
 		{
+			
 			if (gameWrapper.TryMouseRaycast(out var hitResult))
 			{
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
-				SelectedUnit.OrderSpellCast(spellSettings, targetPosition);
+				player.OrderSpellCast(index, targetPosition);
 			}
 		}
 	}

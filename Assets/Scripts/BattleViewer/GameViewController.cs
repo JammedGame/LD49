@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Simulation;
+using Game.View.SpellView;
 using UnityEngine.Profiling;
 using UnityEngine;
 
@@ -9,16 +10,18 @@ namespace Game.View
 	public class GameViewController : IViewEventHandler
 	{
 		public readonly HealthBarController HealthBarController;
+		public readonly SpellUIController SpellUIController;
 		public readonly CameraController CameraController;
 
 		readonly Dictionary<BattleObject, BattleObjectView> battleObject2ViewDict = new Dictionary<BattleObject, BattleObjectView>();
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController, CameraController cameraController)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController)
 		{
 			HealthBarController = healthBarController;
 			CameraController = cameraController;
+			SpellUIController = spellUIController;
 		}
 
 		public void OnViewEvent(ViewEvent evt)
@@ -53,6 +56,8 @@ namespace Game.View
 					view.SyncDeadView(dT);
 				}
 			}
+
+			SpellUIController.Sync();
 		}
 
 		public void ExecuteViewEvents()
@@ -70,6 +75,10 @@ namespace Game.View
 							CreateViewObject(evt.Parent);
 							break;
 						}
+						
+						case ViewEventType.PlayerSpellsUpdated:
+							SyncSpellUI(evt.Parent as Unit);
+							break;
 
 						case ViewEventType.End:
 						{
@@ -92,7 +101,7 @@ namespace Game.View
 				}
 			}
 
-			// finally, clear the qeueu
+			// finally, clear the queue
 			eventsInQueue.Clear();
 		}
 
@@ -101,6 +110,20 @@ namespace Game.View
 			var newView = BattleObjectView.Create(parent, this);
 			battleObject2ViewDict[parent] = newView;
 			allBattleViews.Add(newView);
+		}
+
+		private void SyncSpellUI(Unit player)
+		{
+			for (int i = 0; i < player.EquippedSpells.Count; i++)
+			{
+				SpellUIController.equippedSpellViews[i].gameObject.SetActive(true);
+				SpellUIController.equippedSpellViews[i].SetModel(player.EquippedSpells[i]);
+			}
+
+			for (int i = player.EquippedSpells.Count; i < SpellUIController.equippedSpellViews.Count; i++)
+			{
+				SpellUIController.equippedSpellViews[i].gameObject.SetActive(false);
+			}
 		}
 
 		/// <summary>

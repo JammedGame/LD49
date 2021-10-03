@@ -27,3 +27,5 @@ MonoBehaviour:
     AttackUpswing: 0.4
     ProjectileOffset: {x: 0, y: 0.73333335, z: 0.15}
     ProjectileVelocity: 15
+  Spells:
+  - {fileID: 11400000, guid: 106b670ff5be6ca4288b4c4142fe4348, type: 2}

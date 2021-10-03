@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Blight
   manaCost: 10
+  cooldownSeconds: 3
   castRange: 10
   castDurationSeconds: 0.5
+  isSingleTarget: 0
   hopRadius: 10
   maxHops: 5
   damagePerHop: 5
-  damageDecay: 1
+  damageDecay: 0.8
   coilSpeed: 3

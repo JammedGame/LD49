@@ -8,6 +8,7 @@ namespace BattleSimulator.Spells
     {
         public string spellName;
         public float manaCost;
+        public float cooldownSeconds = 3f;
         public float castRange;
         public float castDurationSeconds;
         public bool isSingleTarget;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BattleSimulator.Brains;
 using BattleSimulator.Spells;
 using Game.Simulation.Board;
@@ -57,6 +58,8 @@ namespace Game.Simulation
 		public override Vector3 GetCenterPosition3D() => GameWorld.Board.GetPosition3D(Position) + new Vector3(0, Settings.Height / 2, 0f);
 		public override float2 GetPosition2D() => Position;
 
+		public List<EquippedSpell> EquippedSpells = new List<EquippedSpell>();
+
 		public Unit(GameWorld gameWorld, UnitSettings unitSettings, float2 position, OwnerId owner, BattleObject parent)
 			: base(gameWorld, owner, parent)
 		{
@@ -66,6 +69,12 @@ namespace Game.Simulation
 			Position = position;
 			Speed = unitSettings.Speed;
 			ResetModifiers();
+			
+			// load spells
+			foreach (SpellSettings spellSettings in Settings.Spells)
+			{
+				EquippedSpells.Add(new EquippedSpell(spellSettings, this));
+			}
 		}
 
 		public virtual void ResetModifiers()
@@ -88,6 +97,12 @@ namespace Game.Simulation
 			if (currentActionType == UnitActionType.EndCurrentAction)
 			{
 				OrderIdle();
+			}
+			
+			// tick equipped spells
+			foreach (EquippedSpell spell in EquippedSpells)
+			{
+				spell.Tick();
 			}
 		}
 
@@ -131,13 +146,29 @@ namespace Game.Simulation
 			StartAction(new CastSpellAction(spellSettings, Settings.CastUpswing), targetInfo);
 		}
 
+		public void OrderSpellCast(int spellIndex, UnitTargetInfo targetInfo)
+		{
+			if (spellIndex >= EquippedSpells.Count)
+			{
+				Debug.Log($"No spell at spell index {spellIndex}!");
+				return;
+			}
+
+			EquippedSpell spell = EquippedSpells[spellIndex];
+			if (!spell.TryCast(targetInfo))
+			{
+				Debug.Log($"Can't cast spell {spell.SpellSettings.spellName}, {spell.CooldownSecondsLeft}s of cooldown left!");
+			}
+			
+		}
+
 		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
 		{
 			if (newAction == null)
 				throw new NullReferenceException();
 
 			// don't reset progress if animation is the same.
-			if (this.currentAction == newAction)
+			if (currentAction == newAction && actionContext.Target.Equals(target))
 			{
 				actionContext.Target = target;
 			}
