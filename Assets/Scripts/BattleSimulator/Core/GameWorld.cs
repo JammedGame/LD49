@@ -22,7 +22,7 @@ namespace Game.Simulation
 		public readonly BoardData Board;
 		public readonly GameWorldData Data;
 		private readonly IViewEventHandler viewBridge;
-		public readonly WaveController Wave;
+		private readonly WaveController waveController;
 
 		public GameWorld(GameWorldData data, IViewEventHandler viewBridge)
 		{
@@ -30,7 +30,7 @@ namespace Game.Simulation
 			Board = data.Board;
 			this.viewBridge = viewBridge;
 			Physics = new GameWorldPhysics();
-			Wave = new WaveController(Data.WaveData, this);
+			waveController = new WaveController(Data.WaveData, this);
 
 			// spawn initial object
 			foreach (var unitSpawn in data.UnitSpawns)
@@ -106,8 +106,11 @@ namespace Game.Simulation
 			Profiler.EndSample();
 
 			// update waves
-			Wave.Tick();
-
+			if (waveController.AnyWavesRemaining)
+			{
+				if (waveController.AnySpawnsRemaining) waveController.Tick();
+				else waveController.StartNextWave();
+			}
 
 			CleanInactiveObjects();
 

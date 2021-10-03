@@ -48,3 +48,12 @@ MonoBehaviour:
     Owner: 0
   WaveData:
   - {fileID: 11400000, guid: 60307a554530b694397fad8b7a75b300, type: 2}
+  - {fileID: 11400000, guid: c8fd2cbdee2bd47f6adeab9cf4a6ee7e, type: 2}
+  - {fileID: 11400000, guid: eb00ef4b474ca47cd8f987456335339d, type: 2}
+  - {fileID: 11400000, guid: bb14abdab0e0343e6a12aa5934bad650, type: 2}
+  - {fileID: 11400000, guid: 6e39cc3306105435781ed68314848a52, type: 2}
+  - {fileID: 11400000, guid: c5d2d3f7ac70648cba36902b6de84a6b, type: 2}
+  - {fileID: 11400000, guid: 9b5c10a1be783470597acb78259ef4ea, type: 2}
+  - {fileID: 11400000, guid: 096dc1cdb011b441d9832fcd015e77d3, type: 2}
+  - {fileID: 11400000, guid: 2e118782bbe524619b98032ec528acdb, type: 2}
+  - {fileID: 11400000, guid: 8fc2b089f65a04403b92d3764d818e60, type: 2}

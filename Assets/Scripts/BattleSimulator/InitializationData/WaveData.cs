@@ -8,11 +8,12 @@ namespace Game.Simulation
     [CreateAssetMenu]
     public class WaveData : ScriptableObject
     {
-        public List<MultiUnitSpawnWithDelay> multiUnits;
+        public int goldReward;
+        public List<MultiSpawn> multiSpawns;
     }
 
     [Serializable]
-    public class MultiUnitSpawnWithDelay
+    public class MultiSpawn
     {
         public float delay;
         [Table] public List<UnitSpawn> unitSpawns;

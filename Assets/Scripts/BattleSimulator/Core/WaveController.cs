@@ -1,71 +1,67 @@
-using System.Collections;
 using System.Collections.Generic;
 using BattleSimulator.Brains;
 using UnityEngine;
 
 namespace Game.Simulation
 {
-    public class WaveController
-    {
-        public List<WaveData> Waves = new List<WaveData>();
-        private GameWorld world;
-        private int currentWaveIndex = 0;
-        private float currentWaveTimer = 0;
-        private float prevSpawnTime = 0;
+	public class WaveController
+	{
+		private readonly List<WaveData> waves;
+		private readonly GameWorld world;
 
-        public WaveController(List<WaveData> waveData, GameWorld world)
-        {
-            this.world = world;
-            this.Waves = waveData;
-        }
+		private int currentWaveIndex = -1;
+		private float prevSpawnTime;
 
-        private WaveData GetCurrentWave() { return Waves[currentWaveIndex]; }
+		public WaveController(List<WaveData> waves, GameWorld world)
+		{
+			this.world = world;
+			this.waves = waves;
+		}
 
-        public void Tick()
-        {
-            if (currentWaveIndex >= Waves.Count)
-                return;
-            bool AnySpawnsRemaining = false;
-            WaveData currWave = GetCurrentWave();
-            for (int i = 0; i < currWave.multiUnits.Count; i++)
-            {
-                if (currentWaveTimer <= currWave.multiUnits[i].delay)
-                {
-                    AnySpawnsRemaining = true;
-                }
+		public string CurrentWaveName => CurrentWave != null ? CurrentWave.name : null;
+		public float TimeSinceStartOfWave { get; private set; }
+		public bool AnyWavesRemaining => currentWaveIndex < waves.Count;
 
-                if (currWave.multiUnits[i].delay <= currentWaveTimer && currWave.multiUnits[i].delay > prevSpawnTime)
-                {
-                    // spawn
-                    SpawnWave(currWave.multiUnits[i].unitSpawns);
-                    prevSpawnTime = currentWaveTimer;
-                }
+		public bool AnySpawnsRemaining => CurrentWave != null &&
+			CurrentWave.multiSpawns.Exists(ms => TimeSinceStartOfWave <= ms.delay);
 
-            }
+		private WaveData CurrentWave =>
+			currentWaveIndex >= 0 && currentWaveIndex < waves.Count ? waves[currentWaveIndex] : null;
 
-            if (!AnySpawnsRemaining)
-            {
-                currentWaveIndex++;
-                currentWaveTimer = 0;
-                prevSpawnTime = 0;
-            }
+		public void StartNextWave()
+		{
+			currentWaveIndex++;
+			TimeSinceStartOfWave = 0;
+			prevSpawnTime = 0;
+			Debug.Log($"Starting wave: {CurrentWaveName}");
+		}
 
-            currentWaveTimer += GameTick.TickDuration;
+		public void Tick()
+		{
+			if (currentWaveIndex < 0 || currentWaveIndex >= waves.Count) return;
 
+			if (!AnySpawnsRemaining) return;
 
-        }
+			foreach (var multiSpawn in CurrentWave.multiSpawns)
+				if (multiSpawn.delay <= TimeSinceStartOfWave && multiSpawn.delay > prevSpawnTime)
+				{
+					// spawn
+					ExecuteMultiSpawn(multiSpawn);
+					prevSpawnTime = TimeSinceStartOfWave;
+				}
 
-        void SpawnWave(List<UnitSpawn> unitSpawns)
-        {
-            Debug.Log("Spawning enemies...");
-            for (int i = 0; i < unitSpawns.Count; i++)
-            {
-                // execute
-                Unit unit = unitSpawns[i].Execute(world);
+			TimeSinceStartOfWave += GameTick.TickDuration;
+		}
+
+		private void ExecuteMultiSpawn(MultiSpawn multiSpawn)
+		{
+			Debug.Log($"Spawning enemies at {TimeSinceStartOfWave}");
+			for (var i = 0; i < multiSpawn.unitSpawns.Count; i++)
+			{
+				// execute
+				var unit = multiSpawn.unitSpawns[i].Execute(world);
 				unit?.SetBrain(new AggroAltarBrain());
 			}
-
-        }
-
-    }
+		}
+	}
 }
