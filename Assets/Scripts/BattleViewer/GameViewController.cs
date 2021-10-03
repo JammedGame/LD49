@@ -13,15 +13,20 @@ namespace Game.View
 		public readonly SpellUIController SpellUIController;
 		public readonly CameraController CameraController;
 
+		private readonly SelectionCircle selectionCircle;
+		private readonly MovementCross movementCross;
+
 		readonly Dictionary<BattleObject, BattleObjectView> battleObject2ViewDict = new Dictionary<BattleObject, BattleObjectView>();
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SelectionCircle selectionCircle, MovementCross movementCross)
 		{
 			HealthBarController = healthBarController;
 			CameraController = cameraController;
 			SpellUIController = spellUIController;
+			this.selectionCircle = selectionCircle;
+			this.movementCross = movementCross;
 		}
 
 		public void OnViewEvent(ViewEvent evt)
@@ -135,6 +140,39 @@ namespace Game.View
 				return view;
 
 			return null;
+		}
+
+		public void SelectPosition(Vector3 position)
+		{
+			selectionCircle.Hide();
+			movementCross.ShowTemporarily(position);
+		}
+
+		public void SelectObject(OwnerId selectionOwner, BattleObjectView targetView)
+		{
+			var isFriend = targetView.Data.Owner == selectionOwner;
+			var isEnemy = targetView.Data.Owner == selectionOwner.GetOpposite();
+			movementCross.Hide();
+			selectionCircle.Follow(targetView);
+			if (isFriend) selectionCircle.ShowFriend();
+			else if (isEnemy) selectionCircle.ShowEnemy();
+			else selectionCircle.ShowDefault();
+		}
+
+		public void SelectObjectForAction(OwnerId selectionOwner, BattleObjectView targetView)
+		{
+			var isFriend = targetView.Data.Owner == selectionOwner;
+			var isEnemy = targetView.Data.Owner == selectionOwner.GetOpposite();
+			movementCross.Hide();
+			selectionCircle.Follow(targetView);
+			if (isFriend) selectionCircle.ShowFriendAction();
+			else if (isEnemy) selectionCircle.ShowEnemyAction();
+			else selectionCircle.ShowDefault();
+		}
+
+		public void UnselectObject()
+		{
+			selectionCircle.Hide();
 		}
 	}
 }

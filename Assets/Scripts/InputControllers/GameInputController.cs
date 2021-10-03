@@ -13,6 +13,7 @@ namespace Game.UI
 	{
 		private GameWrapper gameWrapper;
 		public Unit SelectedUnit => gameWrapper.GameWorld.AllUnits[0];
+		private Unit selectedOther;
 
 		private Unit player;
 
@@ -35,6 +36,11 @@ namespace Game.UI
 		/// </summary>
 		public void Update()
 		{
+			if (Input.GetMouseButtonDown(0))
+			{
+				ModifySelection();
+			}
+
 			if (Input.GetMouseButtonDown(1))
 			{
 				AttackMove();
@@ -76,11 +82,52 @@ namespace Game.UI
 			}
 		}
 
+		private void ModifySelection()
+		{
+			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
+			var targetUnit = raycastInfo.TargetUnit;
+			if (targetUnit != null)
+			{
+				var targetView = gameWrapper.ViewController.GetView(targetUnit);
+				selectedOther = targetUnit;
+				gameWrapper.ViewController.SelectObject(SelectedUnit.Owner, targetView);
+			}
+			else
+			{
+				selectedOther = null;
+				gameWrapper.ViewController.UnselectObject();
+			}
+		}
+
 		private void AttackMove()
 		{
 			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
-			if (raycastInfo.TargetUnit != null) SelectedUnit.OrderAttacking(new UnitTargetInfo(raycastInfo.TargetUnit));
-			else SelectedUnit.OrderMoveToPoint(raycastInfo.TargetPosition);
+			var targetUnit = raycastInfo.TargetUnit;
+			if (targetUnit != null)
+			{
+				var targetView = gameWrapper.ViewController.GetView(targetUnit);
+				selectedOther = targetUnit;
+				gameWrapper.ViewController.SelectObjectForAction(SelectedUnit.Owner, targetView);
+
+				if (targetUnit.Owner != SelectedUnit.Owner && targetUnit.IsValidAttackTarget)
+				{
+					SelectedUnit.OrderAttacking(new UnitTargetInfo(targetUnit));
+				}
+				else
+				{
+					// todo jole: should be follow order
+					SelectedUnit.OrderMoveToPoint(targetUnit.Position);
+				}
+			}
+			else
+			{
+				selectedOther = null;
+				gameWrapper.ViewController.UnselectObject();
+
+				var targetPosition = raycastInfo.TargetPosition;
+				gameWrapper.ViewController.SelectPosition(ViewUtil.ConvertTo3D(targetPosition));
+				SelectedUnit.OrderMoveToPoint(targetPosition);
+			}
 		}
 
 		private void CastSpell(int index)

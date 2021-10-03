@@ -23,6 +23,8 @@ namespace Game
 		GameViewController viewController;
 		GameTimeline gameTimeline;
 		GameInputController inputController;
+		private SelectionCircle selectionCircle;
+		private MovementCross movementCross;
 
 		// properties
 		public Camera Camera => CameraController.Camera;
@@ -38,7 +40,9 @@ namespace Game
 			Application.targetFrameRate = -60;
 
 			// create new game world
-			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController);
+			selectionCircle = Instantiate(SelectionCircle.LoadPrefab());
+			movementCross = Instantiate(MovementCross.LoadPrefab());
+			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController, selectionCircle, movementCross);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);
