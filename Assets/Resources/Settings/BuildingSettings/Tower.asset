@@ -27,3 +27,5 @@ MonoBehaviour:
     AttackUpswing: 0
     ProjectileOffset: {x: 0, y: 1.8, z: 0.9}
     ProjectileVelocity: 20
+  Spells: []
+  SpawnOnDeath: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}

@@ -23,6 +23,7 @@ namespace Game.Simulation
 		public readonly GameWorldData Data;
 		private readonly IViewEventHandler viewBridge;
 		private readonly WaveController waveController;
+		private readonly List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
 
 		private int goldAmount;
 
@@ -51,7 +52,9 @@ namespace Game.Simulation
         /// </summary>
         public GameWorldPhysics Physics { get; }
 
-		public Unit SpawnUnit(UnitSettings settings, float2 position, OwnerId owner, BattleObject parent = null)
+        private void SpawnUnit(ScheduledSpawn ss) => SpawnUnit(ss.Settings, ss.Position, ss.Owner, ss.Parent);
+
+        public Unit SpawnUnit(UnitSettings settings, float2 position, OwnerId owner, BattleObject parent = null)
 		{
 			Unit newUnit = (Unit)settings.Spawn(this, position, owner, parent);
 			AllUnits.Add(newUnit);
@@ -163,11 +166,20 @@ namespace Game.Simulation
 					if (obj == Altar) Altar = null;
 				}
 			}
+
+			// execute scheduled spawns.
+			foreach (var scheduledSpawn in scheduledSpawns) SpawnUnit(scheduledSpawn);
+			scheduledSpawns.Clear();
 		}
 
 		public void Dispose()
 		{
 			Physics.Dispose();
+		}
+
+		public void ScheduleSpawn(UnitSettings settingsSpawnOnDeath, float2 position, OwnerId owner, BattleObject parent)
+		{
+			scheduledSpawns.Add(new ScheduledSpawn(settingsSpawnOnDeath, position, owner, parent));
 		}
 	}
 }

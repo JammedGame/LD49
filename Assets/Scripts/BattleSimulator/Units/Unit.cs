@@ -193,6 +193,12 @@ namespace Game.Simulation
 		{
 			base.OnDeactivate();
 			currentActionType = UnitActionType.Death;
+			SpawnOnDeath();
+		}
+
+		private void SpawnOnDeath()
+		{
+			if (Settings.SpawnOnDeath != null) GameWorld.ScheduleSpawn(Settings.SpawnOnDeath, Position, Owner, Parent);
 		}
 
 		#endregion
