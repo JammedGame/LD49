@@ -33,6 +33,10 @@ namespace Game.Simulation
 
 		public int GoldCost;
 
+		// todo actual name
+		[SerializeField] private string unitName;
+		public string UnitName => !string.IsNullOrEmpty(unitName) ? unitName : name;
+
 		public override BattleObject Spawn(GameWorld gameWorld, UnitTargetInfo targetInfo, OwnerId owner, BattleObject parent)
 		{
 			return new Unit(gameWorld, this, targetInfo.Position, owner, parent);
