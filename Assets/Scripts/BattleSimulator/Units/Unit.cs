@@ -142,7 +142,7 @@ namespace Game.Simulation
 			StartAction(Settings.PrimaryAttack, attackTarget);
 		}
 
-		public void OrderSpellCast(EquippedSpell spell, UnitTargetInfo targetInfo)
+		public virtual void OrderSpellCast(EquippedSpell spell, UnitTargetInfo targetInfo)
 		{
 			StartAction(new CastSpellAction(spell, Settings.CastUpswing), targetInfo);
 		}

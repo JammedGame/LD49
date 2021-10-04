@@ -29,6 +29,6 @@ namespace Game.Simulation
         End = 2,
         ProjectileFired = 3,
         PlayerSpellsUpdated = 4,
-        SummoningListUpdated = 5,
+        SummoningListUpdated = 5
     }
 }

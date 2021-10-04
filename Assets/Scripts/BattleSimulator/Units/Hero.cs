@@ -1,5 +1,7 @@
 ﻿using BattleSimulator.Brains;
+using BattleSimulator.Spells;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Game.Simulation
 {
@@ -10,6 +12,13 @@ namespace Game.Simulation
         {
             SetBrain(new HoldGroundBrain());
             gameWorld.DispatchViewEvent(this, ViewEventType.PlayerSpellsUpdated);
+        }
+
+        public override void OrderSpellCast(EquippedSpell spell, UnitTargetInfo targetInfo)
+        {
+            base.OrderSpellCast(spell, targetInfo);
+
+            GameWorld.WildMagicController.OnSpellCast(spell.SpellSettings);
         }
     }
 }

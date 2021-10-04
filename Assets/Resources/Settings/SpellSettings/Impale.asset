@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Impale
   m_EditorClassIdentifier: 
   spellName: Impale
-  manaCost: 10
+  wildMagicEnergy: 3
   cooldownSeconds: 2
   castRange: 7
   castDurationSeconds: 1

@@ -22,6 +22,7 @@ namespace Game.Simulation
 		public readonly List<Unit> AllUnits = new List<Unit>();
 		public readonly BoardData Board;
 		public readonly GameWorldData Data;
+		public readonly WildMagicController WildMagicController;
 		private readonly IViewEventHandler viewBridge;
 		private readonly WaveController waveController;
 		private readonly List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
@@ -42,6 +43,8 @@ namespace Game.Simulation
 			// spawn initial object
 			foreach (var unitSpawn in data.UnitSpawns)
 				unitSpawn.Execute(this);
+
+			WildMagicController = new WildMagicController();
 		}
 
 
@@ -124,6 +127,9 @@ namespace Game.Simulation
 					waveController.StartNextWave();
 				}
 			}
+			
+			// wild magic
+			WildMagicController.Tick(GameTick.TickDuration);
 
 			CleanInactiveObjects();
 

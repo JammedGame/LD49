@@ -11,6 +11,7 @@ namespace Game.View
 	{
 		public readonly HealthBarController HealthBarController;
 		public readonly SpellUIController SpellUIController;
+		public readonly WildMagicUI WildMagicUI;
 		public readonly SummoningUIController SummoningUIController;
 		public readonly CameraController CameraController;
 
@@ -21,7 +22,7 @@ namespace Game.View
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SummoningUIController summoningUIController, SelectionCircle selectionCircle, MovementCross movementCross)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SummoningUIController summoningUIController, SelectionCircle selectionCircle, MovementCross movementCross, WildMagicUI wildMagicUI)
 		{
 			HealthBarController = healthBarController;
 			CameraController = cameraController;
@@ -29,6 +30,8 @@ namespace Game.View
 			SummoningUIController = summoningUIController;
 			this.selectionCircle = selectionCircle;
 			this.movementCross = movementCross;
+			
+			WildMagicUI = wildMagicUI;
 		}
 
 		public void OnViewEvent(ViewEvent evt)
@@ -65,6 +68,7 @@ namespace Game.View
 			}
 
 			SpellUIController.Sync();
+			WildMagicUI.Sync();
 		}
 
 		public void ExecuteViewEvents()

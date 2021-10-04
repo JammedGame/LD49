@@ -7,7 +7,7 @@ namespace BattleSimulator.Spells
     public abstract class SpellSettings : BattleObjectSettings
     {
         public string spellName;
-        public float manaCost;
+        public float wildMagicEnergy;
         public float cooldownSeconds = 3f;
         public float castRange;
         public float castDurationSeconds;

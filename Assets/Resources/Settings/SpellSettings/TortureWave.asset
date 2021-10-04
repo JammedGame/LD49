@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TortureWave
   m_EditorClassIdentifier: 
   spellName: Torture Wave
-  manaCost: 0
+  wildMagicEnergy: 3
   cooldownSeconds: 3
   castRange: 5
   castDurationSeconds: 0.1
