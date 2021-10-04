@@ -62,9 +62,11 @@ namespace BattleSimulator.Brains
 				}
 			}
 
-			if (newTarget == null && myUnit.Owner != myUnit.GameWorld.Altar.Owner)
+			if (newTarget == null
+				&& myUnit.GameWorld.Altar is Altar altar
+				&& myUnit.Owner != altar.Owner)
 			{
-				return myUnit.GameWorld.Altar;
+				return altar;
 			}
 
 			return newTarget;
