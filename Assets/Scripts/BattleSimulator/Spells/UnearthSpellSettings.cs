@@ -49,7 +49,6 @@ namespace BattleSimulator.Spells
                 if (dist <= currentRadius)
                 {
 					var newUnit = GameWorld.SpawnUnit(grave.Settings, grave.Position, Owner, this);
-					newUnit.SetBrain(new AggroEverythingBrain());
 					graves.RemoveAt(i--);
 				}
 			}

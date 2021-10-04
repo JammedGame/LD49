@@ -127,7 +127,7 @@ namespace Game.Simulation
 					waveController.StartNextWave();
 				}
 			}
-			
+
 			// wild magic
 			WildMagicController.Tick(GameTick.TickDuration);
 
@@ -231,8 +231,7 @@ namespace Game.Simulation
 			SubtractGold(buildingToSummon.GoldCost);
 			oldBuilding.Deactivate();
 
-			var newBuilding = SpawnUnit(buildingToSummon, oldBuilding.Position, oldBuilding.Owner, oldBuilding.Parent);
-			newBuilding?.SetBrain(new HoldGroundBrain());
+			SpawnUnit(buildingToSummon, oldBuilding.Position, oldBuilding.Owner, oldBuilding.Parent);
 		}
 
 		public void SummonCreep(UnitSettings creepToSummon, float2 targetPosition, OwnerId owner)
@@ -241,8 +240,7 @@ namespace Game.Simulation
 
 			SubtractGold(creepToSummon.GoldCost);
 
-			var newCreep = SpawnUnit(creepToSummon, targetPosition, owner);
-			newCreep?.SetBrain(new HoldGroundBrain());
+			SpawnUnit(creepToSummon, targetPosition, owner);
 		}
 	}
 }

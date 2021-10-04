@@ -12,7 +12,6 @@ namespace Game.Simulation
 		public Building(GameWorld gameWorld, BuildingSettings settings, float2 position, OwnerId owner, BattleObject parent)
 			: base(gameWorld, settings, position, owner, parent)
 		{
-			SetBrain(new HoldGroundBrain());
 		}
 
 		public override string ViewPath => $"View/BuildingViews/{Settings.name}View";

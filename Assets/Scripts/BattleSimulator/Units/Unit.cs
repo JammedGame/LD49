@@ -24,6 +24,8 @@ namespace Game.Simulation
 
 		// stats
 		public Stat Speed;
+		public Stat MinAttackDamage;
+		public Stat MaxAttackDamage;
 
 		// transform state
 		public float2 Position;
@@ -50,6 +52,7 @@ namespace Game.Simulation
 		public virtual bool IsStatic => false; // for collision purposes
 		public bool IsValidAttackTarget => IsActive && !IsInvulnerable;
 		public bool CanAttack(Unit unit) => unit != null && unit.IsValidAttackTarget && unit.Owner != Owner;
+		public float GetRandomDamage() => Mathf.RoundToInt(UnityEngine.Random.Range(MinAttackDamage, MaxAttackDamage));
 
 		public override string ViewPath => $"View/UnitViews/{Settings.name}View";
 
@@ -69,6 +72,9 @@ namespace Game.Simulation
 			Settings = unitSettings;
 			Position = position;
 			Speed = unitSettings.Speed;
+			MinAttackDamage = unitSettings.PrimaryAttack.MinDamage;
+			MaxAttackDamage = unitSettings.PrimaryAttack.MaxDamage;
+			brain = DefaultAggroBrain.Instance;
 			ResetModifiers();
 
 			// load spells
@@ -82,6 +88,8 @@ namespace Game.Simulation
 		{
 			isInvulnerable = Settings.IsInvulnerable;
 			Speed.Reset();
+			MinAttackDamage.Reset();
+			MaxAttackDamage.Reset();
 		}
 
 		public virtual void Tick()

@@ -3,15 +3,31 @@ using Unity.Mathematics;
 
 namespace BattleSimulator.Brains
 {
-	public class AggroAltarBrain : IBrain
+	public class HeroAggroBrain : IBrain
 	{
-		public const float DefaultAggroRange = 7;
-		public const float BreakAggroRange = 14;
+		public static HeroAggroBrain Instance = new HeroAggroBrain();
+
+		public Decision Think(Unit myUnit)
+		{
+			if (myUnit.CurrentActionType == UnitActionType.Idle)
+				return DefaultAggroBrain.Instance.Think(myUnit);
+
+			return null;
+		}
+	}
+
+	public class DefaultAggroBrain : IBrain
+	{
+		public static DefaultAggroBrain Instance = new DefaultAggroBrain();
+
+		public const float DefaultAggroRange = 9;
+		public const float BreakAggroRange = 15;
 
 		public Decision Think(Unit myUnit)
 		{
 			if (myUnit.CurrentActionType != UnitActionType.Attack
-			|| !myUnit.IsWithinRange(myUnit.CurrentTarget, BreakAggroRange))
+			&& myUnit.CurrentActionType != UnitActionType.CastSpell
+			&& myUnit.MaxAttackDamage > 0)
 			{
 				var target = PickHighestAggroTargetInRange(myUnit);
 				if (target != null)
@@ -24,23 +40,30 @@ namespace BattleSimulator.Brains
 		private Unit PickHighestAggroTargetInRange(Unit myUnit)
 		{
 			Unit currentTarget = myUnit.CurrentTarget.TargetUnit;
-			Unit target = null;
+			Unit newTarget = currentTarget;
 			float aggroRange = math.max(DefaultAggroRange, myUnit.Settings.PrimaryAttack.AttackRange);
+			bool canMove = myUnit.Speed > 0;
 			foreach (var candidate in myUnit.GameWorld.AllUnits)
 			{
 				if (!myUnit.CanAttack(candidate)) continue;
+				if (!canMove && !myUnit.IsWithinAttackRange(candidate)) continue;
 
 				if (currentTarget == candidate && myUnit.IsWithinRange(candidate, BreakAggroRange)
-				|| myUnit.IsWithinRange(candidate, DefaultAggroRange))
+				|| myUnit.IsWithinRange(candidate, aggroRange))
 				{
-					if (target == null || IsBetterAggro(myUnit, candidate, target))
+					if (newTarget == null || IsBetterAggro(myUnit, candidate, newTarget))
 					{
-						target = candidate;
+						newTarget = candidate;
 					}
 				}
 			}
 
-			return target ?? myUnit.GameWorld.Altar;
+			if (newTarget == null && myUnit.Owner != myUnit.GameWorld.Altar.Owner)
+			{
+				return myUnit.GameWorld.Altar;
+			}
+
+			return newTarget;
 		}
 
 		private bool IsBetterAggro(Unit myUnit, Unit candidate, Unit currentTarget)

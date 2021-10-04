@@ -16,6 +16,7 @@ namespace Game.Simulation
 		public Altar(GameWorld gameWorld, BuildingSettings settings, float2 position, OwnerId owner, BattleObject parent) :
 			base(gameWorld, settings, position, owner, parent)
 		{
+			SetBrain(null);
 		}
 	}
 }

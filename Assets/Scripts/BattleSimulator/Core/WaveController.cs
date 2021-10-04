@@ -60,7 +60,6 @@ namespace Game.Simulation
 			foreach (var unitSpawn in multiSpawn.unitSpawns)
 			{
 				var unit = unitSpawn.Execute(world);
-				unit?.SetBrain(new AggroAltarBrain());
 				currentWaveUnits.Add(unit);
 			}
 		}
