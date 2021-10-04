@@ -109,14 +109,20 @@ namespace Game.View
 			base.OnDeactivated();
 			SyncUnitAnimation(Unit);
 			if (healthBar != null)
+			{
 				ViewController.HealthBarController.Dispose(healthBar);
+				healthBar = null;
+			}
 		}
 
 		public override void OnDispose()
 		{
 			base.OnDispose();
 			if (healthBar != null)
+			{
 				ViewController.HealthBarController.Dispose(healthBar);
+				healthBar = null;
+			}
 		}
 	}
 

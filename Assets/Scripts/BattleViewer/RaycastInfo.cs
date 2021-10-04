@@ -51,18 +51,18 @@ namespace Game.View
 			var nearestUnit = default(Unit);
 			var nearestUnitDist = float.MaxValue;
 
-			var threshold = 100f * (Screen.height / 800f);
+			var threshold = 1.01f;
 			var allUnits = wrapper.GameWorld.AllUnits;
+			var ray = camera3D.ScreenPointToRay(mousePosition);
+			var startPoint = ray.origin;
+			var endPoint = ray.origin + ray.direction * 200;
 			foreach (var unit in allUnits)
 			{
 				if (spell != null && unit is Creep creep && !spell.ShouldCreepBeIncludedInTargets(creep))
 					continue;
 
-				var pos1 = camera3D.WorldToScreenPoint(unit.GetCenterPosition3D());
-				var diff1 = new Vector2(pos1.x - mousePosition.x, (pos1.y - mousePosition.y) * 0.85f);
-				var pos2 = camera3D.WorldToScreenPoint(unit.GetPosition3D());
-				var diff2 = new Vector2(pos2.x - mousePosition.x, (pos2.y - mousePosition.y) * 0.85f);
-				var dist = Mathf.Min(diff1.magnitude, diff2.magnitude);
+				Vector3 point = unit.GetCenterPosition3D();
+				var dist = MathUtil.GetDistanceToLine(point, startPoint, endPoint, unit.Settings.Height, Mathf.Max(1f, unit.Radius));
 				if (dist < threshold)
 				{
 					// prefer enemies for raycast.
@@ -76,6 +76,7 @@ namespace Game.View
 				}
 			}
 
+			Debug.Log(nearestUnit);
 			return nearestUnit;
 		}
 	}

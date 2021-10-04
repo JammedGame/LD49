@@ -220,7 +220,7 @@ namespace Game.Simulation
 
 		public void SummonBuilding(UnitSettings buildingToSummon, Unit oldBuilding)
 		{
-			if (buildingToSummon.GoldCost >= goldAmount) return;
+			if (buildingToSummon.GoldCost > goldAmount) return;
 
 			SubtractGold(buildingToSummon.GoldCost);
 			oldBuilding.Deactivate();
@@ -231,7 +231,7 @@ namespace Game.Simulation
 
 		public void SummonCreep(UnitSettings creepToSummon, float2 targetPosition, OwnerId owner)
 		{
-			if (creepToSummon.GoldCost >= goldAmount) return;
+			if (creepToSummon.GoldCost > goldAmount) return;
 
 			SubtractGold(creepToSummon.GoldCost);
 

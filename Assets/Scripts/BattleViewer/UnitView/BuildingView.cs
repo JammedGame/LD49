@@ -31,14 +31,20 @@ namespace Game.View
 		{
 			base.OnDeactivated();
 			if (healthBar != null)
-				healthBar.Hide();
+			{
+				ViewController.HealthBarController.Dispose(healthBar);
+				healthBar = null;
+			}
 		}
 
 		public override void OnDispose()
 		{
 			base.OnDispose();
 			if (healthBar != null)
-				healthBar.Hide();
+			{
+				ViewController.HealthBarController.Dispose(healthBar);
+				healthBar = null;
+			}
 		}
 	}
 }

@@ -35,4 +35,24 @@ public static class MathUtil
 	{
 		return math.normalizesafe(to - from);
 	}
+
+	public static float GetDistanceToLine(Vector3 p, Vector3 from, Vector3 to, float height, float radius)
+	{
+		p.y /= height;
+		from.y /= height;
+		to.y /= height;
+
+		p.x /= radius;
+		from.x /= radius;
+		to.x /= radius;
+		p.z /= radius;
+		from.z /= radius;
+		to.z /= radius;
+
+		Vector3 d = (to - from).normalized;
+		Vector3 v = p - from;
+		float t = Vector3.Dot(v, d);
+		Vector3 P = from + t * d;
+		return Vector3.Distance(P, p);
+	}
 }
