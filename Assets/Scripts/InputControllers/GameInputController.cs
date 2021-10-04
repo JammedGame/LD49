@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using BattleSimulator.Spells;
 using Game.Simulation;
-using Game.Simulation.Board;
 using Game.View;
 using Unity.Mathematics;
 using UnityEngine;
@@ -99,23 +96,35 @@ namespace Game.UI
 			}
 		}
 
+		private void SelectUnit(Unit targetUnit)
+		{
+			var targetView = gameWrapper.ViewController.GetView(targetUnit);
+			selectedOther = targetUnit;
+			gameWrapper.ViewController.SelectObject(SelectedUnit.Owner, targetView);
+			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
+		}
+
+		private void SelectUnitForAction(Unit targetUnit)
+		{
+			var targetView = gameWrapper.ViewController.GetView(targetUnit);
+			selectedOther = targetUnit;
+			gameWrapper.ViewController.SelectObjectForAction(SelectedUnit.Owner, targetView);
+			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
+		}
+
+		private void UnselectUnit()
+		{
+			selectedOther = null;
+			gameWrapper.ViewController.UnselectObject();
+			gameWrapper.GameWorld.UpdateSummoningList(null);
+		}
+
 		private void ModifySelection()
 		{
 			var raycastInfo = RaycastInfo.DoTheRaycast(gameWrapper, gameWrapper.Camera, Input.mousePosition);
 			var targetUnit = raycastInfo.TargetUnit;
-			if (targetUnit != null)
-			{
-				var targetView = gameWrapper.ViewController.GetView(targetUnit);
-				selectedOther = targetUnit;
-				gameWrapper.ViewController.SelectObject(SelectedUnit.Owner, targetView);
-			}
-			else
-			{
-				selectedOther = null;
-				gameWrapper.ViewController.UnselectObject();
-			}
-
-			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
+			if (targetUnit != null) SelectUnit(targetUnit);
+			else UnselectUnit();
 		}
 
 		private void AttackMove()
@@ -124,9 +133,7 @@ namespace Game.UI
 			var targetUnit = raycastInfo.TargetUnit;
 			if (targetUnit != null)
 			{
-				var targetView = gameWrapper.ViewController.GetView(targetUnit);
-				selectedOther = targetUnit;
-				gameWrapper.ViewController.SelectObjectForAction(SelectedUnit.Owner, targetView);
+				SelectUnitForAction(targetUnit);
 
 				if (targetUnit.Owner != SelectedUnit.Owner && targetUnit.IsValidAttackTarget)
 				{
@@ -140,15 +147,12 @@ namespace Game.UI
 			}
 			else
 			{
-				selectedOther = null;
-				gameWrapper.ViewController.UnselectObject();
+				UnselectUnit();
 
 				var targetPosition = raycastInfo.TargetPosition;
 				gameWrapper.ViewController.SelectPosition(ViewUtil.ConvertTo3D(targetPosition));
 				SelectedUnit.OrderMoveToPoint(targetPosition);
 			}
-
-			gameWrapper.GameWorld.UpdateSummoningList(selectedOther);
 		}
 
 		private void CastSpell(int index)
@@ -162,15 +166,21 @@ namespace Game.UI
 
 		private void Summon(int index)
 		{
-			if (selectedOther?.Settings.SummoningList != null && selectedOther.Settings.SummoningList.Count > 0)
+			var summoningList = selectedOther?.Settings.SummoningList;
+			if (summoningList != null && summoningList.Count > 0)
 			{
-				gameWrapper.GameWorld.SummonBuilding(selectedOther.Settings.SummoningList[index], selectedOther);
+				if (index < 0 || index >= summoningList.Count) return;
+
+				gameWrapper.GameWorld.SummonBuilding(summoningList[index], selectedOther);
+				UnselectUnit();
 			}
 			else if (gameWrapper.TryMouseRaycast(out var hitResult))
 			{
+				summoningList = gameWrapper.GameWorld.Data.DefaultSummoningList;
+				if (summoningList == null || index < 0 || index >= summoningList.Count) return;
+
 				var targetPosition = gameWrapper.GameWorld.Board.ClampPoint(hitResult);
-				gameWrapper.GameWorld.SummonCreep(gameWrapper.GameWorld.Data.DefaultSummoningList[index],
-					targetPosition, SelectedUnit.Owner);
+				gameWrapper.GameWorld.SummonCreep(summoningList[index], targetPosition, SelectedUnit.Owner);
 			}
 		}
 	}

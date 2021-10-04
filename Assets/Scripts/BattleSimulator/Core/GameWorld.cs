@@ -137,6 +137,12 @@ namespace Game.Simulation
 			Debug.Log($"Gold amount is now {goldAmount}");
 		}
 
+		private void SubtractGold(int amount)
+		{
+			goldAmount -= amount;
+			Debug.Log($"Gold amount is now {goldAmount}");
+		}
+
 		public void ResetModifiers()
 		{
 			foreach (var unit in AllUnits) unit.ResetModifiers();
@@ -208,22 +214,29 @@ namespace Game.Simulation
 		{
 			var summoningList = selectedOther?.Settings.SummoningList;
 			if (summoningList == null || summoningList.Count == 0) summoningList = Data.DefaultSummoningList;
-			var summoningOptions = summoningList.ConvertAll(us => new SummoningOption(us, true));
+			var summoningOptions = summoningList.ConvertAll(us => new SummoningOption(us, us.GoldCost <= goldAmount));
 			DispatchViewEvent(selectedOther, ViewEventType.SummoningListUpdated, summoningOptions);
 		}
 
-		public void SummonBuilding(UnitSettings buildingToSummon, Unit selectedOther)
+		public void SummonBuilding(UnitSettings buildingToSummon, Unit oldBuilding)
 		{
-			selectedOther.Deactivate();
+			if (buildingToSummon.GoldCost >= goldAmount) return;
 
-			var newUnit = SpawnUnit(buildingToSummon, selectedOther.Position, selectedOther.Owner, selectedOther.Parent);
-			newUnit?.SetBrain(new HoldGroundBrain());
+			SubtractGold(buildingToSummon.GoldCost);
+			oldBuilding.Deactivate();
+
+			var newBuilding = SpawnUnit(buildingToSummon, oldBuilding.Position, oldBuilding.Owner, oldBuilding.Parent);
+			newBuilding?.SetBrain(new HoldGroundBrain());
 		}
 
 		public void SummonCreep(UnitSettings creepToSummon, float2 targetPosition, OwnerId owner)
 		{
-			var newUnit = SpawnUnit(creepToSummon, targetPosition, owner);
-			newUnit?.SetBrain(new HoldGroundBrain());
+			if (creepToSummon.GoldCost >= goldAmount) return;
+
+			SubtractGold(creepToSummon.GoldCost);
+
+			var newCreep = SpawnUnit(creepToSummon, targetPosition, owner);
+			newCreep?.SetBrain(new HoldGroundBrain());
 		}
 	}
 }
