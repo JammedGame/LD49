@@ -76,7 +76,6 @@ namespace Game.View
 				}
 			}
 
-			Debug.Log(nearestUnit);
 			return nearestUnit;
 		}
 	}

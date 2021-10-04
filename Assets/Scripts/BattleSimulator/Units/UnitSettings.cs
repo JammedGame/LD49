@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
 using BattleSimulator.Spells;
-using Physics2D;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 namespace Game.Simulation
@@ -48,7 +44,9 @@ namespace Game.Simulation
 			if (string.IsNullOrEmpty(UnitName))
 			{
 				UnitName = name;
-				EditorUtility.SetDirty(this);
+#if UNITY_EDITOR
+				UnityEditor.EditorUtility.SetDirty(this);
+#endif
 			}
 		}
 	}
