@@ -12,6 +12,7 @@ namespace BattleSimulator.Spells
         public float coneGrowSeconds;
         public float holdSeconds;
         public float damage;
+
         public override BattleObject Spawn(GameWorld world, UnitTargetInfo targetInfo, OwnerId ownerId, BattleObject parent = null)
         {
             return new TortureWaveSpell(parent, this, world, targetInfo.Position);

@@ -20,5 +20,5 @@ MonoBehaviour:
   KeyboardYawSpeed: 90
   StartZoom: 60
   MinZoom: 60
-  MaxZoom: 200
+  MaxZoom: 60
   ScrollWheelZoomSpeed: 1600

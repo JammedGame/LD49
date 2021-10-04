@@ -21,7 +21,7 @@ namespace BattleSimulator.Spells
         private HashSet<Unit> alreadyDamaged = new HashSet<Unit>();
         private Unit caster;
         private float holdSecondsLeft;
-        
+
         // helpers
         private float minCos;
         public TortureWaveSpell(BattleObject caster, SpellSettings _settings, GameWorld gameWorld, float2 positionClicked) : base(caster, _settings, gameWorld)
@@ -54,7 +54,9 @@ namespace BattleSimulator.Spells
         {
             base.Tick();
 
-            switch (state)
+			caster.Speed.Decrease(1);
+
+			switch (state)
             {
                 case 0:
                     Grow();
@@ -114,7 +116,7 @@ namespace BattleSimulator.Spells
                 float2 directionToUnit = math.normalize(unit.GetPosition2D() - coneOrigin);
                 float distance = math.distance(unit.GetPosition2D(), coneOrigin);
                 float cos = math.dot(directionToUnit, coneDirection);
-                
+
                 if (cos < minCos || distance > coneLength)
                 {
                     // Not in cone
