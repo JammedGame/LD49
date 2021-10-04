@@ -33,9 +33,6 @@ public class CameraController : MonoBehaviour
 		// update zoom
 		Distance -= Input.GetAxis("Mouse ScrollWheel") * Settings.ScrollWheelZoomSpeed * Time.deltaTime;
 
-		// update rotation
-		Yaw += Input.GetAxis("Yaw") * Settings.KeyboardYawSpeed * Time.deltaTime;
-
 		// validate new value
 		ClampValues();
 
