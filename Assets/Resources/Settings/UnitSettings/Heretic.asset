@@ -31,6 +31,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 106b670ff5be6ca4288b4c4142fe4348, type: 2}
   - {fileID: 11400000, guid: 3ed622c1fa3ee014ebe4f9d423a1995e, type: 2}
   - {fileID: 11400000, guid: 9a354c253db4e94419b6268e659b48fb, type: 2}
+  - {fileID: 11400000, guid: 695bb51a42fcfb8458fe5d9545829ef7, type: 2}
   SpawnOnDeath: {fileID: 0}
   SummoningList: []
   GoldCost: 20
