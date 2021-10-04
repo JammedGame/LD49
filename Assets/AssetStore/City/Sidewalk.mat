@@ -62,7 +62,7 @@ Material:
     m_Floats:
     - HARDWARE_CullMode: 2
     - HARDWARE_ZTest: 4
-    - HARDWARE_ZWrite: 0
+    - HARDWARE_ZWrite: 1
     - USE_FRESNEL: 0
     - USE_NORMAL_MAP: 0
     - USE_PROJECT_UV: 0
