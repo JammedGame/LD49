@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Unearth
   manaCost: 0
-  cooldownSeconds: 3
+  cooldownSeconds: 60
   castRange: 0
-  castDurationSeconds: 0
+  castDurationSeconds: 1
   isSingleTarget: 0
   GraveTime: 20
   MaxRadius: 100

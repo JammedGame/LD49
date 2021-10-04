@@ -16,7 +16,7 @@ MonoBehaviour:
   manaCost: 10
   cooldownSeconds: 2
   castRange: 7
-  castDurationSeconds: 1.5
+  castDurationSeconds: 1
   isSingleTarget: 0
   damage: 3
   protrudeSeconds: 0.5

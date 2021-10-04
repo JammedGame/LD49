@@ -20,6 +20,8 @@ Shader "Game/Diffuse"
 		_FresnelColor("Fresnel Color", Color) = (1, 1, 1, 1)
 
 		[Enum(UnityEngine.Rendering.CullMode)] HARDWARE_CullMode ("Cull faces", Float) = 2
+		[Enum(On, 1, Off, 0)] HARDWARE_ZWrite ("Depth write", Float) = 1
+		[Enum(UnityEngine.Rendering.CompareFunction)] HARDWARE_ZTest("Depth test", Float) = 4
 	}
 	SubShader
 	{
@@ -27,6 +29,10 @@ Shader "Game/Diffuse"
 
 		Pass
 		{
+			Cull [HARDWARE_CullMode]
+			ZWrite [HARDWARE_ZWrite]
+			ZTest [HARDWARE_ZTest]
+
 			Tags { "LightMode"="ForwardBase"}
 
 			CGPROGRAM
