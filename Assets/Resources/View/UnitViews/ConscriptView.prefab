@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a5cdaa63b0040dbbf8cc463e3536ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathAnimationDuration: 2
+  DeathAnimationDuration: 8
   DeathAnimation:
     ClipName: anim_Death
     Speed: 1.5

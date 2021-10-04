@@ -18,6 +18,6 @@ MonoBehaviour:
   castRange: 0
   castDurationSeconds: 1
   isSingleTarget: 0
-  GraveTime: 20
+  GraveTime: 8
   MaxRadius: 100
   Duration: 5

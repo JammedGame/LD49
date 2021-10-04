@@ -16,6 +16,7 @@ namespace Game.Simulation
 		public readonly List<Creep> AllCreeps = new List<Creep>();
 		public Altar Altar { get; private set; }
 		public bool IsBuildingTime { get; private set; }
+		public int GoldAmount => goldAmount;
 
 		// collections of battle objects.
 		public readonly List<Projectile> AllProjectiles = new List<Projectile>();
