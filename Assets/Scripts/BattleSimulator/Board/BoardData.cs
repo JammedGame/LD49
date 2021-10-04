@@ -9,6 +9,7 @@ namespace Game.Simulation.Board
 	{
 		[SerializeField] private int width;
 		[SerializeField] private int height;
+		[SerializeField] private Polygon[] polygons;
 
 		int version; // if board gets changed, this will make other systems now they are out of sync with board state.
 
@@ -19,6 +20,7 @@ namespace Game.Simulation.Board
 		public float MinY => 0;
 		public float MaxY => height;
 		public int Version => version;
+		public Polygon[] Polygons => polygons;
 
 		/// <summary>
 		/// Clamps given point to board borders.
@@ -60,5 +62,11 @@ namespace Game.Simulation.Board
 		{
 			return new Vector3(pos.x, 0, pos.y);
 		}
+	}
+
+	[System.Serializable]
+	public class Polygon
+	{
+		public float2[] Points;
 	}
 }

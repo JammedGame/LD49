@@ -29,6 +29,13 @@ namespace Game.Simulation.Physics
 				physicsWorld.AddCircleCollider(unit.Radius);
 			}
 
+			physicsWorld.AddStaticBody(default, default);
+
+			foreach (var polygon in gameWorld.Board.Polygons)
+			{
+				physicsWorld.AddPolygonCollider(polygon.Points);
+			}
+
 			// run the physics
 			physicsWorld.Tick(gameWorld.Data.PhysicsSettings, dT);
 

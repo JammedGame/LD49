@@ -1,6 +1,10 @@
 using System;
+using System.Linq;
 using Game.Simulation;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Game.View.Debugging
 {
@@ -18,6 +22,29 @@ namespace Game.View.Debugging
 				Gizmos.DrawLine(unit.GetPosition3D(), ViewUtil.ConvertTo3D(unit.CurrentTarget.Position));
 			}
 		}
+
+#if UNITY_EDITOR
+		[Gizmo]
+		public static void DrawMapGizmos(GameWrapper gameWrapper)
+		{
+			foreach (var polygon in gameWrapper.GameData.Board.Polygons)
+			{
+				if (polygon == null || polygon.Points == null || polygon.Points.Length < 3)
+					return;
+
+				Handles.color = Color.white.WithAlpha(0.25f);
+				UnityEditor.Handles.DrawAAConvexPolygon(polygon.Points.Select(x => ViewUtil.ConvertTo3D(x)).ToArray());
+
+				for (int i = 0; i < polygon.Points.Length; i++)
+				{
+					var point3D = ViewUtil.ConvertTo3D(polygon.Points[i]);
+					Handles.color = Color.red;
+					point3D = UnityEditor.Handles.FreeMoveHandle(point3D, Quaternion.identity, HandleUtility.GetHandleSize(point3D) * 0.1f, default, Handles.CubeHandleCap);
+					polygon.Points[i] = ViewUtil.ConvertTo2D(point3D);
+				}
+			}
+		}
+#endif
 
 		[Gizmo]
 		public static void DrawUnitViewColliders(GameWrapper gameWrapper)
