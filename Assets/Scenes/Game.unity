@@ -1662,10 +1662,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 11400000, guid: a445e72c4199dfc459b146e87f5c6d98, type: 2}
   Camera: {fileID: 1823379861}
-  MinX: 0
-  MaxX: 0
+  MinX: 7
+  MaxX: 100
   MinZ: 0
-  MaxZ: 0
+  MaxZ: 100
   Distance: 0
   Yaw: 0
   Position: {x: 0, y: 0, z: 0}
