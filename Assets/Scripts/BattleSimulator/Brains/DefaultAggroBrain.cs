@@ -7,6 +7,10 @@ namespace BattleSimulator.Brains
 	{
 		public static HeroAggroBrain Instance = new HeroAggroBrain();
 
+		public void OnDamageReceived(Unit unit, BattleObject fromUnit, float damageAmount)
+		{
+		}
+
 		public Decision Think(Unit myUnit)
 		{
 			if (myUnit.CurrentActionType == UnitActionType.Idle)
@@ -68,6 +72,11 @@ namespace BattleSimulator.Brains
 
 		private bool IsBetterAggro(Unit myUnit, Unit candidate, Unit currentTarget)
 		{
+			var candidateIsDangerous = candidate.MaxAttackDamage > 0;
+			var currentTargetIsDangerous = currentTarget.MaxAttackDamage > 0;
+			if (candidateIsDangerous && !currentTargetIsDangerous) return true;
+			if (!candidateIsDangerous && currentTargetIsDangerous) return false;
+
 			var candidateIsInRange = myUnit.IsWithinAttackRange(candidate);
 			var currentTargetIsInRange = myUnit.IsWithinAttackRange(currentTarget);
 			if (candidateIsInRange && !currentTargetIsInRange) return true;
@@ -76,6 +85,28 @@ namespace BattleSimulator.Brains
 			return
 				math.distancesq(myUnit.Position, candidate.Position)
 				< math.distancesq(myUnit.Position, currentTarget.Position);
+		}
+
+		public void OnDamageReceived(Unit unit, BattleObject damageSource, float damageAmount)
+		{
+			Unit attacker = (damageSource as Unit) ?? (damageSource.Parent as Unit);
+			if (attacker == null)
+				return;
+
+			foreach(var friend in unit.GameWorld.AllUnits)
+			{
+				if (friend.Owner == unit.Owner && friend.IsWithinRange(unit.Position, 3f))
+				{
+					if (friend.IsAttacking && friend.CurrentTarget.TargetUnit != null && friend.CurrentTarget.TargetUnit.MaxAttackDamage > 0)
+					{
+						// already busy - no time for revenge.
+						continue;
+					}
+
+					// revenge time!
+					friend.OrderAttacking(attacker);
+				}
+			}
 		}
 	}
 }

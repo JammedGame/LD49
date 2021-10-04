@@ -174,7 +174,7 @@ namespace Game.Simulation
 			}
 		}
 
-		public void StartAction(UnitAction newAction, UnitTargetInfo target = default, Action SuccessCallback = null, Action FailCallback = null)
+		public void StartAction(UnitAction newAction, UnitTargetInfo target = default)
 		{
 			if (newAction == null)
 				throw new NullReferenceException();
@@ -187,7 +187,7 @@ namespace Game.Simulation
 			else
 			{
 				currentAction = newAction;
-				actionContext = new UnitActionContext() { Target = target, OnSuccess = SuccessCallback, OnFail = FailCallback };
+				actionContext = new UnitActionContext() { Target = target };
 			}
 		}
 
@@ -199,6 +199,7 @@ namespace Game.Simulation
 		{
 			base.DealDamage(damage, damageSource);
 			health -= damage;
+			brain?.OnDamageReceived(this, damageSource, damage);
 		}
 
 		public void Die()
@@ -283,8 +284,6 @@ namespace Game.Simulation
 		public float Progress;
 		public bool Executed;
 		public bool Finished;
-		public Action OnSuccess;
-		public Action OnFail;
 
 		public void ResetProgress()
 		{

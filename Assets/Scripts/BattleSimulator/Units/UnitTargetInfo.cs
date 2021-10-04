@@ -12,6 +12,7 @@ namespace Game.Simulation
         float2 targetPosition;
 
         public float2 Position => targetUnit != null ? targetUnit.GetPosition2D() : targetPosition;
+        public Vector3 GetCenterPosition3D() => targetUnit != null ? targetUnit.GetCenterPosition3D() : new Vector3(targetPosition.x, 0 , targetPosition.y);
         public float Radius => targetUnit is Unit unit ? unit.Radius : 0f;
         public Unit TargetUnit => targetUnit;
 		public bool IsValid => targetUnit == null || targetUnit.IsActive;
