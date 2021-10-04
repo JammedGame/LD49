@@ -9,7 +9,6 @@ namespace Game.Simulation
         private const float EnergyDecayPerSecond = 1f;
         private const float castChancePerEnergyOverflow = 0.02f;
         private const float castCooldownSeconds = 5f;
-        private WildMagicSpellSettings[] wildMagicSpells = { };
 
         public float Energy = 0f;
 
@@ -61,7 +60,6 @@ namespace Game.Simulation
 
         private void CastRandom()
         {
-            
             Debug.Log("A random magic spell is released!");
         }
     }
