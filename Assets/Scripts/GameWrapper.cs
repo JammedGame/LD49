@@ -47,6 +47,13 @@ namespace Game
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);
 
+			// spawn hack
+			foreach(var go in GameObject.FindObjectsOfType<SpawnInfo>())
+			{
+				var pos2d = ViewUtil.ConvertTo2D(go.transform.position);
+				gameWorld.SpawnUnit(go.Settings, pos2d, go.Owner, null);
+			}
+
 			// update camera
 			GameUIController.Initialize(this);
 		}

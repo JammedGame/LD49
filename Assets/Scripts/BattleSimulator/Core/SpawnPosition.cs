@@ -13,9 +13,9 @@ namespace Game.Simulation
 
 	public static class SpawnPositionExtensions
 	{
-		private static readonly float2 SpawnPositionLeft = new float2(40, 10);
-		private static readonly float2 SpawnPositionCenter = new float2(75, 50);
-		private static readonly float2 SpawnPositionRight = new float2(40, 90);
+		private static readonly float2 SpawnPositionLeft = new float2(33, 93);
+		private static readonly float2 SpawnPositionCenter = new float2(55, 50);
+		private static readonly float2 SpawnPositionRight = new float2(33, 7);
 
 		public static float2 ToFloat2(this SpawnPosition spawnPosition)
 		{

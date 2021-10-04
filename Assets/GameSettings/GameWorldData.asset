@@ -72,30 +72,6 @@ MonoBehaviour:
     SpawnPosition: 0
     PositionOffset: {x: 7.5, y: 50}
     Owner: 0
-  - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 20, y: 25}
-    Owner: 0
-  - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 20, y: 75}
-    Owner: 0
-  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 10, y: 40}
-    Owner: 0
-  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 10, y: 60}
-    Owner: 0
-  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 15, y: 47}
-    Owner: 0
-  - Type: {fileID: 11400000, guid: a773e3130a7e0284295aabd874b06ac3, type: 2}
-    SpawnPosition: 0
-    PositionOffset: {x: 15, y: 53}
-    Owner: 0
   WaveData:
   - {fileID: 11400000, guid: 60307a554530b694397fad8b7a75b300, type: 2}
   - {fileID: 11400000, guid: c8fd2cbdee2bd47f6adeab9cf4a6ee7e, type: 2}
