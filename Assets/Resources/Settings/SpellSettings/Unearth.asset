@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unearth
   m_EditorClassIdentifier: 
   spellName: Unearth
-  wildMagicEnergy: 8
+  wildMagicEnergy: 30
   cooldownSeconds: 60
   castRange: 0
   castDurationSeconds: 1

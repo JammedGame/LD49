@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blight
   m_EditorClassIdentifier: 
   spellName: Blight
-  wildMagicEnergy: 1
+  wildMagicEnergy: 3
   cooldownSeconds: 3
   castRange: 20
   castDurationSeconds: 0.5
