@@ -68,5 +68,40 @@ namespace Game.Simulation.Board
 	public class Polygon
 	{
 		public float2[] Points;
+
+		public bool IsPointInside(float2 point)
+		{
+			return Dist2Point(point) <= 0;
+		}
+
+		public float Dist2Point(float2 point)
+		{
+			// Compute circle position in the frame of the polygon.
+
+			// Find the min separating edge.
+			float separation = float.MinValue;
+			int vertexCount = Points.Length;
+			for (int i = 0; i < vertexCount; ++i)
+			{
+				var v0 = Points[i];
+				var v1 = Points[(i + 1) % vertexCount];
+				var v2 = Points[(i + 2) % vertexCount];
+
+				// find the right normal.
+				var edge = v1 - v0;
+				var normal = math.normalize(new float2(edge.y, -edge.x));
+				if (math.dot(v2 - v1, normal) > 0)
+					normal = -normal;
+
+				// find separation for this edge.
+				float s = math.dot(normal, point - Points[i]);
+				if (s > separation)
+				{
+					separation = s;
+				}
+			}
+
+			return separation;
+		}
 	}
 }

@@ -1,13 +1,15 @@
 using UnityEngine;
 using Unity.Mathematics;
 using static Unity.Mathematics.math;
+using System.Collections.Generic;
+using UnityEngine.Events;
+using Game.Simulation.Board;
 
 namespace Game.Simulation
 {
 	public static class Pathfinding
 	{
 		/* settings */
-		private const float ChangeDirectionPenalty = 0.2f;
 		private const float AwayFromTargetPenalty = 0.5f;
 		private const float GoodEnoughScore = 0.1f;
 		private const float MaxObstacleDist = 3f;
@@ -15,10 +17,12 @@ namespace Game.Simulation
 		/* gameplay data */
 		private static readonly Rotator Rotator = new Rotator();
 
+		static readonly List<Unit> obstacles = new List<Unit>();
+		static readonly List<Polygon> polygonObstacles = new List<Polygon>();
+
 		public static float2 CalculateTargetDirection(Unit unit, UnitTargetInfo targetInfo)
 		{
 			var board = unit.GameWorld.Board;
-			var obstacles = unit.GameWorld.AllUnits;
 			var direction = unit.GetDirection();
 			var targetPosition = targetInfo.Position;
 			var distToTarget = length(targetPosition - unit.Position);
@@ -28,6 +32,24 @@ namespace Game.Simulation
 			// go through directions to find the best.
 			var bestDir = initDir;
 			var bestScore = 999f;
+
+			obstacles.Clear();
+			foreach(var candidate in unit.GameWorld.AllUnits)
+			{
+				if (candidate == unit)
+					continue;
+				if (candidate == targetInfo.TargetUnit)
+					continue;
+				if (unit.IsWithinRange(candidate, candidate.Radius + raycastDistance))
+					obstacles.Add(candidate);
+			}
+
+			polygonObstacles.Clear();
+			foreach (var candidate in unit.GameWorld.Board.Polygons)
+			{
+				if (candidate.Dist2Point(unit.Position) <= raycastDistance)
+					polygonObstacles.Add(candidate);
+			}
 
 			// rotator determines how many rotations of the initial direction we are testing
 			for (var j = 0; j < Rotator.Count; j++)
@@ -42,22 +64,28 @@ namespace Game.Simulation
 
 				// add cost for staying away from target / changing direction
 				var cost = (1 - dot(dir, initDir)) * AwayFromTargetPenalty;
-				cost += (1 - dot(dir, direction)) * ChangeDirectionPenalty;
 
 				// add cost for obstacles
 				foreach (var obstacle in obstacles)
 				{
-					if (obstacle == unit)
-						continue;
-					if (obstacle == targetInfo.TargetUnit)
-						continue;
-
 					var distToObstacle = Math2D.GetDistanceToPoint(unit.Position, targetPos, obstacle.Position);
 					if (distToObstacle < obstacle.Radius + unit.Radius)
 					{
 						var massRatio = obstacle.IsStatic ? 999f : 1f;
 						cost += (1f - distToObstacle / (obstacle.Radius + unit.Radius)) *
 							min(10, massRatio * massRatio);
+
+						if (cost >= bestScore)
+							continue;
+					}
+				}
+
+				foreach(var polygon in polygonObstacles)
+				{
+					if (polygon.IsPointInside(targetPos))
+					{
+						cost = float.MaxValue;
+						break;
 					}
 				}
 
@@ -67,7 +95,8 @@ namespace Game.Simulation
 					bestDir = dir;
 				}
 
-				if (cost < GoodEnoughScore) break;
+				if (cost < GoodEnoughScore)
+					break;
 			}
 
 			return bestDir;
