@@ -19,6 +19,8 @@ namespace Game.UI
 		private readonly KeyCode[] summoningKeys =
 			{ KeyCode.Alpha0, KeyCode.Alpha9, KeyCode.Alpha8, KeyCode.Alpha7, KeyCode.Alpha6, KeyCode.Alpha5 };
 
+		private bool superSpeedEnabled;
+
 		public GameInputController(GameWrapper gameWrapper)
 		{
 			this.gameWrapper = gameWrapper;
@@ -66,7 +68,13 @@ namespace Game.UI
 
 			ControlUnitWASD(SelectedUnit);
 
-			Time.timeScale = Input.GetKey(KeyCode.Alpha5) ? 4f : 1f;
+			if (Input.GetKeyDown(KeyCode.Alpha5)) ToggleSuperSpeed();
+		}
+
+		private void ToggleSuperSpeed()
+		{
+			superSpeedEnabled = !superSpeedEnabled;
+			Time.timeScale = superSpeedEnabled ? 4f : 1f;
 		}
 
 		private void ControlUnitWASD(Unit unit)
