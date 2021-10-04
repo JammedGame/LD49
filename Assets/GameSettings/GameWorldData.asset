@@ -29,7 +29,7 @@ MonoBehaviour:
     Owner: 0
   - Type: {fileID: 11400000, guid: 7fd2603fec5f5974a8025546403af8b3, type: 2}
     SpawnPosition: 0
-    PositionOffset: {x: 6, y: 50}
+    PositionOffset: {x: 7, y: 50}
     Owner: 0
   - Type: {fileID: 11400000, guid: bc0b98198baa2ef4981042182dfa57c2, type: 2}
     SpawnPosition: 0
