@@ -95,7 +95,7 @@ namespace BattleSimulator.Brains
 
 			foreach(var friend in unit.GameWorld.AllUnits)
 			{
-				if (friend.Owner == unit.Owner && friend.IsWithinRange(unit.Position, 3f))
+				if (friend.Owner == unit.Owner && friend.IsWithinRange(unit.Position, 1.5f))
 				{
 					if (friend.IsAttacking && friend.CurrentTarget.TargetUnit != null && friend.CurrentTarget.TargetUnit.MaxAttackDamage > 0)
 					{

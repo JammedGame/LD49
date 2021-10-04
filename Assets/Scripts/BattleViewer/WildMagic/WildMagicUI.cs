@@ -10,24 +10,21 @@ public class WildMagicUI : MonoBehaviour
 {
     private Color lowEnergyColor = new Color(0, 1, 0);
     private Color highEnergyColor = new Color(1, 0, 0);
-    
+
     [SerializeField] private float unstableBlinkIntervalSeconds = 0.5f;
     [SerializeField] private Text energyBarTitle;
     [SerializeField] private Text unstableCaption;
     [SerializeField] private Image energyBar;
-    [SerializeField] private GameWrapper gameWrapper;
-    
 
-    private WildMagicController model;
+
     private float sinceLastBlinkSeconds = 0f;
 
     private void Start()
     {
         unstableCaption.gameObject.SetActive(false);
-        model = gameWrapper.GameWorld.WildMagicController;
     }
 
-    public void Sync()
+    public void Sync(WildMagicController model)
     {
         if (model == null)
         {
@@ -52,6 +49,6 @@ public class WildMagicUI : MonoBehaviour
         Color color = lowEnergyColor * (1 - energyBar.fillAmount) + highEnergyColor * energyBar.fillAmount;
         energyBar.color = color;
     }
-    
+
 }
-    
+

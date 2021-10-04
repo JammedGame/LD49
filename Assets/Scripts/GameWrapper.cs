@@ -15,9 +15,7 @@ namespace Game
 		// scene references
 		public CameraController CameraController;
 		public HealthBarController HealthBarController;
-		public SpellUIController SpellUIController;
-		public WildMagicUI WildMagicUI;
-		public SummoningUIController SummoningUIController;
+		public InGameUIController GameUIController;
 		public GameWorldData GameData;
 
 		// state
@@ -44,17 +42,13 @@ namespace Game
 			// create new game world
 			selectionCircle = Instantiate(SelectionCircle.LoadPrefab());
 			movementCross = Instantiate(MovementCross.LoadPrefab());
-			viewController = new GameViewController(HealthBarController, CameraController, SpellUIController, SummoningUIController, selectionCircle, movementCross, WildMagicUI);
+			viewController = new GameViewController(HealthBarController, CameraController, GameUIController, selectionCircle, movementCross);
 			gameWorld = new GameWorld(GameData, viewController);
 			gameTimeline = new GameTimeline();
 			inputController = new GameInputController(this);
 
 			// update camera
-			CameraController.MinX = gameWorld.Board.MinX;
-			CameraController.MaxX = gameWorld.Board.MaxX;
-			CameraController.MinZ = gameWorld.Board.MinY;
-			CameraController.MaxZ = gameWorld.Board.MaxY;
-			CameraController.SetCentralPosition();
+			GameUIController.Initialize(this);
 		}
 
 		// void OnGUI()
@@ -87,7 +81,7 @@ namespace Game
 			CameraController.UpdateCamera();
 
 			// update view
-			viewController.Update(Time.deltaTime);
+			viewController.Update(GameWorld, Time.deltaTime);
 		}
 
 		public bool TryMouseRaycast(out float2 hitResult)

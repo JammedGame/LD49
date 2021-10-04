@@ -4,16 +4,15 @@ using Game.Simulation;
 using Game.View.SpellView;
 using UnityEngine.Profiling;
 using UnityEngine;
+using Game.UI;
 
 namespace Game.View
 {
 	public class GameViewController : IViewEventHandler
 	{
 		public readonly HealthBarController HealthBarController;
-		public readonly SpellUIController SpellUIController;
-		public readonly WildMagicUI WildMagicUI;
-		public readonly SummoningUIController SummoningUIController;
 		public readonly CameraController CameraController;
+		public readonly InGameUIController UIController;
 
 		private readonly SelectionCircle selectionCircle;
 		private readonly MovementCross movementCross;
@@ -22,16 +21,13 @@ namespace Game.View
 		readonly List<BattleObjectView> allBattleViews = new List<BattleObjectView>();
 		readonly List<ViewEvent> eventsInQueue = new List<ViewEvent>();
 
-		public GameViewController(HealthBarController healthBarController, CameraController cameraController, SpellUIController spellUIController, SummoningUIController summoningUIController, SelectionCircle selectionCircle, MovementCross movementCross, WildMagicUI wildMagicUI)
+		public GameViewController(HealthBarController healthBarController, CameraController cameraController, InGameUIController gameUIController, SelectionCircle selectionCircle, MovementCross movementCross)
 		{
-			HealthBarController = healthBarController;
-			CameraController = cameraController;
-			SpellUIController = spellUIController;
-			SummoningUIController = summoningUIController;
+			this.HealthBarController = healthBarController;
+			this.CameraController = cameraController;
+			this.UIController = gameUIController;
 			this.selectionCircle = selectionCircle;
 			this.movementCross = movementCross;
-			
-			WildMagicUI = wildMagicUI;
 		}
 
 		public void OnViewEvent(ViewEvent evt)
@@ -39,7 +35,7 @@ namespace Game.View
 			eventsInQueue.Add(evt);
 		}
 
-		public void Update(float dT)
+		public void Update(GameWorld model, float dT)
 		{
 			Profiler.BeginSample("ViewController.ExecuteViewEvents");
 				ExecuteViewEvents();
@@ -47,6 +43,10 @@ namespace Game.View
 
 			Profiler.BeginSample("ViewController.SyncViews");
 				SyncViews(dT);
+			Profiler.EndSample();
+
+			Profiler.BeginSample("UIController.Sync");
+				UIController.Sync(model);
 			Profiler.EndSample();
 		}
 
@@ -66,9 +66,6 @@ namespace Game.View
 					view.SyncDeadView(dT);
 				}
 			}
-
-			SpellUIController.Sync();
-			WildMagicUI.Sync();
 		}
 
 		public void ExecuteViewEvents()
@@ -86,9 +83,9 @@ namespace Game.View
 							CreateViewObject(evt.Parent);
 							break;
 						}
-						
+
 						case ViewEventType.PlayerSpellsUpdated:
-							SyncSpellUI(evt.Parent as Unit);
+							UIController.SpellUIController.SyncSpellUI(evt.Parent as Unit);
 							break;
 
 						case ViewEventType.SummoningListUpdated:
@@ -127,23 +124,9 @@ namespace Game.View
 			allBattleViews.Add(newView);
 		}
 
-		private void SyncSpellUI(Unit player)
-		{
-			for (int i = 0; i < player.EquippedSpells.Count; i++)
-			{
-				SpellUIController.equippedSpellViews[i].gameObject.SetActive(true);
-				SpellUIController.equippedSpellViews[i].SetModel(player.EquippedSpells[i]);
-			}
-
-			for (int i = player.EquippedSpells.Count; i < SpellUIController.equippedSpellViews.Count; i++)
-			{
-				SpellUIController.equippedSpellViews[i].gameObject.SetActive(false);
-			}
-		}
-
 		private void SyncSummoningUI(List<SummoningOption> summoningList)
 		{
-			SummoningUIController.SetData(summoningList);
+			UIController.SummoningUIController.SetData(summoningList);
 		}
 
 		/// <summary>
